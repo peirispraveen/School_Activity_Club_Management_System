@@ -1,5 +1,6 @@
-package com.example.EventScheduling;
+package com.example.sacms;
 
+import com.example.EventScheduling.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
