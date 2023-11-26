@@ -9,6 +9,8 @@ module com.example.sacms {
 
     opens com.example.sacms to javafx.fxml;
     opens com.example.demo to javafx.fxml;
+    opens com.example.implementation to javafx.fxml;
     exports com.example.sacms;
     exports com.example.demo;
+    exports com.example.implementation;
 }
