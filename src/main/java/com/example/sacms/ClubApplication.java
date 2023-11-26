@@ -11,7 +11,6 @@ import java.sql.SQLException;
 
 public class ClubApplication extends Application {
 
-
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         Storage.allAvailables();
