@@ -39,11 +39,17 @@ public class ViewStudents {
 
     @FXML
     private void initialize() {
-        studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("studentId"));
-        fnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentFirstName"));
-        lnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentLastName"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("studentEmail"));
+        studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        fnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         dobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+
+//        studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+//        lnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentLastName"));
+//        emailColumn.setCellValueFactory(new PropertyValueFactory<>("studentEmail"));
+//        dobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+//        fnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentFirstName"));
 
         loadDataIntoTableView();
     }

@@ -23,13 +23,13 @@ public class UserRegApplication extends Application {
         newStage.setScene(newScene);
         newStage.show();
 
-        try{
-            UserRegMainController controller = userRegLoader.getController();
-            controller.loadStudentsFromFile();
-            controller.loadAdvisorsFromFile();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+//        try{
+//            UserRegMainController controller = userRegLoader.getController();
+//            controller.loadStudentsFromFile();
+//            controller.loadAdvisorsFromFile();
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public static void main(String[] args) {

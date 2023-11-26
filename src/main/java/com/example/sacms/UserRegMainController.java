@@ -55,33 +55,33 @@ public class UserRegMainController {
         prevStage.close();
     }
 
-    @FXML
-    protected void loadStudentsFromFile() throws IOException {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("StudentDetails.ser"))) {
-            studentList = (List<Student>) objectInputStream.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: StudentDetails.ser");
-        } catch (EOFException e) {
-            System.out.println("End of file reached unexpectedly. The file might be empty.");
-        } catch (Exception e) {
-            System.out.println("Error reading from StudentDetails.ser");
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    protected void loadStudentsFromFile() throws IOException {
+//        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("StudentDetails.ser"))) {
+//            studentList = (List<Student>) objectInputStream.readObject();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found: StudentDetails.ser");
+//        } catch (EOFException e) {
+//            System.out.println("End of file reached unexpectedly. The file might be empty.");
+//        } catch (Exception e) {
+//            System.out.println("Error reading from StudentDetails.ser");
+//            e.printStackTrace();
+//        }
+//    }
 
-    @FXML
-    protected void loadAdvisorsFromFile() {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("AdvisorDetails.ser"))) {
-            advisorList = (List<Advisor>) objectInputStream.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: AdvisorDetails.ser");
-        } catch (EOFException e) {
-            System.out.println("End of file reached unexpectedly. The file might be empty.");
-        } catch (Exception e) {
-            System.out.println("Error reading from AdvisorDetails.ser");
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    protected void loadAdvisorsFromFile() {
+//        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("AdvisorDetails.ser"))) {
+//            advisorList = (List<Advisor>) objectInputStream.readObject();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File not found: AdvisorDetails.ser");
+//        } catch (EOFException e) {
+//            System.out.println("End of file reached unexpectedly. The file might be empty.");
+//        } catch (Exception e) {
+//            System.out.println("Error reading from AdvisorDetails.ser");
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     private void viewStudents() throws IOException{

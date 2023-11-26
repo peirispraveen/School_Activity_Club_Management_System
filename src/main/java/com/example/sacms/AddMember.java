@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.time.LocalDate;
 
-public class AddMember implements Member {
+public class AddMember {
 
     @FXML
     private Button backButton;
@@ -302,13 +302,13 @@ public class AddMember implements Member {
                 studentList.add(student);
                 DBConnect.insertStudent(studentId, studentFirstName, studentLastName, studentEmail,dateOfBirth, studentPassword);
 
-                for (Object i: studentList){
-                    System.out.println(student.getStudentId());
-                    System.out.println(student.getStudentFirstName());
-                    System.out.println(student.getStudentLastName());
-                    System.out.println(student.getStudentEmail());
+                for (Student i: studentList){
+                    System.out.println(student.getId());
+                    System.out.println(student.getFirstName());
+                    System.out.println(student.getLastName());
+                    System.out.println(student.getEmail());
                     System.out.println(student.getDateOfBirth().toString());
-                    System.out.println(student.getStudentPassword());
+                    System.out.println(student.getPassword());
                 }
 
                 clearStudentFields();
@@ -503,13 +503,13 @@ public class AddMember implements Member {
                 advisorList.add(advisor);
                 DBConnect.insertAdvisor(advisorId, advisorFirstName, advisorLastName, advisorEmail, dateOfBirth, advisorPassword);
 
-                for (Object i : advisorList) {
-                    System.out.println(advisor.getAdvisorId());
-                    System.out.println(advisor.getAdvisorFirstName());
-                    System.out.println(advisor.getAdvisorLastName());
-                    System.out.println(advisor.getAdvisorEmail());
+                for (Advisor i : advisorList) {
+                    System.out.println(advisor.getId());
+                    System.out.println(advisor.getFirstName());
+                    System.out.println(advisor.getLastName());
+                    System.out.println(advisor.getEmail());
                     System.out.println(advisor.getDateOfBirth().toString());
-                    System.out.println(advisor.getAdvisorPassword());
+                    System.out.println(advisor.getPassword());
                 }
 
                 clearAdvisorFields();
