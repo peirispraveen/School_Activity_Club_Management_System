@@ -1,0 +1,67 @@
+.main-pane
+{
+    -fx-background-color: #070b14;
+}
+
+.exit-button
+{
+    -fx-background-color:  #b22222;
+    -fx-text-fill: white;
+    -fx-background-radius:  28.28;
+    -fx-border-radius:  28.28;
+    -fx-background-insets: 0;
+    -fx-border-color: #fff;
+    -fx-border-width: 0.5px;
+}
+
+.control-button
+{
+    -fx-background-color: #004db1;
+    -fx-border-stule :none;
+    -fx-background-radius: 28.28;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-border-color: #fff;
+    -fx-border-width: 0.5px;
+    -fx-border-radius:  28.28;
+}
+
+
+.control-button:hover
+{
+    -fx-background-color: #108610;
+}
+
+.exit-button:hover
+{
+    -fx-background-color: rgb(230, 77, 50);
+}
+
+.image-view
+{
+    -fx-padding: 20px 20px 20px 20px;
+    -fx-alignment:center;
+}
+
+.submit-button
+{
+    -fx-background-color: #004db1;
+    -fx-border-color: #fff;
+    -fx-border-width: 0.5px;
+}
+.submit-button:hover
+{
+    -fx-background-color: #108610;
+}
+
+.input
+{
+    -fx-background-radius: 15;
+    -fx-background-color: #fff;
+
+}
+
+.text-topic
+{
+    -fx-effect: dropshadow(gaussian, #004db1,1, 1, 0, 0);
+}

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: "Bourton";
+    src: url("Fonts/BourtonInline.ttf");
+}
+
+.mainAnchor {
+    -fx-background-color: white;
+}
+
+.menuLabel {
+    -fx-font-family: Bourton;
+    -fx-text-fill: #712377;
+    -fx-font-weight: bold;
+}
+
+TableView {
+    -fx-border-color: #712377;
+    -fx-border-radius: 8px;
+}
+
+.tableColumnStyle {
+    -fx-background-color: rgb(221, 179, 232);}
+
+.sacmsLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+}
