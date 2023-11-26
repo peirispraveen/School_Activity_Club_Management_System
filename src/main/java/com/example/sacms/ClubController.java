@@ -1,4 +1,4 @@
-package com.example.implementation;
+package com.example.sacms;
 
 import com.example.sacms.ClubApplication;
 import javafx.event.ActionEvent;
