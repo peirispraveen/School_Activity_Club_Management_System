@@ -1115,10 +1115,33 @@ public class EventController {
                 // For example, you can save it to a file
                 try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx")) {
                     workbook.write(fileOut);
+                    Stage newStage = new Stage();
+                    Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    newStage.initOwner(previousStage);
+                    Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
+                    Scene scene = new Scene(root, 400, 73);
+                    newStage.setScene(scene);
+                    newStage.setResizable(false);
+                    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                    newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                    newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                    newStage.show();
+                    clubID.clear();
+                    eventID.clear();
+                    eventName.clear();
+                    eventPlace.clear();
+                    eventYear.clear();
+                    eventMonth.clear();
+                    eventDay.clear();
+                    endHour.clear();
+                    endMin.clear();
+                    startHour.clear();
+                    startMin.clear();
                 } catch (Exception f)
                 {
                     f.printStackTrace();
                 }
+                connection.close();
             }
             catch (Exception edb)
                 {
