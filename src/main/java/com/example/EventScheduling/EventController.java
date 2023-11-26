@@ -1,6 +1,5 @@
 package com.example.EventScheduling;
 
-import com.example.EventScheduling.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,7 +125,7 @@ public class EventController
     public void onClickViewEventButton(ActionEvent e) throws Exception
     {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("event-view-ui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../../../resources/com/example/sacms/event-view-ui.fxml"));
         TableView tableView = (TableView<EventView>) root.lookup("#eventTableView");
         TableColumn<EventView, String > column1 = (TableColumn<EventView, String>) tableView.getColumns().get(0);
         TableColumn<EventView, String > column2 = (TableColumn<EventView, String>) tableView.getColumns().get(1);
