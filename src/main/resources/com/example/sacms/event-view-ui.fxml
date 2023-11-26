@@ -38,11 +38,11 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="addEventButton" focusTraversable="false" layoutX="483.0" layoutY="451.0" mnemonicParsing="false" onAction="#onClickAddEventButton" prefHeight="40.0" prefWidth="166.0" styleClass="submit-button" text="Add new event" textFill="WHITE">
+      <Button fx:id="addEventButton" focusTraversable="false" layoutX="357.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickAddEventButton" prefHeight="40.0" prefWidth="166.0" styleClass="submit-button" text="Add new event" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button focusTraversable="false" layoutX="483.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" text="Generate Report" textFill="WHITE">
+      <Button focusTraversable="false" layoutX="592.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" text="Generate Report" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -61,5 +61,10 @@
             <Font size="16.0" />
          </font>
       </Button>
+      <TextField fx:id="filePath" focusTraversable="false" layoutX="603.0" layoutY="454.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="File path" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

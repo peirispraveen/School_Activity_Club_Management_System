@@ -16,7 +16,7 @@
             <Font size="37.0" />
          </font>
       </Text>
-      <TextField fx:id="eventPlace" focusTraversable="false" layoutX="235.0" layoutY="384.0" prefHeight="35.0" prefWidth="160.0" promptText="zoom" styleClass="input">
+      <TextField fx:id="eventPlace" focusTraversable="false" layoutX="235.0" layoutY="384.0" prefHeight="35.0" prefWidth="160.0" promptText="Auditorium" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -54,11 +54,11 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="122.0" prefHeight="35.0" prefWidth="160.0" promptText="21" styleClass="input">
+      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="122.0" prefHeight="35.0" prefWidth="160.0" promptText="C001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="210.0" prefHeight="35.0" prefWidth="160.0" promptText="302" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="210.0" prefHeight="35.0" prefWidth="160.0" promptText="E001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -70,7 +70,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventName" focusTraversable="false" layoutX="235.0" layoutY="295.0" prefHeight="35.0" prefWidth="160.0" promptText="105" styleClass="input">
+      <TextField fx:id="eventName" focusTraversable="false" layoutX="235.0" layoutY="295.0" prefHeight="35.0" prefWidth="160.0" promptText="Event 1.1" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
