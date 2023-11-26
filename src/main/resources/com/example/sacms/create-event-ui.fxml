@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="main-pane" stylesheets="@../../../Styles/event-scheduling.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
+   <children>
+      <Line endX="-60.1712646484375" endY="-132.0" layoutX="256.0" layoutY="183.0" startX="-60.1712646484375" startY="-184.0" stroke="WHITE" strokeWidth="0.5" />
+      <Line endX="534.0" endY="-144.0" layoutX="265.0" layoutY="195.0" startX="-263.0" startY="-144.0" stroke="WHITE" strokeWidth="0.5" />
+      <Text fill="WHITE" layoutX="372.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Create Event">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+      <TextField fx:id="eventPlace" focusTraversable="false" layoutX="235.0" layoutY="384.0" prefHeight="35.0" prefWidth="160.0" promptText="zoom" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="eventYear" focusTraversable="false" layoutX="591.0" layoutY="165.0" prefHeight="35.0" prefWidth="80.0" promptText="2024" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="eventMonth" focusTraversable="false" layoutX="680.0" layoutY="164.0" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="eventDay" focusTraversable="false" layoutX="740.0" layoutY="163.0" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="startHour" focusTraversable="false" layoutX="591.0" layoutY="256.0" prefHeight="35.0" prefWidth="60.0" promptText="12" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Text fill="WHITE" layoutX="435.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="End Time" wrappingWidth="140.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Button focusTraversable="false" layoutX="364.0" layoutY="495.0" mnemonicParsing="false" onAction="#onClickCreateEventButton" prefHeight="35.0" prefWidth="107.0" styleClass="submit-button" text="Create" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Text fill="WHITE" layoutX="46.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Place " wrappingWidth="125.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <TextField fx:id="startMin" focusTraversable="false" layoutX="661.0" layoutY="257.0" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="122.0" prefHeight="35.0" prefWidth="160.0" promptText="21" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="210.0" prefHeight="35.0" prefWidth="160.0" promptText="302" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="endHour" focusTraversable="false" layoutX="591.0" layoutY="339.0" prefHeight="36.0" prefWidth="60.0" promptText="18" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="endMin" focusTraversable="false" layoutX="661.0" layoutY="339.0" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="eventName" focusTraversable="false" layoutX="235.0" layoutY="295.0" prefHeight="35.0" prefWidth="160.0" promptText="105" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Text fill="WHITE" layoutX="46.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Club ID" wrappingWidth="116.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="46.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Event ID" wrappingWidth="125.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="46.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text=" Name" wrappingWidth="167.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="435.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Date" wrappingWidth="87.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="435.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Start Time" wrappingWidth="150.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="207.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="207.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="207.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="207.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="572.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="572.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="572.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="12.08154296875">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Button fx:id="exitButton" focusTraversable="false" layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="40.0" prefWidth="40.0" styleClass="exit-button" stylesheets="@../../../Styles/event-scheduling.css" text="⏻">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button focusTraversable="false" layoutX="74.0" layoutY="6.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="M">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="↻">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

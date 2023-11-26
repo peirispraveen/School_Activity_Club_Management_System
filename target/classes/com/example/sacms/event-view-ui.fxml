@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="main-pane" stylesheets="@../../../Styles/event-scheduling.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
+   <children>
+      <Line endX="-60.1712646484375" endY="-132.0" layoutX="256.0" layoutY="184.0" startX="-60.1712646484375" startY="-184.0" stroke="WHITE" strokeWidth="0.5" />
+      <Line endX="534.0" endY="-144.0" layoutX="265.0" layoutY="195.0" startX="-263.0" startY="-144.0" stroke="WHITE" strokeWidth="0.5" />
+      <Text fill="WHITE" layoutX="378.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Events">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+      <TableView fx:id="eventTableView" layoutX="18.0" layoutY="75.0" prefHeight="347.0" prefWidth="767.0">
+        <columns>
+            <TableColumn fx:id="eventIDColumn" prefWidth="174.0" text="Event ID" />
+            <TableColumn fx:id="clubIDColumn" prefWidth="217.0" text="Club ID" />
+            <TableColumn fx:id="typeColumn" prefWidth="186.0" text="Type" />
+            <TableColumn fx:id="startDateColumn" prefWidth="177.0" text="Start Date" />
+        </columns>
+      </TableView>
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="109.0" layoutY="454.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="Enter club ID" styleClass="input">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button focusTraversable="false" layoutX="193.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickUpdateEventButton" styleClass="submit-button" text="Postpone" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button focusTraversable="false" layoutX="79.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickDeleteEventButton" styleClass="submit-button" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="addEventButton" focusTraversable="false" layoutX="483.0" layoutY="451.0" mnemonicParsing="false" onAction="#onClickAddEventButton" prefHeight="40.0" prefWidth="166.0" styleClass="submit-button" text="Add new event" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button focusTraversable="false" layoutX="483.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" text="Generate Report" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="exitButton" focusTraversable="false" layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="40.0" prefWidth="40.0" styleClass="exit-button" stylesheets="@../../../Styles/event-scheduling.css" text="⏻">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button focusTraversable="false" layoutX="72.0" layoutY="6.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="M">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="resetButton" disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickEventViewResetButton" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="↻">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
