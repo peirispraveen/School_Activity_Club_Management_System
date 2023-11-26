@@ -126,9 +126,10 @@ public class EventValidator implements EventValidation
     }
     public void validateClubID(String clubID)
     {
-        if(validateInt(clubID))
-        {
-            validClubID = true;
+        if(clubID != "") {
+            if (clubID.charAt(0) == 'C') {
+                validClubID = true;
+            }
         }
         else
         {
@@ -138,9 +139,10 @@ public class EventValidator implements EventValidation
 
     public void validateEventID(String eventID)
     {
-        if(validateInt(eventID))
-        {
-            validEventID = true;
+        if(eventID != "") {
+            if (eventID.charAt(0) == 'E') {
+                validEventID = true;
+            }
         }
         else {
             validEventID = false;
