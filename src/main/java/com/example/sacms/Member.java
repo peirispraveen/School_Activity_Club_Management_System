@@ -11,5 +11,5 @@ public interface Member extends Serializable {
     String getPassword();
     DateOfBirth getDateOfBirth();
 
-    // Interface Test
+    // Interface Testing
 }
