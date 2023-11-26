@@ -1,4 +1,4 @@
-package com.example.sacms.EventScheduling;
+package com.example.EventScheduling;
 
 public class Event extends EventParent
 {

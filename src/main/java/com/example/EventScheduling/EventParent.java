@@ -1,4 +1,4 @@
-package com.example.sacms.EventScheduling;
+package com.example.EventScheduling;
 
 abstract class EventParent
 {

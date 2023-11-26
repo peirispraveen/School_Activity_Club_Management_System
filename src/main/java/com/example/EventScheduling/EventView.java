@@ -1,6 +1,4 @@
-package com.example.sacms.EventScheduling;
-
-import com.example.sacms.EventController;
+package com.example.EventScheduling;
 
 public class EventView
 {
