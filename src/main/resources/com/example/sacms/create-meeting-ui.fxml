@@ -75,11 +75,11 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="110.0" prefHeight="35.0" prefWidth="160.0" promptText="21" styleClass="input">
+      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="110.0" prefHeight="35.0" prefWidth="160.0" promptText="C001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="181.0" prefHeight="35.0" prefWidth="160.0" promptText="302" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="181.0" prefHeight="35.0" prefWidth="160.0" promptText="E001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -91,7 +91,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="meetingNum" focusTraversable="false" layoutX="235.0" layoutY="256.0" prefHeight="35.0" prefWidth="160.0" promptText="105" styleClass="input">
+      <TextField fx:id="meetingNum" focusTraversable="false" layoutX="235.0" layoutY="256.0" prefHeight="35.0" prefWidth="160.0" promptText="23" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>

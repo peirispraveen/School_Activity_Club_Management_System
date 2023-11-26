@@ -126,10 +126,8 @@ public class EventValidator implements EventValidation
     }
     public void validateClubID(String clubID)
     {
-        if(clubID != "") {
-            if (clubID.charAt(0) == 'C') {
-                validClubID = true;
-            }
+        if(!clubID.isEmpty() && clubID.length() < 5 && clubID.charAt(0) == 'C') {
+            validClubID = true;
         }
         else
         {
@@ -139,10 +137,8 @@ public class EventValidator implements EventValidation
 
     public void validateEventID(String eventID)
     {
-        if(eventID != "") {
-            if (eventID.charAt(0) == 'E') {
-                validEventID = true;
-            }
+        if(!eventID.isEmpty() && eventID.length() < 9 && eventID.charAt(0) == 'E') {
+            validEventID = true;
         }
         else {
             validEventID = false;
@@ -318,7 +314,7 @@ public class EventValidator implements EventValidation
     {
         try
         {
-            double strDouble = Double.parseDouble(str);
+            Double.parseDouble(str);
             return false;
         }
         catch(Exception e)
@@ -385,7 +381,6 @@ public class EventValidator implements EventValidation
     public void validateLink(String link)
     {
         String urlRegex = "^(https?|ftp):\\/\\/[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,})+(\\/[^\\s]*)?$";
-
         Pattern pattern = Pattern.compile(urlRegex);
         Matcher matcher = pattern.matcher(link);
         if(matcher.matches())
@@ -397,6 +392,7 @@ public class EventValidator implements EventValidation
             validLink = false;
         }
     }
+
 }
 
 

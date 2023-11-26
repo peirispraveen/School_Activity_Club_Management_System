@@ -17,13 +17,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class EventController
-{
+public class EventController {
 
     String url = "jdbc:mysql://localhost:3306/SACMS";
     String user = "root";
@@ -66,22 +74,22 @@ public class EventController
     private Button resetButton;
     private int validPoints;
 
+    @FXML
+    private TextField filePath;
+
 
     @FXML
-    public void onInputTextChanged()
-    {
+    public void onInputTextChanged() {
         resetButton.setDisable(false);
     }
 
     @FXML
-    public void onClickEventViewResetButton(ActionEvent e) throws Exception
-    {
+    public void onClickEventViewResetButton(ActionEvent e) throws Exception {
         eventID.clear();
     }
 
     @FXML
-    public void onClickCreateActivityResetButton(ActionEvent e) throws Exception
-    {
+    public void onClickCreateActivityResetButton(ActionEvent e) throws Exception {
         clubID.clear();
         eventID.clear();
         activityNo.clear();
@@ -98,40 +106,38 @@ public class EventController
     }
 
 
-   @FXML
+    @FXML
     public void onClickAddEventButton(ActionEvent e) throws Exception {
 
-    Stage newStage = new Stage();
-    Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-    newStage.initOwner(previousStage);
-    Parent root = FXMLLoader.load(getClass().getResource("event-type-selection-ui.fxml"));
-    Scene scene = new Scene(root, 400, 73);
-    newStage.setScene(scene);
-    newStage.setResizable(false);
-    newStage.setTitle("Please select the event type");
-    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-    newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-    newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-    newStage.show();
+        Stage newStage = new Stage();
+        Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        newStage.initOwner(previousStage);
+        Parent root = FXMLLoader.load(getClass().getResource("event-type-selection-ui.fxml"));
+        Scene scene = new Scene(root, 400, 73);
+        newStage.setScene(scene);
+        newStage.setResizable(false);
+        newStage.setTitle("Please select the event type");
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+        newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+        newStage.show();
     }
 
     @FXML
-    public void onClickExitButton()
-    {
+    public void onClickExitButton() {
         System.exit(0);
     }
 
 
     @FXML
-    public void onClickViewEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickViewEventButton(ActionEvent e) throws Exception {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("../../../../resources/com/example/sacms/event-view-ui.fxml"));
         TableView tableView = (TableView<EventView>) root.lookup("#eventTableView");
-        TableColumn<EventView, String > column1 = (TableColumn<EventView, String>) tableView.getColumns().get(0);
-        TableColumn<EventView, String > column2 = (TableColumn<EventView, String>) tableView.getColumns().get(1);
-        TableColumn<EventView, String > column3 = (TableColumn<EventView, String>) tableView.getColumns().get(2);
-        TableColumn<EventView, String > column4 = (TableColumn<EventView, String>) tableView.getColumns().get(3);
+        TableColumn<EventView, String> column1 = (TableColumn<EventView, String>) tableView.getColumns().get(0);
+        TableColumn<EventView, String> column2 = (TableColumn<EventView, String>) tableView.getColumns().get(1);
+        TableColumn<EventView, String> column3 = (TableColumn<EventView, String>) tableView.getColumns().get(2);
+        TableColumn<EventView, String> column4 = (TableColumn<EventView, String>) tableView.getColumns().get(3);
 
         column1.setCellValueFactory(new PropertyValueFactory<>("eventID"));
         column2.setCellValueFactory(new PropertyValueFactory<>("clubID"));
@@ -140,8 +146,7 @@ public class EventController
 
         ObservableList<EventView> obList = FXCollections.observableArrayList();
 
-        try
-        {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
@@ -151,27 +156,23 @@ public class EventController
             String query4 = "select event_id from Activity";
             ResultSet resultSet1 = statement.executeQuery(query1);
             ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
-            while(resultSet1.next())
-            {
+            while (resultSet1.next()) {
                 eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString(1),
                         resultSet1.getString(2), resultSet1.getString(3))));
             }
             ResultSet resultSet2 = statement.executeQuery(query2);
             ArrayList<String> meeting = new ArrayList<>();
-            while(resultSet2.next())
-            {
+            while (resultSet2.next()) {
                 meeting.add(resultSet2.getString(1));
             }
             ResultSet resultSet3 = statement.executeQuery(query3);
             ArrayList<String> event = new ArrayList<>();
-            while(resultSet3.next())
-            {
+            while (resultSet3.next()) {
                 event.add(resultSet3.getString(1));
             }
             ResultSet resultSet4 = statement.executeQuery(query4);
             ArrayList<String> activity = new ArrayList<>();
-            while(resultSet4.next())
-            {
+            while (resultSet4.next()) {
                 activity.add(resultSet4.getString(1));
             }
             resultSet1.close();
@@ -205,15 +206,12 @@ public class EventController
                         }
                     }
                 }
-                if (type != "")
-                {
+                if (type != "") {
                     EventView eventValue = new EventView(strings.get(0), strings.get(1), type, strings.get(2));
                     obList.add(eventValue);
                 }
             }
-        }
-        catch(Exception et)
-        {
+        } catch (Exception et) {
             et.printStackTrace();
         }
 
@@ -224,8 +222,7 @@ public class EventController
     }
 
     @FXML
-    public void onClickEventMeetingButton(ActionEvent e) throws Exception
-    {
+    public void onClickEventMeetingButton(ActionEvent e) throws Exception {
         Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Stage previousStage = (Stage) currentStage.getOwner();
         currentStage.close();
@@ -235,8 +232,7 @@ public class EventController
     }
 
     @FXML
-    public void onClickCreateMeetingButton(ActionEvent e) throws Exception
-    {
+    public void onClickCreateMeetingButton(ActionEvent e) throws Exception {
         Meeting newMeeting = new Meeting(clubID.getText(), eventID.getText(), eventYear.getText(), eventMonth.getText(),
                 eventDay.getText(), startHour.getText(), startMin.getText(), endHour.getText(), endMin.getText(),
                 meetingNum.getText(), eventPlatform.getText(), eventLink.getText());
@@ -247,65 +243,50 @@ public class EventController
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
-            if (EventValidator.isValidClubID())
-            {
+            if (EventValidator.isValidClubID()) {
                 ResultSet dbClubResult = statement.executeQuery("select club_id from Club");
                 boolean dbClubIDMatch = false;
-                while(dbClubResult.next())
-                {
-                    if(dbClubResult.getString(1).equals(clubID.getText()))
-                    {
-                     newMeeting.values[0] = clubID.getText();
-                     validPoints++;
-                     dbClubIDMatch = true;
+                while (dbClubResult.next()) {
+                    if (dbClubResult.getString(1).equals(clubID.getText())) {
+                        newMeeting.values[0] = clubID.getText();
+                        validPoints++;
+                        dbClubIDMatch = true;
                     }
                 }
                 dbClubResult.close();
-                if(!dbClubIDMatch)
-                {
+                if (!dbClubIDMatch) {
                     clubID.clear();
                     clubID.setPromptText("IN");
                     clubID.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidEventID())
-            {
+            if (EventValidator.isValidEventID()) {
                 boolean dbEventIDMatch = false;
                 ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
-                while(dbResult.next())
-                {
-                    if(dbResult.getString(1).equals(eventID.getText()))
-                    {
+                while (dbResult.next()) {
+                    if (dbResult.getString(1).equals(eventID.getText())) {
                         dbEventIDMatch = true;
                     }
                 }
                 dbResult.close();
-                if(dbEventIDMatch)
-                {
+                if (dbEventIDMatch) {
                     eventID.clear();
                     eventID.setPromptText("IN");
                     eventID.setStyle("-fx-prompt-text-fill: #b22222");
-                }
-                else
-                {
+                } else {
                     newMeeting.values[1] = eventID.getText();
                     validPoints++;
                 }
-            }
-            else
-            {
+            } else {
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay())
-            {
+            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
                 newMeeting.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
                 validPoints++;
             } else {
@@ -319,12 +300,10 @@ public class EventController
                 eventDay.setPromptText("IN");
                 eventDay.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
-            {
+            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin()) {
                 newMeeting.values[3] = startHour.getText() + ":" + startMin.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 startHour.clear();
                 startHour.setPromptText("IN");
                 startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -333,16 +312,13 @@ public class EventController
                 startMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
 
-            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
-            {
+            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
                 if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
                         (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
-                {
+                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
                     newMeeting.values[4] = endHour.getText() + ":" + endMin.getText();
                     validPoints++;
-                } else
-                {
+                } else {
                     endHour.clear();
                     endHour.setPromptText("IN");
                     endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -350,9 +326,7 @@ public class EventController
                     endHour.setPromptText("IN");
                     endHour.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -360,65 +334,49 @@ public class EventController
                 endMin.setPromptText("IN");
                 endMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidNum())
-            {
+            if (EventValidator.isValidNum()) {
                 boolean dbMeetingNoMatch = false;
                 ResultSet dbResult = statement.executeQuery("select meeting_no from Meeting");
-                while(dbResult.next())
-                {
-                    if(dbResult.getString(1).equals(meetingNum.getText()))
-                    {
+                while (dbResult.next()) {
+                    if (dbResult.getString(1).equals(meetingNum.getText())) {
                         dbMeetingNoMatch = true;
                     }
 
                 }
                 dbResult.close();
-                if(dbMeetingNoMatch)
-                {
+                if (dbMeetingNoMatch) {
                     meetingNum.clear();
                     meetingNum.setPromptText("IN");
                     meetingNum.setStyle("-fx-prompt-text-fill: #b22222");
-                }
-                else
-                {
+                } else {
                     newMeeting.values[5] = meetingNum.getText();
                     validPoints++;
                 }
-            }
-            else
-            {
+            } else {
                 meetingNum.clear();
                 meetingNum.setPromptText("IN");
                 meetingNum.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidPlatform())
-            {
+            if (EventValidator.isValidPlatform()) {
                 newMeeting.values[6] = eventPlatform.getText();
                 validPoints++;
-            }
-            else
-            {
+            } else {
                 eventPlatform.clear();
                 eventPlatform.setPromptText("IN");
                 eventPlatform.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidLink())
-            {
+            if (EventValidator.isValidLink()) {
                 newMeeting.values[7] = eventLink.getText();
                 validPoints++;
-            }
-            else
-            {
+            } else {
                 eventLink.clear();
                 eventLink.setPromptText("IN");
                 eventLink.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (validPoints == 8)
-            {
+            if (validPoints == 8) {
                 String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     preparedStatement1.setString(i + 1, newMeeting.values[i + 1]);
                 }
                 preparedStatement1.setString(5, newMeeting.values[0]);
@@ -426,8 +384,7 @@ public class EventController
                 String query2 = "INSERT INTO Meeting VALUES (?, ?, ?, ?)";
                 PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
                 preparedStatement2.setString(1, newMeeting.values[1]);
-                for (int i = 0; i < 3; i++)
-                {
+                for (int i = 0; i < 3; i++) {
                     preparedStatement2.setString(i + 2, newMeeting.values[i + 5]);
                 }
                 preparedStatement2.executeUpdate();
@@ -456,17 +413,27 @@ public class EventController
                 startHour.clear();
                 startMin.clear();
             }
-            connection.close();
-        }
-        catch(SQLException edb)
-        {
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                connection.close();
+            }
+        } catch (SQLException edb) {
             edb.printStackTrace();
         }
     }
 
     @FXML
-    public void onClickEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickEventButton(ActionEvent e) throws Exception {
         Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Stage previousStage = (Stage) currentStage.getOwner();
         currentStage.close();
@@ -476,8 +443,7 @@ public class EventController
     }
 
     @FXML
-    public void onClickCreateEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickCreateEventButton(ActionEvent e) throws Exception {
         Event newEvent = new Event(clubID.getText(), eventID.getText(), eventYear.getText(), eventMonth.getText(),
                 eventDay.getText(), startHour.getText(), startMin.getText(), endHour.getText(), endMin.getText(),
                 eventName.getText(), eventPlace.getText());
@@ -488,65 +454,50 @@ public class EventController
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
-            if (EventValidator.isValidClubID())
-            {
+            if (EventValidator.isValidClubID()) {
                 ResultSet dbClubResult = statement.executeQuery("select club_id from Club");
                 boolean dbClubIDMatch = false;
-                while(dbClubResult.next())
-                {
-                    if(dbClubResult.getString(1).equals(clubID.getText()))
-                    {
-                     newEvent.values[0] = clubID.getText();
-                     validPoints++;
-                     dbClubIDMatch = true;
+                while (dbClubResult.next()) {
+                    if (dbClubResult.getString(1).equals(clubID.getText())) {
+                        newEvent.values[0] = clubID.getText();
+                        validPoints++;
+                        dbClubIDMatch = true;
                     }
                 }
                 dbClubResult.close();
-                if(!dbClubIDMatch)
-                {
+                if (!dbClubIDMatch) {
                     clubID.clear();
                     clubID.setPromptText("IN");
                     clubID.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidEventID())
-            {
+            if (EventValidator.isValidEventID()) {
                 boolean dbEventIDMatch = false;
-                 ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
-                while(dbResult.next())
-                {
-                    if(dbResult.getString(1).equals(eventID.getText()))
-                    {
+                ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
+                while (dbResult.next()) {
+                    if (dbResult.getString(1).equals(eventID.getText())) {
                         dbEventIDMatch = true;
                     }
                 }
                 dbResult.close();
-                if(dbEventIDMatch)
-                {
+                if (dbEventIDMatch) {
                     eventID.clear();
                     eventID.setPromptText("IN");
                     eventID.setStyle("-fx-prompt-text-fill: #b22222");
-                }
-                else
-                {
+                } else {
                     newEvent.values[1] = eventID.getText();
                     validPoints++;
                 }
-            }
-            else
-            {
+            } else {
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay())
-            {
+            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
                 newEvent.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
                 validPoints++;
             } else {
@@ -560,12 +511,10 @@ public class EventController
                 eventDay.setPromptText("IN");
                 eventDay.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
-            {
+            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin()) {
                 newEvent.values[3] = startHour.getText() + ":" + startMin.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 startHour.clear();
                 startHour.setPromptText("IN");
                 startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -574,16 +523,13 @@ public class EventController
                 startMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
 
-            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
-            {
+            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
                 if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
                         (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
-                {
+                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
                     newEvent.values[4] = endHour.getText() + ":" + endMin.getText();
                     validPoints++;
-                } else
-                {
+                } else {
                     endHour.clear();
                     endHour.setPromptText("IN");
                     endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -591,39 +537,31 @@ public class EventController
                     endMin.setPromptText("IN");
                     endMin.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 endHour.clear();
-                    endHour.setPromptText("IN");
-                    endHour.setStyle("-fx-prompt-text-fill: #b22222");
-                    endMin.clear();
-                    endMin.setPromptText("IN");
-                    endMin.setStyle("-fx-prompt-text-fill: #b22222");
+                endHour.setPromptText("IN");
+                endHour.setStyle("-fx-prompt-text-fill: #b22222");
+                endMin.clear();
+                endMin.setPromptText("IN");
+                endMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidName())
-            {
-                    newEvent.values[5] = eventName.getText();
-                    validPoints++;
-            }
-            else
-            {
+            if (EventValidator.isValidName()) {
+                newEvent.values[5] = eventName.getText();
+                validPoints++;
+            } else {
                 eventName.clear();
                 eventName.setPromptText("IN");
                 eventName.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidPlace())
-            {
+            if (EventValidator.isValidPlace()) {
                 newEvent.values[6] = eventPlace.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 eventPlace.clear();
                 eventPlace.setPromptText("IN");
                 eventPlace.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (validPoints == 7)
-            {
+            if (validPoints == 7) {
                 try {
                     String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
                     PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
@@ -661,23 +599,31 @@ public class EventController
                     endMin.clear();
                     startHour.clear();
                     startMin.clear();
-                }
-                catch(Exception el)
-                {
+                } catch (Exception el) {
                     el.printStackTrace();
                 }
             }
-            connection.close();
-        }
-        catch(SQLException edb)
-        {
-                edb.printStackTrace();
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                connection.close();
+            }
+        } catch (SQLException edb) {
+            edb.printStackTrace();
         }
     }
 
     @FXML
-    public void onClickActivityButton(ActionEvent e) throws Exception
-    {
+    public void onClickActivityButton(ActionEvent e) throws Exception {
         Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Stage previousStage = (Stage) currentStage.getOwner();
         currentStage.close();
@@ -687,8 +633,7 @@ public class EventController
     }
 
     @FXML
-    public void onClickCreateActivityButton(ActionEvent e) throws Exception
-    {
+    public void onClickCreateActivityButton(ActionEvent e) throws Exception {
         Activity newActivity = new Activity(clubID.getText(), eventID.getText(), eventYear.getText(), eventMonth.getText(),
                 eventDay.getText(), startHour.getText(), startMin.getText(), endHour.getText(), endMin.getText(),
                 eventType.getText(), eventLink.getText(), eventName.getText(), activityNo.getText());
@@ -699,65 +644,50 @@ public class EventController
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
-            if (EventValidator.isValidClubID())
-            {
+            if (EventValidator.isValidClubID()) {
                 boolean dbClubIDMatch = false;
                 ResultSet dbResult = statement.executeQuery("select club_id from Club");
-                while(dbResult.next())
-                {
-                    if(dbResult.getString(1).equals(clubID.getText()))
-                    {
-                     newActivity.values[0] = clubID.getText();
-                     validPoints++;
-                     dbClubIDMatch = true;
+                while (dbResult.next()) {
+                    if (dbResult.getString(1).equals(clubID.getText())) {
+                        newActivity.values[0] = clubID.getText();
+                        validPoints++;
+                        dbClubIDMatch = true;
                     }
                 }
                 dbResult.close();
-                if(!dbClubIDMatch)
-                {
+                if (!dbClubIDMatch) {
                     clubID.clear();
                     clubID.setPromptText("IN");
                     clubID.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidEventID())
-            {
+            if (EventValidator.isValidEventID()) {
                 boolean dbEventIDMatch = false;
-                 ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
-                while(dbResult.next())
-                {
-                    if(dbResult.getString(1).equals(eventID.getText()))
-                    {
+                ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
+                while (dbResult.next()) {
+                    if (dbResult.getString(1).equals(eventID.getText())) {
                         dbEventIDMatch = true;
                     }
                 }
                 dbResult.close();
-                if(dbEventIDMatch)
-                {
+                if (dbEventIDMatch) {
                     eventID.clear();
                     eventID.setPromptText("IN");
                     eventID.setStyle("-fx-prompt-text-fill: #b22222");
-                }
-                else
-                {
+                } else {
                     newActivity.values[1] = eventID.getText();
                     validPoints++;
                 }
-            }
-            else
-            {
+            } else {
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay())
-            {
+            if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
                 newActivity.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
                 validPoints++;
             } else {
@@ -771,12 +701,10 @@ public class EventController
                 eventDay.setPromptText("IN");
                 eventDay.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
-            {
+            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin()) {
                 newActivity.values[3] = startHour.getText() + ":" + startMin.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 startHour.clear();
                 startHour.setPromptText("IN");
                 startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -785,16 +713,13 @@ public class EventController
                 startMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
 
-            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
-            {
+            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
                 if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
                         (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
-                {
+                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
                     newActivity.values[4] = endHour.getText() + ":" + endMin.getText();
                     validPoints++;
-                } else
-                {
+                } else {
                     endHour.clear();
                     endHour.setPromptText("IN");
                     endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -802,9 +727,7 @@ public class EventController
                     endMin.setPromptText("IN");
                     endMin.setStyle("-fx-prompt-text-fill: #b22222");
                 }
-            }
-            else
-            {
+            } else {
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -812,23 +735,18 @@ public class EventController
                 endMin.setPromptText("IN");
                 endMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidType())
-            {
+            if (EventValidator.isValidType()) {
                 newActivity.values[5] = eventType.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 eventType.clear();
                 eventType.setPromptText("IN");
                 eventType.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidName())
-            {
+            if (EventValidator.isValidName()) {
                 newActivity.values[6] = eventName.getText();
                 validPoints++;
-            }
-            else
-            {
+            } else {
                 eventName.clear();
                 eventName.setPromptText("IN");
                 eventName.setStyle("-fx-prompt-text-fill: #b22222");
@@ -850,29 +768,23 @@ public class EventController
                     newActivity.values[7] = activityNo.getText();
                     validPoints++;
                 }
-            }
-            else
-            {
+            } else {
                 activityNo.clear();
                 activityNo.setPromptText("IN");
                 activityNo.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (EventValidator.isValidLink())
-            {
+            if (EventValidator.isValidLink()) {
                 newActivity.values[8] = eventLink.getText();
                 validPoints++;
-            } else
-            {
+            } else {
                 eventLink.clear();
                 eventLink.setPromptText("IN");
                 eventLink.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if (validPoints == 9)
-            {
+            if (validPoints == 9) {
                 String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     preparedStatement1.setString(i + 1, newActivity.values[i + 1]);
                 }
                 preparedStatement1.setString(5, newActivity.values[0]);
@@ -880,8 +792,7 @@ public class EventController
                 String query2 = "INSERT INTO Activity VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
                 preparedStatement2.setString(1, newActivity.values[1]);
-                for (int i = 0; i < 4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     preparedStatement2.setString(i + 2, newActivity.values[i + 5]);
                 }
                 preparedStatement2.executeUpdate();
@@ -910,18 +821,28 @@ public class EventController
                 startHour.clear();
                 startMin.clear();
             }
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+            }
             connection.close();
-        }
-        catch(SQLException edb)
-        {
+        } catch (SQLException edb) {
             edb.printStackTrace();
         }
     }
 
-    public void onClickDeleteEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickDeleteEventButton(ActionEvent e) throws Exception {
         EventValidator validateClubID = new EventValidator(eventID.getText());
-        if(validateClubID.isValidEventID()) {
+        if (validateClubID.isValidEventID()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(url, user, password);
@@ -966,13 +887,26 @@ public class EventController
                 edb.printStackTrace();
             }
         }
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+            eventID.clear();
+        }
     }
 
-    public void onClickUpdateEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickUpdateEventButton(ActionEvent e) throws Exception {
         PostponeEvent.eventID = eventID.getText();
         EventValidator eventValidator = new EventValidator(eventID.getText());
-        if(eventValidator.isValidEventID()) {
+        if (eventValidator.isValidEventID()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(url, user, password);
@@ -1002,64 +936,60 @@ public class EventController
                 edb.printStackTrace();
             }
         }
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+        }
     }
 
-    public void onClickPostponeEventButton(ActionEvent e) throws Exception
-    {
+    public void onClickPostponeEventButton(ActionEvent e) throws Exception {
 
         PostponeEvent postponeEvent = new PostponeEvent(eventYear.getText(), eventMonth.getText(), eventDay.getText(),
                 startHour.getText(), startMin.getText(), endHour.getText(), endMin.getText());
         postponeEvent.values = new String[3];
         postponeEvent.createEvent();
-        if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay())
-            {
-                postponeEvent.values[0] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
+        if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
+            postponeEvent.values[0] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
+            validPoints++;
+        } else {
+            eventYear.clear();
+            eventYear.setPromptText("IN");
+            eventYear.setStyle("-fx-prompt-text-fill: #b22222");
+            eventMonth.clear();
+            eventMonth.setPromptText("IN");
+            eventMonth.setStyle("-fx-prompt-text-fill: #b22222");
+            eventDay.clear();
+            eventDay.setPromptText("IN");
+            eventDay.setStyle("-fx-prompt-text-fill: #b22222");
+        }
+        if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin()) {
+            postponeEvent.values[1] = startHour.getText() + ":" + startMin.getText();
+            validPoints++;
+        } else {
+            startHour.clear();
+            startHour.setPromptText("IN");
+            startHour.setStyle("-fx-prompt-text-fill: #b22222");
+            startMin.clear();
+            startMin.setPromptText("IN");
+            startMin.setStyle("-fx-prompt-text-fill: #b22222");
+        }
+
+        if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
+            if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
+                    (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
+                            (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
+                postponeEvent.values[2] = endHour.getText() + ":" + endMin.getText();
                 validPoints++;
             } else {
-                eventYear.clear();
-                eventYear.setPromptText("IN");
-                eventYear.setStyle("-fx-prompt-text-fill: #b22222");
-                eventMonth.clear();
-                eventMonth.setPromptText("IN");
-                eventMonth.setStyle("-fx-prompt-text-fill: #b22222");
-                eventDay.clear();
-                eventDay.setPromptText("IN");
-                eventDay.setStyle("-fx-prompt-text-fill: #b22222");
-            }
-            if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
-            {
-                postponeEvent.values[1] = startHour.getText() + ":" + startMin.getText();
-                validPoints++;
-            } else
-            {
-                startHour.clear();
-                startHour.setPromptText("IN");
-                startHour.setStyle("-fx-prompt-text-fill: #b22222");
-                startMin.clear();
-                startMin.setPromptText("IN");
-                startMin.setStyle("-fx-prompt-text-fill: #b22222");
-            }
-
-            if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
-            {
-                if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
-                        (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                                (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
-                {
-                    postponeEvent.values[2] = endHour.getText() + ":" + endMin.getText();
-                    validPoints++;
-                } else
-                {
-                    endHour.clear();
-                    endHour.setPromptText("IN");
-                    endHour.setStyle("-fx-prompt-text-fill: #b22222");
-                    endMin.clear();
-                    endMin.setPromptText("IN");
-                    endMin.setStyle("-fx-prompt-text-fill: #b22222");
-                }
-            }
-            else
-            {
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1067,22 +997,189 @@ public class EventController
                 endMin.setPromptText("IN");
                 endMin.setStyle("-fx-prompt-text-fill: #b22222");
             }
-            if(validPoints == 3) {
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection(url, user, password);
-                    String query2 = "UPDATE EventParent SET event_date = ?, start_time = ?, end_time = ? WHERE event_id = ?";
-                    PreparedStatement preparedStatement1 = connection.prepareStatement(query2);
-                    preparedStatement1.setString(4, eventID.getText());
-                    for (int i = 0; i < 3; i++) {
-                        preparedStatement1.setString(i + 1, postponeEvent.values[i]);
+        } else {
+            endHour.clear();
+            endHour.setPromptText("IN");
+            endHour.setStyle("-fx-prompt-text-fill: #b22222");
+            endMin.clear();
+            endMin.setPromptText("IN");
+            endMin.setStyle("-fx-prompt-text-fill: #b22222");
+        }
+        if (validPoints == 3) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DriverManager.getConnection(url, user, password);
+                String query2 = "UPDATE EventParent SET event_date = ?, start_time = ?, end_time = ? WHERE event_id = ?";
+                PreparedStatement preparedStatement1 = connection.prepareStatement(query2);
+                preparedStatement1.setString(4, eventID.getText());
+                for (int i = 0; i < 3; i++) {
+                    preparedStatement1.setString(i + 1, postponeEvent.values[i]);
+                }
+                preparedStatement1.executeUpdate();
+                connection.close();
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                //
+            } catch (Exception edb) {
+                edb.printStackTrace();
+            }
+        }
+        else{
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+        }
+    }
+
+
+    public void onClickGenerateEventReportButton(ActionEvent e) throws Exception {
+        EventValidator validator = new EventValidator();
+        if (validator.validateString(filePath.getText())) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connection = DriverManager.getConnection(url, user, password);
+                String query1 = "SELECT * FROM EventParent";
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery(query1);
+
+                ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
+                while (resultSet1.next()) {
+                    eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString("club_id"),
+                            resultSet1.getString("event_id"), resultSet1.getString("event_date"),
+                            resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
+                }
+                resultSet1.close();
+                String query2 = "SELECT * FROM EventType";
+                Statement statement2 = connection.createStatement();
+                ResultSet resultSet2 = statement2.executeQuery(query2);
+                ArrayList<ArrayList<String>> event = new ArrayList<>();
+                while (resultSet2.next()) {
+                    event.add(new ArrayList<>(Arrays.asList(resultSet2.getString("event_id"),
+                            resultSet2.getString("name"), resultSet2.getString("place"))));
+                }
+                resultSet2.close();
+                String query3 = "SELECT * FROM Activity";
+                Statement statement3 = connection.createStatement();
+                ResultSet resultSet3 = statement3.executeQuery(query3);
+                ArrayList<ArrayList<String>> activity = new ArrayList<>();
+                while (resultSet3.next()) {
+                    activity.add(new ArrayList<>(Arrays.asList(resultSet3.getString("event_id"),
+                            resultSet3.getString("type"), resultSet3.getString("name"),
+                            resultSet3.getString("activity_no"), resultSet3.getString("link"))));
+                }
+                String query4 = "SELECT * FROM Meeting";
+                Statement statement4 = connection.createStatement();
+                ResultSet resultSet4 = statement4.executeQuery(query4);
+                ArrayList<ArrayList<String>> meeting = new ArrayList<>();
+                while (resultSet4.next()) {
+                    meeting.add(new ArrayList<>(Arrays.asList(resultSet4.getString("event_id"),
+                            resultSet4.getString("meeting_no"), resultSet4.getString("platform"),
+                            resultSet4.getString("link"))));
+                }
+                resultSet4.close();
+
+                ArrayList<ArrayList<String>> report = new ArrayList<>();
+                for (int i = 0; i < eventParent.size(); i++) {
+                    boolean found = false;
+                    for (int j = 0; j < event.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(event.get(j).get(0))) {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
+                            found = true;
+                            break;
+                        }
                     }
-                    preparedStatement1.executeUpdate();
-                    connection.close();
+                    if (found) {
+                        continue;
+                    }
+                    for (int j = 0; j < activity.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(activity.get(j).get(0))) {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    activity.get(j).get(2), "NULL", activity.get(j).get(1), activity.get(j).get(3),
+                                    "NULL", "NULL", activity.get(j).get(4))));
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        continue;
+                    }
+                    for (int j = 0; j < meeting.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(meeting.get(j).get(0))) {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    "NULL", "NULL", "NULL", "NULL", meeting.get(j).get(1), meeting.get(j).get(2),
+                                    meeting.get(j).get(3))));
+                            break;
+                        }
+                    }
+                }
+
+                // Create a new workbook
+                XSSFWorkbook workbook = new XSSFWorkbook();
+                // Create a sheet in the workbook
+                XSSFSheet sheet = workbook.createSheet("Event Report");
+                Font boldFont = workbook.createFont();
+                boldFont.setBold(true);
+                // Create a cell style with the bold font
+                CellStyle boldStyle = workbook.createCellStyle();
+                boldStyle.setFont(boldFont);
+                // Create header row
+                XSSFRow headerRow = sheet.createRow(0);
+                headerRow.createCell(0).setCellValue("Club ID");
+                headerRow.createCell(1).setCellValue("Event ID");
+                headerRow.createCell(2).setCellValue("Start Date");
+                headerRow.createCell(3).setCellValue("Start Time");
+                headerRow.createCell(4).setCellValue("End Time");
+                headerRow.createCell(5).setCellValue("Name");
+                headerRow.createCell(6).setCellValue("Place");
+                headerRow.createCell(7).setCellValue("Type");
+                headerRow.createCell(8).setCellValue("Activity No");
+                headerRow.createCell(9).setCellValue("Meeting No");
+                headerRow.createCell(10).setCellValue("Platform");
+                headerRow.createCell(11).setCellValue("Link");
+
+
+                for (int i = 0; i < headerRow.getLastCellNum(); i++) {
+                    headerRow.getCell(i).setCellStyle(boldStyle);
+                }
+
+                for (int i = 0; i < report.size(); i++) {
+                    // Iterate over the result set and add data to the sheet
+                    XSSFRow row = sheet.createRow(i + 1);
+                    for (int j = 0; j < report.get(0).size(); j++) {
+                        row.createCell(j).setCellValue(report.get(i).get(j));
+                    }
+                }
+
+                // Save the workbook to a file or perform other operations
+
+                // For example, you can save it to a file
+                try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx")) {
+                    workbook.write(fileOut);
                     Stage newStage = new Stage();
                     Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     newStage.initOwner(previousStage);
-                    Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
                     Scene scene = new Scene(root, 400, 73);
                     newStage.setScene(scene);
                     newStage.setResizable(false);
@@ -1090,14 +1187,28 @@ public class EventController
                     newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
                     newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
                     newStage.show();
-                    //
-                } catch (Exception edb) {
-                    edb.printStackTrace();
+                } catch (Exception f) {
+                    f.printStackTrace();
                 }
+                connection.close();
+            } catch (Exception edb) {
+                edb.printStackTrace();
             }
         }
-
-        public void onClickGenerateEventReportButton(ActionEvent e) throws Exception
-        {
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+            filePath.clear();
         }
     }
+
+}

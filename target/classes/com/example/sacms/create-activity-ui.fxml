@@ -20,7 +20,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventName" focusTraversable="false" layoutX="235.0" layoutY="312.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="zoom" styleClass="input">
+      <TextField fx:id="eventName" focusTraversable="false" layoutX="235.0" layoutY="312.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="Activity 1.1" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -63,11 +63,11 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="99.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="21" styleClass="input">
+      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="99.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="C001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="172.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="302" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="172.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="E001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -79,7 +79,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="activityNo" focusTraversable="false" layoutX="235.0" layoutY="240.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="105" styleClass="input">
+      <TextField fx:id="activityNo" focusTraversable="false" layoutX="235.0" layoutY="240.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="23" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>

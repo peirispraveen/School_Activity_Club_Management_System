@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class ValidationTestor
+public class EventTestKit
 {
 
     @Test
@@ -14,6 +14,16 @@ public class ValidationTestor
         EventValidator validationObj = new EventValidator();
         validationObj.validateClubID(clubID);
         assertEquals(EventValidator.isValidClubID(), expectedOut);
+    }
+
+    @Test
+    void validateClubIDLengthy()
+    {
+        String clubID = "C0001";
+        boolean expectedOut = true;
+        EventValidator validationObj = new EventValidator();
+        validationObj.validateClubID(clubID);
+        assertNotEquals(EventValidator.isValidClubID(), expectedOut);
     }
 
     @Test
@@ -63,6 +73,16 @@ public class ValidationTestor
         EventValidator validationObj = new EventValidator();
         validationObj.validateEventID(eventID);
         assertEquals(EventValidator.isValidEventID(), expectedOut);
+    }
+
+    @Test
+    void validateEventIDLengthy()
+    {
+        String eventID = "E00000001";
+        boolean expectedOut = true;
+        EventValidator validationObj = new EventValidator();
+        validationObj.validateEventID(eventID);
+        assertNotEquals(EventValidator.isValidEventID(), expectedOut);
     }
 
     @Test
