@@ -1,5 +1,6 @@
-package com.example.implementation;
+package com.example.sacms;
 
+import com.example.implementation.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ClubApplication extends Application {
-
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
