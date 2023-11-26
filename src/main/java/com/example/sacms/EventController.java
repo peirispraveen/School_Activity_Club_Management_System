@@ -979,23 +979,109 @@ public class EventController {
             {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(url, user, password);
-                String query = "SELECT * FROM student";
-                PreparedStatement statement = connection.prepareStatement(query);
-                ResultSet resultSet = statement.executeQuery();
+                String query1 = "SELECT * FROM EventParent";
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery(query1);
+                ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
+                while(resultSet1.next())
+                {
+                    eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString("club_id"),
+                        resultSet1.getString("event_id"), resultSet1.getString("event_date"),
+                        resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
+                }
+                resultSet1.close();
+                String query2 = "SELECT * FROM EventType";
+                Statement statement2 = connection.createStatement();
+                ResultSet resultSet2 = statement2.executeQuery(query2);
+                ArrayList<ArrayList<String>> event = new ArrayList<>();
+                while(resultSet2.next())
+                {
+                    event.add(new ArrayList<>(Arrays.asList(resultSet2.getString("event_id"),
+                            resultSet2.getString("name"), resultSet2.getString("place"))));
+                }
+                resultSet2.close();
+                String query3 = "SELECT * FROM Activity";
+                Statement statement3 = connection.createStatement();
+                ResultSet resultSet3 = statement3.executeQuery(query3);
+                ArrayList<ArrayList<String>> activity = new ArrayList<>();
+                while(resultSet3.next())
+                {
+                    activity.add(new ArrayList<>(Arrays.asList(resultSet3.getString("event_id"),
+                            resultSet3.getString("type"), resultSet3.getString("name"),
+                            resultSet3.getString("activity_no"), resultSet3.getString("link"))));
+                }
+                String query4 = "SELECT * FROM Meeting";
+                Statement statement4 = connection.createStatement();
+                ResultSet resultSet4 = statement4.executeQuery(query4);
+                ArrayList<ArrayList<String>> meeting = new ArrayList<>();
+                while(resultSet4.next())
+                {
+                    meeting.add(new ArrayList<>(Arrays.asList(resultSet4.getString("event_id"),
+                            resultSet4.getString("meeting_no"), resultSet4.getString("platform"),
+                            resultSet4.getString("link"))));
+                }
+                resultSet4.close();
+
+                ArrayList<ArrayList<String>> report = new ArrayList<>();
+                boolean found = false;
+                for(int i = 0; i < eventParent.size(); i++)
+                {
+                    found = false;
+                    for(int j = 0; j < event.size(); j++)
+                    {
+                        if(eventParent.get(i).get(1).equals(event.get(j).get(0)))
+                            {
+                                report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                        eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                        event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
+                                found = true;
+                                break;
+                            }
+                    }
+                    if(found)
+                    {
+                        continue;
+                    }
+                    for(int j = 0; j < activity.size(); j++)
+                    {
+                        if(eventParent.get(i).get(1).equals(activity.get(j).get(0)))
+                        {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    activity.get(j).get(2), "NULL", activity.get(j).get(1), activity.get(j).get(3),
+                                    "NULL", "NULL", activity.get(j).get(4))));
+                            found = true;
+                                break;
+                        }
+                    }
+                    if(found)
+                    {
+                        continue;
+                    }
+                    for(int j = 0; j < activity.size(); j++) {
+                        if(eventParent.get(i).get(1).equals(meeting.get(j).get(0)))
+                        {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    "NULL", "NULL", "NULL", "NULL", meeting.get(j).get(1), meeting.get(j).get(2),
+                                    meeting.get(j).get(3))));
+                            found = true;
+                                break;
+                        }
+                    }
+                }
+
+
 
                 // Create a new workbook
                 XSSFWorkbook workbook = new XSSFWorkbook();
-
                 // Create a sheet in the workbook
                 XSSFSheet sheet = workbook.createSheet("Event Report");
-
                 Font boldFont = workbook.createFont();
                 boldFont.setBold(true);
-
                 // Create a cell style with the bold font
                 CellStyle boldStyle = workbook.createCellStyle();
                 boldStyle.setFont(boldFont);
-
                 // Create header row
                 XSSFRow headerRow = sheet.createRow(0);
                 headerRow.createCell(0).setCellValue("Club ID");
@@ -1015,16 +1101,13 @@ public class EventController {
                     headerRow.getCell(i).setCellStyle(boldStyle);
                 }
 
-                int rowNum = 1;
-                while (resultSet.next()) {
+                for(int i = 0; i < report.size(); i++)
+                {
                     // Iterate over the result set and add data to the sheet
-                    XSSFRow row = sheet.createRow(rowNum++);
-                    row.createCell(0).setCellValue(rs.getString("student_id"));
-                    row.createCell(1).setCellValue(rs.getString("first_name"));
-                    row.createCell(2).setCellValue(rs.getString("last_name"));
-                    row.createCell(3).setCellValue(rs.getString("email"));
-                    DateOfBirth studentDateOfBirth = parseDateOfBirth(rs.getString("dateOfBirth"));
-                    row.createCell(4).setCellValue(studentDateOfBirth.toString());
+                    XSSFRow row = sheet.createRow(i + 1);
+                    for(int j = 0; j < report.get(0).size(); j++) {
+                        row.createCell(0).setCellValue(report.get(i).get(j));
+                    }
                 }
 
                 // Save the workbook to a file or perform other operations
@@ -1032,12 +1115,12 @@ public class EventController {
                 // For example, you can save it to a file
                 try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx")) {
                     workbook.write(fileOut);
-                } catch (IOException edb)
+                } catch (Exception f)
                 {
-                    edb.printStackTrace();
+                    f.printStackTrace();
                 }
             }
-            catch (IOException edb)
+            catch (Exception edb)
                 {
                     edb.printStackTrace();
                 }
