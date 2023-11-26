@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@StyleSheets/Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.GenerateReport">
+   <children>
+      <Button layoutX="-4.0" layoutY="-7.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="55.0">
+               <image>
+                  <Image url="@Icons/back_arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="report" layoutX="-2.0" layoutY="56.0" prefHeight="444.0" prefWidth="800.0" styleClass="tables">
+        <columns>
+          <TableColumn fx:id="clubId" editable="false" prefWidth="87.36598366498947" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Club ID">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+          <TableColumn fx:id="clubName" editable="false" prefWidth="121.13404083251953" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Name">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="clubAdvisor" editable="false" prefWidth="131.10008239746094" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Advisor">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="maxParticipants" editable="false" prefWidth="160.35806274414062" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Max No of Participants">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="currentParticipants" prefWidth="144.54998779296875" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="No of Participants">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="createdDate" editable="false" prefWidth="153.0" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Created Date">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Line endX="696.9999389648438" layoutX="101.0" layoutY="56.0" startX="-100.0" stroke="WHITE" />
+      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="377.0" layoutY="6.0">
+         <image>
+            <Image url="@Icons/generate report.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
