@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@StyleSheets/Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.ClubController">
+   <children>
+      <Button layoutX="121.0" layoutY="48.0" mnemonicParsing="false" onAction="#createClub" prefHeight="150.0" prefWidth="150.0" styleClass="clubBtns" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="97.0">
+               <image>
+                  <Image url="@Icons/Add Club.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="341.0" layoutY="275.0" mnemonicParsing="false" onAction="#updateClub" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="97.0">
+               <image>
+                  <Image url="@Icons/Update club.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="556.0" layoutY="48.0" mnemonicParsing="false" onAction="#deleteClub" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="97.0">
+               <image>
+                  <Image url="@Icons/delete cub.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="556.0" layoutY="275.0" mnemonicParsing="false" onAction="#generateReports" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="97.0">
+               <image>
+                  <Image url="@Icons/generate report.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="121.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewClub" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="97.0" fitWidth="97.0">
+               <image>
+                  <Image url="@Icons/view club.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fill="WHITE" layoutX="124.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="560.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="562.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Report" textAlignment="CENTER" wrappingWidth="142.21630859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="344.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="125.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button layoutX="341.0" layoutY="48.0" mnemonicParsing="false" onAction="#manageMembers" prefHeight="150.0" prefWidth="150.0">
+         <graphic>
+            <ImageView fitHeight="88.0" fitWidth="88.0">
+               <image>
+                  <Image url="@Icons/update member.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fill="WHITE" layoutX="335.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Members" textAlignment="CENTER" wrappingWidth="163.71658325195312">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
