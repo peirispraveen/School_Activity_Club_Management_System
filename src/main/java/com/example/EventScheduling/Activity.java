@@ -1,23 +1,23 @@
-package com.example.sacms.EventScheduling;
+package com.example.EventScheduling;
 
-public class Meeting extends EventParent
+public class Activity extends EventParent
 {
-    private String meetingNum;
-    private String platform;
+    private String type;
     private String link;
-
+    private String activityName;
+    private String activityNumber;
     public String[] values;
 
-    public Meeting(){}
+    public Activity(){}
 
-    public Meeting(String clubID, String eventID, String year, String month, String day, String startHour,
-                   String startMinute, String endHour, String endMinute, String meetingNum, String platform,
-                   String link)
-    {
+    public Activity(String clubID, String eventID, String year, String month, String day, String startHour,
+                    String startMinute, String endHour, String endMinute, String type, String link, String activityName,
+                    String activityNumber) {
         super(clubID, eventID, year, month, day, startHour, startMinute, endHour, endMinute);
-        this.meetingNum = meetingNum;
-        this.platform = platform;
+        this.type = type;
         this.link = link;
+        this.activityName = activityName;
+        this.activityNumber = activityNumber;
     }
 
     @Override
@@ -30,13 +30,13 @@ public class Meeting extends EventParent
         Thread thread4 = new Thread(() -> validate.validateStartMinute(this.startMinute));
         Thread thread5 = new Thread(() -> validate.validateEndHour(this.endHour));
         Thread thread6 = new Thread(() -> validate.validateEndMinute(this.endMinute));
-        Thread thread7 = new Thread(() -> validate.validatePlatform(this.platform));
+        Thread thread7 = new Thread(() -> validate.validateType(this.type));
         Thread thread8 = new Thread(() -> validate.validateLink(this.link));
         Thread thread9 = new Thread(() -> validate.validateDate(this.year));
         Thread thread10 = new Thread(() -> validate.validateDate(this.year, this.month));
         Thread thread11 = new Thread(() -> validate.validateDate(this.year, this.month, this.day));
-        Thread thread12 = new Thread(() -> validate.validateNum(this.meetingNum));
-
+        Thread thread12 = new Thread(() -> validate.validateName(this.activityName));
+        Thread thread13 = new Thread(() -> validate.validateActivityNo(this.activityNumber));
         thread1.start();
         thread2.start();
         thread3.start();
@@ -48,6 +48,7 @@ public class Meeting extends EventParent
         thread9.start();
         thread10.start();
         thread12.start();
+        thread13.start();
         try
         {
             thread9.join();
@@ -73,6 +74,7 @@ public class Meeting extends EventParent
             thread8.join();
             thread11.join();
             thread12.join();
+            thread13.join();
         }
         catch
         (Exception e)

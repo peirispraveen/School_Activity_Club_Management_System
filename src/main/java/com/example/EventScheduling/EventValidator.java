@@ -1,4 +1,4 @@
-package com.example.sacms.EventScheduling;
+package com.example.EventScheduling;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -11,4 +11,6 @@ module com.example.sacms {
     opens com.example.demo to javafx.fxml;
     exports com.example.sacms;
     exports com.example.demo;
+    exports com.example.EventScheduling;
+    opens com.example.EventScheduling to javafx.fxml;
 }
