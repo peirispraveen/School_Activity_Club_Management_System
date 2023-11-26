@@ -1,8 +1,6 @@
 package com.example.sacms;
 
-import java.io.Serializable;
-
-public interface Member extends Serializable {
+public interface Member {
 
     String getId();
     String getFirstName();
