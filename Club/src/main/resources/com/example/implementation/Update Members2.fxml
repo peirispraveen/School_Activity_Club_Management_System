@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@StyleSheets/Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.UpdateMembers2">
+   <children>
+      <TableView fx:id="clubMemberTbl" layoutY="63.0" prefHeight="437.0" prefWidth="528.0" styleClass="tables">
+        <columns>
+          <TableColumn fx:id="memberIdColumn" editable="false" prefWidth="156.66886448860168" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Member ID">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+          <TableColumn fx:id="fNameColumn" editable="false" prefWidth="169.27151489257812" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+            <TableColumn fx:id="lNameColumn" editable="false" prefWidth="200.72854614257812" resizable="false" styleClass="tableColumn">
+               <graphic>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </graphic>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Button fx:id="deleteBtn" layoutX="567.0" layoutY="103.0" mnemonicParsing="false" onAction="#deleteMember" prefHeight="56.0" prefWidth="163.0" text="Remove">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="46.0">
+               <image>
+                  <Image url="@Icons/remove member.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="addBtn" layoutX="567.0" layoutY="194.0" mnemonicParsing="false" onAction="#addMember" prefHeight="56.0" prefWidth="167.0" text="Add">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="46.0">
+               <image>
+                  <Image url="@Icons/add member.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="updateBtn" layoutX="568.0" layoutY="406.0" mnemonicParsing="false" onAction="#updateMembers" prefHeight="56.0" prefWidth="171.0" text="Update">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="46.0">
+               <image>
+                  <Image url="@Icons/update member.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="backBtn" layoutX="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="56.0" prefWidth="88.0" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="55.0">
+               <image>
+                  <Image url="@Icons/back_arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="homeBtn" layoutX="747.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="61.0" prefWidth="61.0" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="42.0">
+               <image>
+                  <Image url="@Icons/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Line endX="662.9075927734375" endY="6.499992370605469" layoutX="146.0" layoutY="56.0" startX="-149.0" startY="6.499992370605469" stroke="WHITE" />
+      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="379.0" layoutY="10.0">
+         <image>
+            <Image url="@Icons/update member.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

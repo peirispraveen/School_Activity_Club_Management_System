@@ -1,0 +1,45 @@
+.background{
+    -fx-background-color: #070b14;
+}
+Button {
+    -fx-text-fill: White;
+    -fx-background-color: transparent;
+    -fx-border-color: #3a495e;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+}
+
+Button:hover{
+    -fx-background-color: #2c3c5d;
+    -fx-effect: dropshadow(three-pass-box,black,30,0,10,10);
+}
+.homeBackBtn:hover{
+    -fx-background-color: #2c3c5d;
+    -fx-effect: none;
+}
+
+.tables{
+    -fx-background-color: rgba(17, 15, 38, 0.88);
+}
+
+.tableColumn{
+    -fx-background-color: rgba(17, 15, 38, 0.88);
+    -fx-text-fill: white;
+    -fx-alignment: Center;
+}
+DatePicker{
+    -fx-font-size: 14px;
+}
+
+.tableColumn{
+    -fx-border-color: #696969;
+
+}
+
+.table-row-cell:selected .tableColumn{
+    -fx-background-color: #6879e8;
+}
+.table-cell-centered{
+    -fx-text-alignment: Center;
+}
+

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@StyleSheets/Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.UpdateProfile2">
+   <children>
+      <TextField fx:id="clubId" layoutX="93.0" layoutY="111.0" onKeyReleased="#idReleased" prefHeight="40.0" prefWidth="300.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="93.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club ID">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="93.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="clubName" layoutX="93.0" layoutY="209.0" onKeyReleased="#nameReleased" prefHeight="40.0" prefWidth="300.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="420.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created Date">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="createdDate" editable="false" layoutX="420.0" layoutY="296.0" prefHeight="40.0" prefWidth="300.0" />
+      <Button layoutX="486.0" layoutY="409.0" mnemonicParsing="false" onAction="#updateClub" prefHeight="61.0" prefWidth="159.0" text="Update">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="44.0" fitWidth="46.0">
+               <image>
+                  <Image url="@Icons/Update club.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="-6.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="55.0">
+               <image>
+                  <Image url="@Icons/back_arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fill="WHITE" layoutX="420.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Advisor">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="errorCall" fill="WHITE" layoutX="417.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="330.65956294027774">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="clubAdvisor" layoutX="420.0" layoutY="109.0" prefHeight="40.0" prefWidth="300.0" promptText="Select Advisor" />
+      <Text fill="WHITE" layoutX="420.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Particpants">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="maxParticipants" layoutX="420.0" layoutY="208.0" onKeyReleased="#partReleased" prefHeight="40.0" prefWidth="300.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="93.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Description" wrappingWidth="148.2144317626953">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="clubDescription" layoutX="93.0" layoutY="296.0" onKeyReleased="#descReleased" prefHeight="175.0" prefWidth="300.0" />
+      <Line endX="800.0" layoutY="56.0" stroke="WHITE" />
+      <Button layoutX="739.0" layoutY="2.0" mnemonicParsing="false" onAction="#homeButton" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="42.0">
+               <image>
+                  <Image url="@Icons/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="373.0" layoutY="4.0">
+         <image>
+            <Image url="@Icons/Update club.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
