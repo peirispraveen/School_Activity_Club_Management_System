@@ -1,4 +1,4 @@
-package com.example.EventScheduling;
+package com.example.sacms;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

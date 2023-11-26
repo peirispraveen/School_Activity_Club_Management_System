@@ -1,5 +1,6 @@
-package com.example.implementation;
+package com.example.sacms;
 
+import com.example.implementation.Storage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

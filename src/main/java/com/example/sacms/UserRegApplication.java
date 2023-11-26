@@ -1,6 +1,5 @@
 package com.example.sacms;
 
-import com.example.EventScheduling.Driver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

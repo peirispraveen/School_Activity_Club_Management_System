@@ -1,5 +1,6 @@
 package com.example.implementation;
 
+import com.example.sacms.ClubApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,8 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class UpdateMembers2 extends Storage{
