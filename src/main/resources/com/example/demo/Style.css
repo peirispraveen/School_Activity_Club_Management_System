@@ -1,0 +1,155 @@
+.tab-header-area .tab {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand; /* Add cursor style for a more interactive feel */
+    -fx-transition: background-color 0.5s; /* Add transition for background color change */
+    -fx-font-family: "Arial Rounded MT Bold";
+}
+
+.tab:hover {
+    -fx-background-color: #45a049; /* Change background color on hover */
+}
+
+.tab-pane {
+    -fx-background-color: pink;
+}
+
+/* Apply styles to the labels */
+Label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+/* Apply styles to the text fields */
+TextField, DatePicker {
+    -fx-font-size: 14px;
+    -fx-pref-width: 180px;
+    -fx-padding: 5px; /* Add padding */
+    -fx-background-color: #f4f4f4; /* Set background color */
+    -fx-border-color: #ccc; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-border-radius: 5px; /* Set border radius for rounded corners */
+    -fx-text-fill: #333; /* Set text color */
+}
+
+/* Apply styles to the focused text fields */
+TextField:focused, DatePicker:focused {
+    -fx-border-color: #4CAF50; /* Change border color on focus */
+}
+
+/* Apply styles to the prompt text in text fields */
+.text-field .text {
+    -fx-font-size: 14px;
+    -fx-fill: #888; /* Set prompt text color */
+}
+
+/* Apply styles to the date picker button */
+.date-picker .arrow-button {
+    -fx-background-color: #4CAF50; /* Set button background color */
+    -fx-shape: "M 0 0 L 5 10 L 10 0 Z"; /* Customize the shape of the button arrow */
+}
+
+/* Apply styles to the date picker content */
+.date-picker-popup > * {
+    -fx-background-color: #f4f4f4; /* Set popup background color */
+}
+
+/* Apply styles to the date picker day cells */
+.date-cell {
+    -fx-background-color: #fff; /* Set day cell background color */
+    -fx-text-fill: #333; /* Set day cell text color */
+}
+
+/* Apply styles to the date picker selected day cell */
+.date-cell:selected {
+    -fx-background-color: #4CAF50; /* Set selected day cell background color */
+    -fx-text-fill: #fff; /* Set selected day cell text color */
+}
+
+
+/* Apply styles to the button */
+Button {
+    -fx-font-size: 14px;
+    -fx-pref-width: 150px;
+    -fx-background-color: #4CAF50; /* Green background color for the button */
+    -fx-text-fill: black; /* White text color for the button */
+    -fx-border-radius: 5px; /* Rounded corners for the button */
+    -fx-padding: 8px 12px; /* Padding inside the button */
+    -fx-cursor: hand; /* Add hand cursor for better indication of interactivity */
+    -fx-font-family: "Arial Rounded MT Bold";
+}
+
+/* Add a hover effect for the button */
+Button:hover {
+    -fx-background-color: #45a049; /* Darker green background color on hover */
+}
+
+/* Apply styles to the AnchorPane */
+AnchorPane {
+    -fx-background-color: pink; /* Light gray background color */
+    -fx-padding: 20px; /* Add some padding around the content */
+}
+/* Apply background color to the AnchorPane with fx:id "background" */
+/*#background {*/
+/*    -fx-background-color: pink; !* Light gray background color *!*/
+/*}*/
+
+/* Apply styles to the ComboBox */
+#Eventlist {
+    -fx-font-size: 14px;
+    -fx-pref-width: 206px;
+    -fx-pref-height: 26px;
+    -fx-background-color: #f4f4f4; /* Set background color */
+    -fx-border-color: #ccc; /* Set border color */
+    -fx-border-width: 1px; /* Set border width */
+    -fx-border-radius: 5px; /* Set border radius for rounded corners */
+    -fx-text-fill: #333; /* Set text color */
+}
+
+/* Apply styles to the focused ComboBox */
+#Eventlist:focused {
+    -fx-border-color: #4CAF50; /* Change border color on focus */
+}
+
+/* Apply styles to the ComboBox popup */
+#Eventlist .list-view {
+    -fx-background-color: #fff; /* Set popup background color */
+}
+
+/* Apply styles to the ComboBox items */
+#Eventlist .list-cell {
+    -fx-background-color: #fff; /* Set item background color */
+    -fx-text-fill: #333; /* Set item text color */
+}
+
+/* Apply styles to the selected ComboBox item */
+#Eventlist .list-cell:selected {
+    -fx-background-color: #4CAF50; /* Set selected item background color */
+    -fx-text-fill: #fff; /* Set selected item text color */
+}
+
+/* Apply styles to the RadioButtons */
+#absentRadioButton, #presentRadioButton, #pendingRadioButton {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333; /* Set text color */
+}
+
+/* Apply styles to the selected RadioButton */
+#absentRadioButton:selected, #presentRadioButton:selected, #pendingRadioButton:selected {
+    -fx-text-fill: #fff; /* Set text color for selected state */
+}
+
+/* Apply styles to the RadioButton indicators (dots) */
+.radio-button .radio {
+    -fx-background-color: #4CAF50; /* Set indicator color */
+    -fx-border-color: #4CAF50; /* Set border color */
+}
+
+/* Apply styles to the focused RadioButton */
+#absentRadioButton:focused, #presentRadioButton:focused, #pendingRadioButton:focused {
+    -fx-border-color: #4CAF50; /* Change border color on focus */
+}
+
+
+
