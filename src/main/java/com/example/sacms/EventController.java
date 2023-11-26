@@ -413,7 +413,20 @@ public class EventController {
                 startHour.clear();
                 startMin.clear();
             }
-            connection.close();
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                connection.close();
+            }
         } catch (SQLException edb) {
             edb.printStackTrace();
         }
@@ -590,7 +603,20 @@ public class EventController {
                     el.printStackTrace();
                 }
             }
-            connection.close();
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                connection.close();
+            }
         } catch (SQLException edb) {
             edb.printStackTrace();
         }
@@ -795,6 +821,19 @@ public class EventController {
                 startHour.clear();
                 startMin.clear();
             }
+            else {
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+            }
             connection.close();
         } catch (SQLException edb) {
             edb.printStackTrace();
@@ -848,6 +887,20 @@ public class EventController {
                 edb.printStackTrace();
             }
         }
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+            eventID.clear();
+        }
     }
 
     public void onClickUpdateEventButton(ActionEvent e) throws Exception {
@@ -882,6 +935,19 @@ public class EventController {
             } catch (Exception edb) {
                 edb.printStackTrace();
             }
+        }
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
         }
     }
 
@@ -967,35 +1033,44 @@ public class EventController {
                 edb.printStackTrace();
             }
         }
+        else{
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+        }
     }
 
 
-    public void onClickGenerateEventReportButton(ActionEvent e) throws Exception
-    {
-        EventValidator pathValidate = new EventValidator();
-        if(pathValidate.validateFilePath(filePath.getText()))
-        {
-            try
-            {
+    public void onClickGenerateEventReportButton(ActionEvent e) throws Exception {
+        EventValidator validator = new EventValidator();
+        if (validator.validateString(filePath.getText())) {
+            try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection(url, user, password);
                 String query1 = "SELECT * FROM EventParent";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(query1);
+
                 ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
-                while(resultSet1.next())
-                {
+                while (resultSet1.next()) {
                     eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString("club_id"),
-                        resultSet1.getString("event_id"), resultSet1.getString("event_date"),
-                        resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
+                            resultSet1.getString("event_id"), resultSet1.getString("event_date"),
+                            resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
                 }
                 resultSet1.close();
                 String query2 = "SELECT * FROM EventType";
                 Statement statement2 = connection.createStatement();
                 ResultSet resultSet2 = statement2.executeQuery(query2);
                 ArrayList<ArrayList<String>> event = new ArrayList<>();
-                while(resultSet2.next())
-                {
+                while (resultSet2.next()) {
                     event.add(new ArrayList<>(Arrays.asList(resultSet2.getString("event_id"),
                             resultSet2.getString("name"), resultSet2.getString("place"))));
                 }
@@ -1004,8 +1079,7 @@ public class EventController {
                 Statement statement3 = connection.createStatement();
                 ResultSet resultSet3 = statement3.executeQuery(query3);
                 ArrayList<ArrayList<String>> activity = new ArrayList<>();
-                while(resultSet3.next())
-                {
+                while (resultSet3.next()) {
                     activity.add(new ArrayList<>(Arrays.asList(resultSet3.getString("event_id"),
                             resultSet3.getString("type"), resultSet3.getString("name"),
                             resultSet3.getString("activity_no"), resultSet3.getString("link"))));
@@ -1014,8 +1088,7 @@ public class EventController {
                 Statement statement4 = connection.createStatement();
                 ResultSet resultSet4 = statement4.executeQuery(query4);
                 ArrayList<ArrayList<String>> meeting = new ArrayList<>();
-                while(resultSet4.next())
-                {
+                while (resultSet4.next()) {
                     meeting.add(new ArrayList<>(Arrays.asList(resultSet4.getString("event_id"),
                             resultSet4.getString("meeting_no"), resultSet4.getString("platform"),
                             resultSet4.getString("link"))));
@@ -1023,55 +1096,43 @@ public class EventController {
                 resultSet4.close();
 
                 ArrayList<ArrayList<String>> report = new ArrayList<>();
-                boolean found = false;
-                for(int i = 0; i < eventParent.size(); i++)
-                {
-                    found = false;
-                    for(int j = 0; j < event.size(); j++)
-                    {
-                        if(eventParent.get(i).get(1).equals(event.get(j).get(0)))
-                            {
-                                report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
-                                        eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
-                                        event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
-                                found = true;
-                                break;
-                            }
+                for (int i = 0; i < eventParent.size(); i++) {
+                    boolean found = false;
+                    for (int j = 0; j < event.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(event.get(j).get(0))) {
+                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                    event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
+                            found = true;
+                            break;
+                        }
                     }
-                    if(found)
-                    {
+                    if (found) {
                         continue;
                     }
-                    for(int j = 0; j < activity.size(); j++)
-                    {
-                        if(eventParent.get(i).get(1).equals(activity.get(j).get(0)))
-                        {
+                    for (int j = 0; j < activity.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(activity.get(j).get(0))) {
                             report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
                                     eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
                                     activity.get(j).get(2), "NULL", activity.get(j).get(1), activity.get(j).get(3),
                                     "NULL", "NULL", activity.get(j).get(4))));
                             found = true;
-                                break;
+                            break;
                         }
                     }
-                    if(found)
-                    {
+                    if (found) {
                         continue;
                     }
-                    for(int j = 0; j < activity.size(); j++) {
-                        if(eventParent.get(i).get(1).equals(meeting.get(j).get(0)))
-                        {
+                    for (int j = 0; j < meeting.size(); j++) {
+                        if (eventParent.get(i).get(1).equals(meeting.get(j).get(0))) {
                             report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
                                     eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
                                     "NULL", "NULL", "NULL", "NULL", meeting.get(j).get(1), meeting.get(j).get(2),
                                     meeting.get(j).get(3))));
-                            found = true;
-                                break;
+                            break;
                         }
                     }
                 }
-
-
 
                 // Create a new workbook
                 XSSFWorkbook workbook = new XSSFWorkbook();
@@ -1097,16 +1158,16 @@ public class EventController {
                 headerRow.createCell(10).setCellValue("Platform");
                 headerRow.createCell(11).setCellValue("Link");
 
+
                 for (int i = 0; i < headerRow.getLastCellNum(); i++) {
                     headerRow.getCell(i).setCellStyle(boldStyle);
                 }
 
-                for(int i = 0; i < report.size(); i++)
-                {
+                for (int i = 0; i < report.size(); i++) {
                     // Iterate over the result set and add data to the sheet
                     XSSFRow row = sheet.createRow(i + 1);
-                    for(int j = 0; j < report.get(0).size(); j++) {
-                        row.createCell(0).setCellValue(report.get(i).get(j));
+                    for (int j = 0; j < report.get(0).size(); j++) {
+                        row.createCell(j).setCellValue(report.get(i).get(j));
                     }
                 }
 
@@ -1118,7 +1179,7 @@ public class EventController {
                     Stage newStage = new Stage();
                     Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     newStage.initOwner(previousStage);
-                    Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
                     Scene scene = new Scene(root, 400, 73);
                     newStage.setScene(scene);
                     newStage.setResizable(false);
@@ -1126,27 +1187,27 @@ public class EventController {
                     newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
                     newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
                     newStage.show();
-                    clubID.clear();
-                    eventID.clear();
-                    eventName.clear();
-                    eventPlace.clear();
-                    eventYear.clear();
-                    eventMonth.clear();
-                    eventDay.clear();
-                    endHour.clear();
-                    endMin.clear();
-                    startHour.clear();
-                    startMin.clear();
-                } catch (Exception f)
-                {
+                } catch (Exception f) {
                     f.printStackTrace();
                 }
                 connection.close();
+            } catch (Exception edb) {
+                edb.printStackTrace();
             }
-            catch (Exception edb)
-                {
-                    edb.printStackTrace();
-                }
+        }
+        else {
+            Stage newStage = new Stage();
+            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            newStage.initOwner(previousStage);
+            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+            Scene scene = new Scene(root, 400, 73);
+            newStage.setScene(scene);
+            newStage.setResizable(false);
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+            newStage.show();
+            filePath.clear();
         }
     }
 

@@ -393,17 +393,6 @@ public class EventValidator implements EventValidation
         }
     }
 
-    public boolean validateFilePath(String path)
-    {
-        String pathRegex = "^(?:(?:[a-zA-Z]:|\\/)(?:\\\\|\\/)?)((?:[^<>:\"\\|?*\\x00-\\x1F\\/\\\\]+(?:[\\/\\\\]|$))+)([^<>:\"\\|?*\\x00-\\x1F]+)$\n";
-        Pattern pattern = Pattern.compile(pathRegex);
-        Matcher matcher = pattern.matcher(path);
-        if(matcher.matches())
-        {
-            return true;
-        }
-        return false;
-    }
 }
 
 
