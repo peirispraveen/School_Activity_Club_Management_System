@@ -31,7 +31,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="121.0" layoutY="275.0" mnemonicParsing="false" onAction="#deleteClub" prefHeight="150.0" prefWidth="150.0">
+      <Button layoutX="556.0" layoutY="48.0" mnemonicParsing="false" onAction="#deleteClub" prefHeight="150.0" prefWidth="150.0">
          <font>
             <Font size="22.0" />
          </font>
@@ -53,7 +53,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="556.0" layoutY="48.0" mnemonicParsing="false" onAction="#viewClub" prefHeight="150.0" prefWidth="150.0">
+      <Button layoutX="121.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewClub" prefHeight="150.0" prefWidth="150.0">
          <font>
             <Font size="22.0" />
          </font>
@@ -70,7 +70,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="130.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+      <Text fill="WHITE" layoutX="560.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
          <font>
             <Font size="20.0" />
          </font>
@@ -85,7 +85,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="559.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
+      <Text fill="WHITE" layoutX="125.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Club" textAlignment="CENTER" wrappingWidth="142.21630859375">
          <font>
             <Font size="20.0" />
          </font>
