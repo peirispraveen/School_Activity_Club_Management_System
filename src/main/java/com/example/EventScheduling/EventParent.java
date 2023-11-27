@@ -2,6 +2,7 @@ package com.example.EventScheduling;
 
 abstract class EventParent
 {
+    // common attributes
     protected String clubID;
     protected String eventID;
     protected String year;
@@ -12,10 +13,14 @@ abstract class EventParent
     protected String endHour;
     protected String endMinute;
 
+    // default constructor
     public EventParent() {}
 
+    // parametarised constructor (overloading the constructor)
     public EventParent(String year, String month, String day, String startHour, String startMinute, String endHour,
-                       String endMinute) {
+                       String endMinute)
+    {
+        // inititalizing common attributes for update
         this.year = year;
         this.month = month;
         this.day = day;
@@ -25,8 +30,11 @@ abstract class EventParent
         this.endMinute = endMinute;
     }
 
+    // parametarised constructor (overloading the constructor)
     public EventParent(String clubID, String eventID, String year, String month, String day, String startHour,
-                       String startMinute, String endHour, String endMinute) {
+                       String startMinute, String endHour, String endMinute)
+    {
+        // initializing common attributes
         this.clubID = clubID;
         this.eventID = eventID;
         this.year = year;
@@ -38,6 +46,7 @@ abstract class EventParent
         this.endMinute = endMinute;
     }
 
+    // creating abstract method to be implemented in all child classes
     abstract void createEvent();
 
 }
