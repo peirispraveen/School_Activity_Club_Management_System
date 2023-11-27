@@ -39,10 +39,10 @@ public class UserRegMainController {
 
     @FXML
     private void studentRegister() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-reg.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-login-page.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Student Sign In");
+        newStage.setTitle("Student Login");
         newStage.setScene(scene);
         newStage.show();
         Stage prevStage = (Stage) consoleAnchor.getScene().getWindow();
@@ -51,10 +51,10 @@ public class UserRegMainController {
 
     @FXML
     private void advisorRegister() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-reg.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-login-page.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Advisor Sign In");
+        newStage.setTitle("Advisor Login");
         newStage.setScene(scene);
         newStage.show();
         Stage prevStage = (Stage) consoleAnchor.getScene().getWindow();
