@@ -10,11 +10,13 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
   <tabs>
-    <Tab text="DELETE Student">
+    <Tab text="  DELETE Student">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -31,6 +33,13 @@
                   </AnchorPane>
                </children></AnchorPane>
       </content>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@trash_bin.png" />
+               </image>
+            </ImageView>
+         </graphic>
     </Tab>
       <Tab onSelectionChanged="#initialize" text="MARK Attendance">
         <content>

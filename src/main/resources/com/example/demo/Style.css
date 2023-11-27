@@ -1,20 +1,24 @@
 .tab-header-area .tab {
     -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
+    /*-fx-text-fill: white;*/
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-cursor: hand; /* Add cursor style for a more interactive feel */
-    -fx-transition: background-color 0.5s; /* Add transition for background color change */
+    -fx-font-size: 16px; /* Increase the font size */
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.5s;
     -fx-font-family: "Arial Rounded MT Bold";
+
+    /* Increase tab size and add rounded corners */
+    -fx-padding: 10px 20px; /* Adjust padding to increase tab size */
+    -fx-border-radius: 10px; /* Adjust border radius for rounded corners */
 }
 
 .tab:hover {
     -fx-background-color: #45a049; /* Change background color on hover */
 }
 
-.tab-pane {
-    -fx-background-color: pink;
-}
+/*.tab-pane {*/
+/*    -fx-background-color: pink;*/
+/*}*/
 
 /* Apply styles to the labels */
 Label {
