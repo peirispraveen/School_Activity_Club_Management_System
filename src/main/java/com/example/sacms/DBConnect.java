@@ -429,6 +429,12 @@ public class DBConnect {
             System.out.println("not");
         }
 
+        if (isAdvisorMatch("AD443", "Password5")) {
+            System.out.println("Found");
+        }else {
+            System.out.println("not");
+        }
+
     }
 
 }
