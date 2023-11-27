@@ -26,7 +26,7 @@ public class Storage {
         return Storage.availableMembers;
     }
     public static void allAvailables() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/Club_Management";
+        String url = "jdbc:mysql://localhost:3307/Club_Management";
         String user = "root";
         String password = "";
 
@@ -45,7 +45,7 @@ public class Storage {
         rs = stmt.executeQuery(query);
 
         while (rs.next()) {
-
+            
             String[] name = rs.getString(4).split("\\s+");
             availableClubs.add(new Club(rs.getString(1), rs.getString(2), rs.getString(3), new ClubAdvisor(name[0], name[1]), rs.getInt(5), rs.getDate(6), Club.parseClubMembers(rs.getString(7))));
         }

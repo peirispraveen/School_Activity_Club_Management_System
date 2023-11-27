@@ -40,7 +40,7 @@ public class DeleteClub extends Storage {
     Statement stmt;
 
     public void initialize() throws SQLException {
-        String url= "jdbc:mysql://localhost:3306/Club_Management";
+        String url= "jdbc:mysql://localhost:3307/Club_Management";
         String user="root";
         String password="";
         con= DriverManager.getConnection(url,user,password);
