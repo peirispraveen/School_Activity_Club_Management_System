@@ -6,8 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="mainAnchor" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
+<AnchorPane fx:id="adminLogAnchor" maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="mainAnchor" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />
       <URL value="@../../../Styles/Buttons.css" />
@@ -29,17 +30,22 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="368.0" layoutY="389.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="214.0" styleClass="loginButton" stylesheets="@../../../Styles/Buttons.css" text="Login">
+      <Button layoutX="368.0" layoutY="389.0" mnemonicParsing="false" onAction="#onAdminLogButtonClicked" prefHeight="46.0" prefWidth="214.0" styleClass="loginButton" stylesheets="@../../../Styles/Buttons.css" text="Login">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="368.0" layoutY="360.0" text="Welcome Admin" textFill="#535353">
+      <Label fx:id="adminLabel" layoutX="368.0" layoutY="360.0" prefHeight="18.0" prefWidth="214.0" text="Welcome Admin" textFill="#535353">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="adminLogLabel" layoutX="448.0" layoutY="168.0" prefHeight="18.0" prefWidth="132.0" />
-      <Label fx:id="adminPassLabel" layoutX="448.0" layoutY="263.0" prefHeight="18.0" prefWidth="132.0" />
+      <Label fx:id="adminLogLabel" alignment="CENTER_RIGHT" layoutX="448.0" layoutY="168.0" prefHeight="18.0" prefWidth="132.0" textFill="RED" />
+      <Label fx:id="adminPassLabel" alignment="CENTER_RIGHT" layoutX="448.0" layoutY="263.0" prefHeight="18.0" prefWidth="132.0" textFill="RED" />
+      <Button layoutX="43.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#adminLogBackButton">
+         <graphic>
+            <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

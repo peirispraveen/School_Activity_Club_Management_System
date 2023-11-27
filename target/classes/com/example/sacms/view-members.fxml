@@ -15,6 +15,11 @@
          <graphic>
             <FontIcon iconLiteral="ion4-ios-person" iconSize="100" />
          </graphic></Button>
+      <Button layoutX="54.0" layoutY="47.0" mnemonicParsing="false" onMouseClicked="#viewMembersBackButton">
+         <graphic>
+            <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
+         </graphic>
+      </Button>
    </children>
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />
