@@ -556,10 +556,6 @@ public class AddMember {
     }
 
     @FXML
-    private void onPassCheckClicked() {
-    }
-
-    @FXML
     private void backButton() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
         Stage mainStage = new Stage();
@@ -571,11 +567,4 @@ public class AddMember {
         prevStage.close();
     }
 
-
-//    @FXML
-//    private void onPassCheckClicked() throws IOException {
-//        if (passCheckBox.isSelected()){
-//            passField.setVisible(true);
-//        }
-//    }
 }
