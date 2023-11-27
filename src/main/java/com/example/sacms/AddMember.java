@@ -148,7 +148,6 @@ public class AddMember {
                 if (!Objects.equals(studentIdBox.getText(), "")){
                     studentId = studentIdBox.getText();
                 }else{
-//                    studentRegLabel.setText("Enter your Student ID");
                     stIdLabel.setText("*required");
                     return;
                 }
@@ -318,13 +317,6 @@ public class AddMember {
                 System.out.println(e7.getMessage());
                 studentRegLabel.setText("Error Encountered");
             }
-
-            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("StudentDetails.ser"))) {
-                objectOutputStream.writeObject(studentList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
@@ -518,12 +510,6 @@ public class AddMember {
             } catch (Exception e7) {
                 System.out.println(e7.getMessage());
                 advisorRegLabel.setText("Error Encountered");
-            }
-
-            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("AdvisorDetails.ser"))) {
-                objectOutputStream.writeObject(advisorList);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
