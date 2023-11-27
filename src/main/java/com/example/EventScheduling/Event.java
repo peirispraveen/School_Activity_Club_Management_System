@@ -5,7 +5,7 @@ public class Event extends EventParent
     // special attributes
     private String name;
     private String place;
-    // array to store all values dynamically
+    // array to store all attributes dynamically
     public String[] values;
 
     // default constructor
@@ -39,6 +39,7 @@ public class Event extends EventParent
         Thread thread9 = new Thread(() -> validate.validateDate(this.year));
         Thread thread10 = new Thread(() -> validate.validateDate(this.year, this.month));
         Thread thread11 = new Thread(() -> validate.validateDate(this.year, this.month, this.day));
+
         // starting threads excluding thread 11
         thread1.start();
         thread2.start();

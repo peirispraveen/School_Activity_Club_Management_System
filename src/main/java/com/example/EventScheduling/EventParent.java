@@ -16,7 +16,7 @@ abstract class EventParent
     // default constructor
     public EventParent() {}
 
-    // parametarised constructor (overloading the constructor)
+    // parametarised constructor
     public EventParent(String year, String month, String day, String startHour, String startMinute, String endHour,
                        String endMinute)
     {
@@ -30,7 +30,7 @@ abstract class EventParent
         this.endMinute = endMinute;
     }
 
-    // parametarised constructor (overloading the constructor)
+    // parametarised constructor
     public EventParent(String clubID, String eventID, String year, String month, String day, String startHour,
                        String startMinute, String endHour, String endMinute)
     {

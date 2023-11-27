@@ -7,6 +7,7 @@ public class Activity extends EventParent
     private String link;
     private String activityName;
     private String activityNumber;
+    // array to store all attributes dynamically
     public String[] values;
 
     // default constructor
@@ -45,6 +46,7 @@ public class Activity extends EventParent
         Thread thread11 = new Thread(() -> validate.validateDate(this.year, this.month, this.day));
         Thread thread12 = new Thread(() -> validate.validateName(this.activityName));
         Thread thread13 = new Thread(() -> validate.validateActivityNo(this.activityNumber));
+
         // starting threads excluding thread 11
         thread1.start();
         thread2.start();

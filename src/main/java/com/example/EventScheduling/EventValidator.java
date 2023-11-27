@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class EventValidator implements EventValidation
 {
-
+    // attributes to store result of validations statically
     private String eventID;
     private static boolean validClubID;
     private static boolean validEventID;
@@ -24,14 +24,17 @@ public class EventValidator implements EventValidation
     private static boolean validName;
     private static boolean validActivityNo;
 
-
+    // default constructor
     public EventValidator(){}
+
+    // parametarized constructor
     public EventValidator(String eventID)
     {
         this.eventID = eventID;
         validateEventID(eventID);
     }
 
+    // class dependent getters
     public static boolean isValidClubID() {
         return validClubID;
     }
@@ -96,6 +99,7 @@ public class EventValidator implements EventValidation
         return validActivityNo;
     }
 
+    // restricting the method access for threads
     public synchronized boolean validateInt(String integer)
     {
         try
@@ -285,6 +289,7 @@ public class EventValidator implements EventValidation
         }
     }
 
+    // restricting the method access for threads
     public synchronized boolean validateHour(String hour)
     {
         if(validateInt(hour)) {
@@ -297,6 +302,8 @@ public class EventValidator implements EventValidation
         }
         return false;
     }
+
+    // restricting the method access for threads
     public synchronized boolean validateMinute(String minute)
     {
         if(validateInt(minute)) {
@@ -310,6 +317,7 @@ public class EventValidator implements EventValidation
         return false;
     }
 
+    // restricting the method access for threads
     public synchronized boolean validateString(String str)
     {
         try
