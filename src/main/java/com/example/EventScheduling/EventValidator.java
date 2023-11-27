@@ -141,7 +141,8 @@ public class EventValidator implements EventValidation
 
     public void validateEventID(String eventID)
     {
-        if(!eventID.isEmpty() && eventID.length() < 9 && eventID.charAt(0) == 'E') {
+        if(!eventID.isEmpty() && eventID.length() < 9 && eventID.charAt(0) == 'E')
+        {
             validEventID = true;
         }
         else {

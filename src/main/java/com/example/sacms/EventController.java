@@ -102,18 +102,22 @@ public class EventController
 
     // when any input changed enable reset button
     @FXML
-    public void onInputTextChanged() {
+    public void onInputTextChanged()
+    {
         resetButton.setDisable(false);
         submitButton.setDisable(false);
     }
 
     // clearing inputs when reset buttons are trigerred
     @FXML
-    public void onClickEventViewResetButton(ActionEvent e) throws Exception
+    public void onClickEventViewResetButton()
     {
         eventID.clear();
         filePath.clear();
-        setRestButtonDisable();
+        resetButton.setDisable(true);
+        deleteButton.setDisable(true);
+        postponeButton.setDisable(true);
+        generateButton.setDisable(true);
     }
 
     public void clearCommonInputs()
@@ -129,7 +133,7 @@ public class EventController
         endMin.clear();
     }
     @FXML
-    public void onClickCreateActivityResetButton(ActionEvent e) throws Exception
+    public void onClickCreateActivityResetButton()
     {
         clearCommonInputs();
         activityNo.clear();
@@ -166,14 +170,14 @@ public class EventController
     }
 
     @FXML
-    public void onClickPostponeEventResetButton(ActionEvent e) throws Exception
+    public void onClickPostponeEventResetButton()
     {
         clearCommonInputs();
         setRestButtonDisable();
     }
 
     @FXML
-    public void onUpdateTextChanged(ActionEvent e) throws Exception
+    public void onUpdateTextChanged()
     {
         postponeButton.setDisable(false);
         deleteButton.setDisable(false);
@@ -206,17 +210,19 @@ public class EventController
 
     // exit method for the program
     @FXML
-    public void onClickExitButton() {
+    public void onClickExitButton()
+    {
         System.exit(0);
     }
 
     // view events in a table
     @FXML
-    public void onClickViewEventButton(ActionEvent e) throws Exception {
+    public void onClickViewEventButton(ActionEvent e) throws Exception
+    {
         // capturing previous stage
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         // loading fxml file
-        Parent root = FXMLLoader.load(getClass().getResource("../../../../resources/com/example/sacms/event-view-ui.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("event-view-ui.fxml"));
         // capturing table and columns
         TableView tableView = (TableView<EventView>) root.lookup("#eventTableView");
         TableColumn<EventView, String> column1 = (TableColumn<EventView, String>) tableView.getColumns().get(0);
@@ -363,7 +369,6 @@ public class EventController
         // setting validation times to 0
         validPoints = 0;
         // connect with the databse
-        connectDB();
         Statement statement = connectDB().createStatement();
         // if club id is valid
         if (EventValidator.isValidClubID())
@@ -473,7 +478,7 @@ public class EventController
                 newMeeting.values[4] = endHour.getText() + ":" + endMin.getText();
                 validPoints++;
             }
-            // if end time is invalid
+            // if end_time is invalid
             else
             {
                 endHour.clear();
@@ -572,67 +577,65 @@ public class EventController
                 preparedStatement2.setString(i + 2, newMeeting.values[i + 5]);
             }
             preparedStatement2.executeUpdate();
-            // creating a new stage
-            Stage newStage = new Stage();
-            // capturing previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set new stage owner as previous stage
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
-            // initialize new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            // show the new stage in the center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+            actionCompleted(e);
             // clear all inputs
-            clubID.clear();
-            eventID.clear();
-            meetingNum.clear();
-            eventPlatform.clear();
-            eventLink.clear();
-            eventYear.clear();
-            eventMonth.clear();
-            eventDay.clear();
-            endHour.clear();
-            endMin.clear();
-            startHour.clear();
-            startMin.clear();
-            setRestButtonDisable();
+            onClickViewEventButton(e);
         }
         // if validation check failed
-        else {
-            // creating new stage
-            Stage newStage = new Stage();
-            // capturing previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // setting the owner of new stage as previous stage
-            newStage.initOwner(previousStage);
-            // loading ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // setting scene to new stage
-            newStage.setScene(scene);
-            // restricting resize
-            newStage.setResizable(false);
-            // show new stage in the center of screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+        else
+        {
+            invalidInformation(e);
             setRestButtonDisable();
         }
         // close the connection with database
         connectDB().close();
     }
 
+    public void invalidInformation(ActionEvent e) throws Exception
+    {
+        // creating new stage
+        Stage newStage = new Stage();
+        // capturing previous stage
+        Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        // setting the owner of new stage as previous stage
+        newStage.initOwner(previousStage);
+        // loading ui
+        Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
+        // initializing new scene
+        Scene scene = new Scene(root, 400, 73);
+        // setting scene to new stage
+        newStage.setScene(scene);
+        // restricting resize
+        newStage.setResizable(false);
+        // show new stage in the center of screen
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+        newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+        newStage.show();
+    }
+
+    public void actionCompleted(ActionEvent e) throws Exception
+    {
+        // creating a new stage
+        Stage newStage = new Stage();
+        // capturing previous stage
+        Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        // set new stage owner as previous stage
+        newStage.initOwner(previousStage);
+        // load ui
+        Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
+        // initialize new scene
+        Scene scene = new Scene(root, 400, 73);
+        // set scene to new stage
+        newStage.setScene(scene);
+        // restricting to resize
+        newStage.setResizable(false);
+        // show the new stage in the center of the screen
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+        newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+        newStage.show();
+    }
     // event button triggerred as new event
     @FXML
     public void onClickEventButton(ActionEvent e) throws Exception
@@ -664,7 +667,6 @@ public class EventController
         newEvent.values = new String[7];
         // set validation times to 0
         validPoints = 0;
-        connectDB();
         Statement statement = connectDB().createStatement();
         // validate the club_id
         if (EventValidator.isValidClubID())
@@ -699,7 +701,8 @@ public class EventController
             clubID.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate the event_id
-        if (EventValidator.isValidEventID()) {
+        if (EventValidator.isValidEventID())
+        {
             boolean dbEventIDMatch = false;
             // resultset to store event_id
             ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
@@ -840,59 +843,13 @@ public class EventController
                 preparedStatement2.setString(i + 2, newEvent.values[i + 5]);
             }
             preparedStatement2.executeUpdate();
-            // creating new stage
-            Stage newStage = new Stage();
-            // capturing previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // loading ui
-            Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // setting the scene to new stage
-            newStage.setScene(scene);
-            // restricting resize
-            newStage.setResizable(false);
-            // show the stage in the middle of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
-            // clear all inputs
-            clubID.clear();
-            eventID.clear();
-            eventName.clear();
-            eventPlace.clear();
-            eventYear.clear();
-            eventMonth.clear();
-            eventDay.clear();
-            endHour.clear();
-            endMin.clear();
-            startHour.clear();
-            startMin.clear();
-            setRestButtonDisable();
+            actionCompleted(e);
+            onClickViewEventButton(e);
         }
         // if the inputs are invalid
-        else {
-            // crating a new stage
-            Stage newStage = new Stage();
-            // capturing previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // setting the owner of the new stage as previous stage
-            newStage.initOwner(previousStage);
-            // loading ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initializng new scene
-            Scene scene = new Scene(root, 400, 73);
-            // setting scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+        else
+        {
+            invalidInformation(e);
             setRestButtonDisable();
         }
         // closing the connection with the database
@@ -929,7 +886,6 @@ public class EventController
         newActivity.values = new String[9];
         // set validation times to 0
         validPoints = 0;
-        connectDB();
         Statement statement = connectDB().createStatement();
         // validate club_id
         if (EventValidator.isValidClubID())
@@ -1157,63 +1113,14 @@ public class EventController
                 preparedStatement2.setString(i + 2, newActivity.values[i + 5]);
             }
             preparedStatement2.executeUpdate();
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new satge owner
-            newStage.initOwner(previousStage);
-            // loading ui
-            Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricitng resize
-            newStage.setResizable(false);
-            // show stage in the center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
-            // clear all inputs
-            clubID.clear();
-            eventID.clear();
-            activityNo.clear();
-            eventName.clear();
-            eventType.clear();
-            eventLink.clear();
-            eventYear.clear();
-            eventMonth.clear();
-            eventDay.clear();
-            endHour.clear();
-            endMin.clear();
-            startHour.clear();
-            startMin.clear();
+            actionCompleted(e);
+            onClickViewEventButton(e);
             setRestButtonDisable();
         }
         // if inputs are invalid
         else
         {
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restring to resize
-            newStage.setResizable(false);
-            // show stage in center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+            invalidInformation(e);
             setRestButtonDisable();
         }
         // close the database connection
@@ -1227,7 +1134,6 @@ public class EventController
         // validate event_id
         if (validateClubID.isValidEventID())
         {
-            connectDB().close();
             Statement statement = connectDB().createStatement();
             String query1 = "select event_id from EventParent";
             // resultset to store event_id
@@ -1238,43 +1144,24 @@ public class EventController
                 if (resultSet1.getString(1).equals(eventID.getText()))
                 {
                     resultSet1.close();
-                    String query5 = "DELETE from EventParent WHERE event_id = ?";
-                    String query6 = "DELETE from Meeting WHERE event_id = ?";
-                    String query7 = "DELETE from Activity WHERE event_id = ?";
-                    String query8 = "DELETE from EventType WHERE event_id = ?;";
+                    String query5 = "DELETE from Meeting WHERE event_id = ?";
                     PreparedStatement preparedStatement1 = connectDB().prepareStatement(query5);
-                    PreparedStatement preparedStatement2 = connectDB().prepareStatement(query6);
-                    PreparedStatement preparedStatement3 = connectDB().prepareStatement(query7);
-                    PreparedStatement preparedStatement4 = connectDB().prepareStatement(query8);
                     preparedStatement1.setString(1, eventID.getText());
-                    preparedStatement2.setString(1, eventID.getText());
-                    preparedStatement3.setString(1, eventID.getText());
-                    preparedStatement4.setString(1, eventID.getText());
                     preparedStatement1.executeUpdate();
+                    String query6 = "DELETE from Activity WHERE event_id = ?";
+                    PreparedStatement preparedStatement2 = connectDB().prepareStatement(query6);
+                    preparedStatement2.setString(1, eventID.getText());
                     preparedStatement2.executeUpdate();
+                    String query7 = "DELETE from EventType WHERE event_id = ?;";
+                    PreparedStatement preparedStatement3 = connectDB().prepareStatement(query7);
+                    preparedStatement3.setString(1, eventID.getText());
                     preparedStatement3.executeUpdate();
+                    String query8 = "DELETE from EventParent WHERE event_id = ?";
+                    PreparedStatement preparedStatement4 = connectDB().prepareStatement(query8);
+                    preparedStatement4.setString(1, eventID.getText());
                     preparedStatement4.executeUpdate();
-                    // create new stage
-                    Stage newStage = new Stage();
-                    //capture previous stage
-                    Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                    // set previous stage as new stage owner
-                    newStage.initOwner(previousStage);
-                    // load ui
-                    Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
-                    // initializing new scene
-                    Scene scene = new Scene(root, 400, 73);
-                    // set scene to new stage
-                    newStage.setScene(scene);
-                    // restricting to rezise
-                    newStage.setResizable(false);
-                    // show the stage in center of the screen
-                    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-                    newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-                    newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-                    newStage.show();
+                    actionCompleted(e);
                     eventID.clear();
-                    setRestButtonDisable();
                     break;
                 }
             }
@@ -1284,25 +1171,7 @@ public class EventController
         // if event_id is invalid
         else
         {
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous srage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initialize new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            // show stage in center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+            invalidInformation(e);
             // clear input
             eventID.clear();
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1321,7 +1190,6 @@ public class EventController
         // validate event_id
         if (eventValidator.isValidEventID())
         {
-            connectDB();
             Statement statement = connectDB().createStatement();
             String query1 = "select event_id,club_id from EventParent";
             // resultset to store event_id and club_id
@@ -1354,27 +1222,7 @@ public class EventController
             }
             else
             {
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initialize new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            // show the new stage in center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
-            eventID.clear();
-            setRestButtonDisable();
+                invalidInformation(e);
             }
             // close database connection
             connectDB().close();
@@ -1382,25 +1230,7 @@ public class EventController
         // if event_id ivalid
         else
         {
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initializng new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to rezise
-            newStage.setResizable(false);
-            // show the new stage in center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+            invalidInformation(e);
             eventID.clear();
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
             postponeButton.setDisable(true);
@@ -1489,8 +1319,6 @@ public class EventController
         // if inputs are valid
         if (validPoints == 3)
         {
-            // connect to databse
-            connectDB();
             // update EventParent
             String query2 = "UPDATE EventParent SET event_date = ?, start_time = ?, end_time = ? WHERE event_id = ?";
             PreparedStatement preparedStatement1 = connectDB().prepareStatement(query2);
@@ -1501,214 +1329,183 @@ public class EventController
             preparedStatement1.executeUpdate();
             // close databse conncetion
             connectDB().close();
-            // create new stage
-            Stage newStage = new Stage();
-            // capture previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("successful-ui.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            // show new stage center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+            actionCompleted(e);
             // caling event view method
             onClickViewEventButton(e);
         }
         else
         {
-            // creating new stage
-            Stage newStage = new Stage();
-            // capturing previous stage
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            // set previous stage as new stage owner
-            newStage.initOwner(previousStage);
-            // load ui
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            // initializing new scene
-            Scene scene = new Scene(root, 400, 73);
-            // set scene to new stage
-            newStage.setScene(scene);
-            // restricting to resize
-            newStage.setResizable(false);
-            // show new stage in center of the screen
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
-            setRestButtonDisable();
+           invalidInformation(e);
+           setRestButtonDisable();
         }
     }
 
 
-    public void onClickGenerateEventReportButton(ActionEvent e) throws Exception {
+    public void onClickGenerateEventReportButton(ActionEvent e) throws Exception
+    {
+        // validate file path
         EventValidator validator = new EventValidator();
-        if (validator.validateString(filePath.getText())) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection(url, user, password);
-                String query1 = "SELECT * FROM EventParent";
-                Statement statement1 = connection.createStatement();
-                ResultSet resultSet1 = statement1.executeQuery(query1);
-
-                ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
-                while (resultSet1.next()) {
-                    eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString("club_id"),
-                            resultSet1.getString("event_id"), resultSet1.getString("event_date"),
-                            resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
-                }
-                resultSet1.close();
-                String query2 = "SELECT * FROM EventType";
-                Statement statement2 = connection.createStatement();
-                ResultSet resultSet2 = statement2.executeQuery(query2);
-                ArrayList<ArrayList<String>> event = new ArrayList<>();
-                while (resultSet2.next()) {
-                    event.add(new ArrayList<>(Arrays.asList(resultSet2.getString("event_id"),
-                            resultSet2.getString("name"), resultSet2.getString("place"))));
-                }
-                resultSet2.close();
-                String query3 = "SELECT * FROM Activity";
-                Statement statement3 = connection.createStatement();
-                ResultSet resultSet3 = statement3.executeQuery(query3);
-                ArrayList<ArrayList<String>> activity = new ArrayList<>();
-                while (resultSet3.next()) {
-                    activity.add(new ArrayList<>(Arrays.asList(resultSet3.getString("event_id"),
-                            resultSet3.getString("type"), resultSet3.getString("name"),
-                            resultSet3.getString("activity_no"), resultSet3.getString("link"))));
-                }
-                String query4 = "SELECT * FROM Meeting";
-                Statement statement4 = connection.createStatement();
-                ResultSet resultSet4 = statement4.executeQuery(query4);
-                ArrayList<ArrayList<String>> meeting = new ArrayList<>();
-                while (resultSet4.next()) {
-                    meeting.add(new ArrayList<>(Arrays.asList(resultSet4.getString("event_id"),
-                            resultSet4.getString("meeting_no"), resultSet4.getString("platform"),
-                            resultSet4.getString("link"))));
-                }
-                resultSet4.close();
-
-                ArrayList<ArrayList<String>> report = new ArrayList<>();
-                for (int i = 0; i < eventParent.size(); i++) {
-                    boolean found = false;
-                    for (int j = 0; j < event.size(); j++) {
-                        if (eventParent.get(i).get(1).equals(event.get(j).get(0))) {
-                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
-                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
-                                    event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        continue;
-                    }
-                    for (int j = 0; j < activity.size(); j++) {
-                        if (eventParent.get(i).get(1).equals(activity.get(j).get(0))) {
-                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
-                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
-                                    activity.get(j).get(2), "NULL", activity.get(j).get(1), activity.get(j).get(3),
-                                    "NULL", "NULL", activity.get(j).get(4))));
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        continue;
-                    }
-                    for (int j = 0; j < meeting.size(); j++) {
-                        if (eventParent.get(i).get(1).equals(meeting.get(j).get(0))) {
-                            report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
-                                    eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
-                                    "NULL", "NULL", "NULL", "NULL", meeting.get(j).get(1), meeting.get(j).get(2),
-                                    meeting.get(j).get(3))));
-                            break;
-                        }
-                    }
-                }
-
-                // Create a new workbook
-                XSSFWorkbook workbook = new XSSFWorkbook();
-                // Create a sheet in the workbook
-                XSSFSheet sheet = workbook.createSheet("Event Report");
-                Font boldFont = workbook.createFont();
-                boldFont.setBold(true);
-                // Create a cell style with the bold font
-                CellStyle boldStyle = workbook.createCellStyle();
-                boldStyle.setFont(boldFont);
-                // Create header row
-                XSSFRow headerRow = sheet.createRow(0);
-                headerRow.createCell(0).setCellValue("Club ID");
-                headerRow.createCell(1).setCellValue("Event ID");
-                headerRow.createCell(2).setCellValue("Start Date");
-                headerRow.createCell(3).setCellValue("Start Time");
-                headerRow.createCell(4).setCellValue("End Time");
-                headerRow.createCell(5).setCellValue("Name");
-                headerRow.createCell(6).setCellValue("Place");
-                headerRow.createCell(7).setCellValue("Type");
-                headerRow.createCell(8).setCellValue("Activity No");
-                headerRow.createCell(9).setCellValue("Meeting No");
-                headerRow.createCell(10).setCellValue("Platform");
-                headerRow.createCell(11).setCellValue("Link");
-
-
-                for (int i = 0; i < headerRow.getLastCellNum(); i++) {
-                    headerRow.getCell(i).setCellStyle(boldStyle);
-                }
-
-                for (int i = 0; i < report.size(); i++) {
-                    // Iterate over the result set and add data to the sheet
-                    XSSFRow row = sheet.createRow(i + 1);
-                    for (int j = 0; j < report.get(0).size(); j++) {
-                        row.createCell(j).setCellValue(report.get(i).get(j));
-                    }
-                }
-
-                // Save the workbook to a file or perform other operations
-
-                // For example, you can save it to a file
-                try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx")) {
-                    workbook.write(fileOut);
-                    Stage newStage = new Stage();
-                    Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                    newStage.initOwner(previousStage);
-                    Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
-                    Scene scene = new Scene(root, 400, 73);
-                    newStage.setScene(scene);
-                    newStage.setResizable(false);
-                    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-                    newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-                    newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-                    newStage.show();
-                } catch (Exception f) {
-                    f.printStackTrace();
-                }
-                connection.close();
-            } catch (Exception edb) {
-                edb.printStackTrace();
+        if (validator.validateString(filePath.getText()))
+        {
+            // get all data from EventParent
+            String query1 = "SELECT * FROM EventParent";
+            Statement statement1 = connectDB().createStatement();
+            ResultSet resultSet1 = statement1.executeQuery(query1);
+            // store EventParent data in 2D arraylist
+            ArrayList<ArrayList<String>> eventParent = new ArrayList<>();
+            while (resultSet1.next()) {
+                eventParent.add(new ArrayList<>(Arrays.asList(resultSet1.getString("club_id"),
+                        resultSet1.getString("event_id"), resultSet1.getString("event_date"),
+                        resultSet1.getString("start_time"), resultSet1.getString("end_time"))));
             }
+            resultSet1.close();
+            // get all data from EventType
+            String query2 = "SELECT * FROM EventType";
+            Statement statement2 = connectDB().createStatement();
+            ResultSet resultSet2 = statement2.executeQuery(query2);
+            // store EventType data in 2D arraylist
+            ArrayList<ArrayList<String>> event = new ArrayList<>();
+            while (resultSet2.next()) {
+                event.add(new ArrayList<>(Arrays.asList(resultSet2.getString("event_id"),
+                        resultSet2.getString("name"), resultSet2.getString("place"))));
+            }
+            resultSet2.close();
+            // get all data from Actiivity
+            String query3 = "SELECT * FROM Activity";
+            Statement statement3 = connectDB().createStatement();
+            ResultSet resultSet3 = statement3.executeQuery(query3);
+            // store Activity data in 2D arraylist
+            ArrayList<ArrayList<String>> activity = new ArrayList<>();
+            while (resultSet3.next()) {
+                activity.add(new ArrayList<>(Arrays.asList(resultSet3.getString("event_id"),
+                        resultSet3.getString("type"), resultSet3.getString("name"),
+                        resultSet3.getString("activity_no"), resultSet3.getString("link"))));
+            }
+            // get all data from Meeting
+            String query4 = "SELECT * FROM Meeting";
+            Statement statement4 = connectDB().createStatement();
+            ResultSet resultSet4 = statement4.executeQuery(query4);
+            // store Meeting data in a 2D arraylist
+            ArrayList<ArrayList<String>> meeting = new ArrayList<>();
+            while (resultSet4.next()) {
+                meeting.add(new ArrayList<>(Arrays.asList(resultSet4.getString("event_id"),
+                        resultSet4.getString("meeting_no"), resultSet4.getString("platform"),
+                        resultSet4.getString("link"))));
+            }
+            resultSet4.close();
+            // extracting all arraylists data to one 2D array
+            ArrayList<ArrayList<String>> report = new ArrayList<>();
+            for (int i = 0; i < eventParent.size(); i++)
+            {
+                boolean found = false;
+                for (int j = 0; j < event.size(); j++)
+                {
+                    if (eventParent.get(i).get(1).equals(event.get(j).get(0)))
+                    {
+                        report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                event.get(j).get(1), event.get(j).get(1), "NULL", "NULL", "NULL", "NULL", "NULL")));
+                        found = true;
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    continue;
+                }
+                for (int j = 0; j < activity.size(); j++)
+                {
+                    if (eventParent.get(i).get(1).equals(activity.get(j).get(0)))
+                    {
+                        report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                activity.get(j).get(2), "NULL", activity.get(j).get(1), activity.get(j).get(3),
+                                "NULL", "NULL", activity.get(j).get(4))));
+                        found = true;
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    continue;
+                }
+                for (int j = 0; j < meeting.size(); j++)
+                {
+                    if (eventParent.get(i).get(1).equals(meeting.get(j).get(0)))
+                    {
+                        report.add(new ArrayList<>(Arrays.asList(eventParent.get(i).get(0), eventParent.get(i).get(1),
+                                eventParent.get(i).get(2), eventParent.get(i).get(3), eventParent.get(i).get(4),
+                                "NULL", "NULL", "NULL", "NULL", meeting.get(j).get(1), meeting.get(j).get(2),
+                                meeting.get(j).get(3))));
+                        break;
+                    }
+                }
+            }
+            // Create a new workbook
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            // Create a sheet in the workbook
+            XSSFSheet sheet = workbook.createSheet("Event Report");
+            Font boldFont = workbook.createFont();
+            boldFont.setBold(true);
+            // Create a cell style with the bold font
+            CellStyle boldStyle = workbook.createCellStyle();
+            boldStyle.setFont(boldFont);
+            // Create header row
+            XSSFRow headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Club ID");
+            headerRow.createCell(1).setCellValue("Event ID");
+            headerRow.createCell(2).setCellValue("Start Date");
+            headerRow.createCell(3).setCellValue("Start Time");
+            headerRow.createCell(4).setCellValue("End Time");
+            headerRow.createCell(5).setCellValue("Name");
+            headerRow.createCell(6).setCellValue("Place");
+            headerRow.createCell(7).setCellValue("Type");
+            headerRow.createCell(8).setCellValue("Activity No");
+            headerRow.createCell(9).setCellValue("Meeting No");
+            headerRow.createCell(10).setCellValue("Platform");
+            headerRow.createCell(11).setCellValue("Link");
+            for (int i = 0; i < headerRow.getLastCellNum(); i++)
+            {
+                headerRow.getCell(i).setCellStyle(boldStyle);
+            }
+            for (int i = 0; i < report.size(); i++) {
+                // Iterate over the result set and add data to the sheet
+                XSSFRow row = sheet.createRow(i + 1);
+                for (int j = 0; j < report.get(0).size(); j++) {
+                    row.createCell(j).setCellValue(report.get(i).get(j));
+                }
+            }
+
+            // Save the workbook to a file
+            try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx"))
+            {
+                workbook.write(fileOut);
+                Stage newStage = new Stage();
+                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                newStage.initOwner(previousStage);
+                Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
+                Scene scene = new Scene(root, 400, 73);
+                newStage.setScene(scene);
+                newStage.setResizable(false);
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+                newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+                newStage.show();
+                filePath.clear();
+                resetButton.setDisable(true);
+            } catch (Exception f)
+            {
+                f.printStackTrace();
+            }
+            // close the database connection
+            connectDB().close();
         }
-        else {
-            Stage newStage = new Stage();
-            Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            newStage.initOwner(previousStage);
-            Parent root = FXMLLoader.load(getClass().getResource("event-validation-failed.fxml"));
-            Scene scene = new Scene(root, 400, 73);
-            newStage.setScene(scene);
-            newStage.setResizable(false);
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
-            newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
-            newStage.show();
+        else
+        {
+            actionCompleted(e);
             filePath.clear();
+            filePath.setPromptText("IN");
+            filePath.setStyle("-fx-prompt-text-fill: #b22222");
         }
     }
-
 }

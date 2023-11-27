@@ -26,7 +26,7 @@
             <TableColumn fx:id="startDateColumn" prefWidth="177.0" text="Start Date" />
         </columns>
       </TableView>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="109.0" layoutY="454.0" onKeyTyped="#onUpdateTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="Enter club ID" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="109.0" layoutY="454.0" onKeyTyped="#onUpdateTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="Enter Event ID" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
