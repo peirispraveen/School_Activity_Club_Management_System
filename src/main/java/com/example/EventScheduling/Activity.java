@@ -15,7 +15,8 @@ public class Activity extends EventParent
     // parametarised constructor
     public Activity(String clubID, String eventID, String year, String month, String day, String startHour,
                     String startMinute, String endHour, String endMinute, String type, String link, String activityName,
-                    String activityNumber) {
+                    String activityNumber)
+    {
         // calling the parent class constructor
         super(clubID, eventID, year, month, day, startHour, startMinute, endHour, endMinute);
         // initializing special attributes
@@ -25,7 +26,7 @@ public class Activity extends EventParent
         this.activityNumber = activityNumber;
     }
 
-    // implementing the parent class method
+    // implementing the parent class abstract method
     @Override
     public void createEvent()
     {
