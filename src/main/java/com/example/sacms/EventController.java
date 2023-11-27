@@ -36,8 +36,6 @@ public class EventController
     private String user = "root";
     private String password = "";
 
-    private Connection connection;
-
     // access fx elements
     @FXML
     private TextField clubID;
@@ -88,20 +86,15 @@ public class EventController
     private int validPoints;
 
     // connect with the database
-    private void connectDB(){
-        try
-        {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+    public Connection connectDB() throws Exception
+    {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(url, user, password);
+        return connection;
     }
 
     // disable the reset button
-    private void setRestButtonDisable()
+    public void setRestButtonDisable()
     {
         resetButton.setDisable(true);
         submitButton.setDisable(true);
@@ -119,10 +112,11 @@ public class EventController
     public void onClickEventViewResetButton(ActionEvent e) throws Exception
     {
         eventID.clear();
+        filePath.clear();
         setRestButtonDisable();
     }
 
-    private void clearCommonInputs()
+    public void clearCommonInputs()
     {
         clubID.clear();
         eventID.clear();
@@ -239,8 +233,7 @@ public class EventController
         // observable list to store items that needed to be shown in the tbale
         ObservableList<EventView> obList = FXCollections.observableArrayList();
         // connect to database
-        connectDB();
-        Statement statement = connection.createStatement();
+        Statement statement = connectDB().createStatement();
         // queries to be executed
         String query1 = "select event_id, club_id, event_date from EventParent";
         String query2 = "select event_id from Meeting";
@@ -284,7 +277,7 @@ public class EventController
         // closing resultSet4
         resultSet4.close();
         // closing connection4
-        connection.close();
+        connectDB().close();
         // travel through array lists and find the type of the event
         for (ArrayList<String> strings : eventParent)
         {
@@ -371,7 +364,7 @@ public class EventController
         validPoints = 0;
         // connect with the databse
         connectDB();
-        Statement statement = connection.createStatement();
+        Statement statement = connectDB().createStatement();
         // if club id is valid
         if (EventValidator.isValidClubID())
         {
@@ -565,7 +558,7 @@ public class EventController
         {
             // updating EventParent table
             String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+            PreparedStatement preparedStatement1 = connectDB().prepareStatement(query1);
             for (int i = 0; i < 4; i++) {
                 preparedStatement1.setString(i + 1, newMeeting.values[i + 1]);
             }
@@ -573,7 +566,7 @@ public class EventController
             preparedStatement1.setString(5, newMeeting.values[0]);
             preparedStatement1.executeUpdate();
             String query2 = "INSERT INTO Meeting VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+            PreparedStatement preparedStatement2 = connectDB().prepareStatement(query2);
             preparedStatement2.setString(1, newMeeting.values[1]);
             for (int i = 0; i < 3; i++) {
                 preparedStatement2.setString(i + 2, newMeeting.values[i + 5]);
@@ -637,7 +630,7 @@ public class EventController
             setRestButtonDisable();
         }
         // close the connection with database
-        connection.close();
+        connectDB().close();
     }
 
     // event button triggerred as new event
@@ -672,7 +665,7 @@ public class EventController
         // set validation times to 0
         validPoints = 0;
         connectDB();
-        Statement statement = connection.createStatement();
+        Statement statement = connectDB().createStatement();
         // validate the club_id
         if (EventValidator.isValidClubID())
         {
@@ -833,7 +826,7 @@ public class EventController
         {
             // update EventParent table
             String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+            PreparedStatement preparedStatement1 = connectDB().prepareStatement(query1);
             for (int i = 0; i < 4; i++) {
                 preparedStatement1.setString(i + 1, newEvent.values[i + 1]);
             }
@@ -841,7 +834,7 @@ public class EventController
             preparedStatement1.executeUpdate();
             // update EventType table
             String query2 = "INSERT INTO EventType VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+            PreparedStatement preparedStatement2 = connectDB().prepareStatement(query2);
             preparedStatement2.setString(1, newEvent.values[1]);
             for (int i = 0; i < 2; i++) {
                 preparedStatement2.setString(i + 2, newEvent.values[i + 5]);
@@ -903,7 +896,7 @@ public class EventController
             setRestButtonDisable();
         }
         // closing the connection with the database
-        connection.close();
+        connectDB().close();
     }
 
     @FXML
@@ -937,7 +930,7 @@ public class EventController
         // set validation times to 0
         validPoints = 0;
         connectDB();
-        Statement statement = connection.createStatement();
+        Statement statement = connectDB().createStatement();
         // validate club_id
         if (EventValidator.isValidClubID())
         {
@@ -1150,7 +1143,7 @@ public class EventController
         {
             // updating EventParent
             String query1 = "INSERT INTO EventParent VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+            PreparedStatement preparedStatement1 = connectDB().prepareStatement(query1);
             for (int i = 0; i < 4; i++) {
                 preparedStatement1.setString(i + 1, newActivity.values[i + 1]);
             }
@@ -1158,7 +1151,7 @@ public class EventController
             preparedStatement1.executeUpdate();
             // updating Activity
             String query2 = "INSERT INTO Activity VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+            PreparedStatement preparedStatement2 = connectDB().prepareStatement(query2);
             preparedStatement2.setString(1, newActivity.values[1]);
             for (int i = 0; i < 4; i++) {
                 preparedStatement2.setString(i + 2, newActivity.values[i + 5]);
@@ -1224,7 +1217,7 @@ public class EventController
             setRestButtonDisable();
         }
         // close the database connection
-        connection.close();
+        connectDB().close();
     }
 
     // delete event
@@ -1234,8 +1227,8 @@ public class EventController
         // validate event_id
         if (validateClubID.isValidEventID())
         {
-            connection.close();
-            Statement statement = connection.createStatement();
+            connectDB().close();
+            Statement statement = connectDB().createStatement();
             String query1 = "select event_id from EventParent";
             // resultset to store event_id
             ResultSet resultSet1 = statement.executeQuery(query1);
@@ -1249,10 +1242,10 @@ public class EventController
                     String query6 = "DELETE from Meeting WHERE event_id = ?";
                     String query7 = "DELETE from Activity WHERE event_id = ?";
                     String query8 = "DELETE from EventType WHERE event_id = ?;";
-                    PreparedStatement preparedStatement1 = connection.prepareStatement(query5);
-                    PreparedStatement preparedStatement2 = connection.prepareStatement(query6);
-                    PreparedStatement preparedStatement3 = connection.prepareStatement(query7);
-                    PreparedStatement preparedStatement4 = connection.prepareStatement(query8);
+                    PreparedStatement preparedStatement1 = connectDB().prepareStatement(query5);
+                    PreparedStatement preparedStatement2 = connectDB().prepareStatement(query6);
+                    PreparedStatement preparedStatement3 = connectDB().prepareStatement(query7);
+                    PreparedStatement preparedStatement4 = connectDB().prepareStatement(query8);
                     preparedStatement1.setString(1, eventID.getText());
                     preparedStatement2.setString(1, eventID.getText());
                     preparedStatement3.setString(1, eventID.getText());
@@ -1286,7 +1279,7 @@ public class EventController
                 }
             }
             // close database connection
-            connection.close();
+            connectDB().close();
         }
         // if event_id is invalid
         else
@@ -1329,7 +1322,7 @@ public class EventController
         if (eventValidator.isValidEventID())
         {
             connectDB();
-            Statement statement = connection.createStatement();
+            Statement statement = connectDB().createStatement();
             String query1 = "select event_id,club_id from EventParent";
             // resultset to store event_id and club_id
             ResultSet resultSet1 = statement.executeQuery(query1);
@@ -1384,7 +1377,7 @@ public class EventController
             setRestButtonDisable();
             }
             // close database connection
-            connection.close();
+            connectDB().close();
         }
         // if event_id ivalid
         else
@@ -1500,14 +1493,14 @@ public class EventController
             connectDB();
             // update EventParent
             String query2 = "UPDATE EventParent SET event_date = ?, start_time = ?, end_time = ? WHERE event_id = ?";
-            PreparedStatement preparedStatement1 = connection.prepareStatement(query2);
+            PreparedStatement preparedStatement1 = connectDB().prepareStatement(query2);
             preparedStatement1.setString(4, eventID.getText());
             for (int i = 0; i < 3; i++) {
                 preparedStatement1.setString(i + 1, postponeEvent.values[i]);
             }
             preparedStatement1.executeUpdate();
             // close databse conncetion
-            connection.close();
+            connectDB().close();
             // create new stage
             Stage newStage = new Stage();
             // capture previous stage
