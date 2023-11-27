@@ -19,8 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class UpdateMembers2 extends Storage{
@@ -35,16 +33,10 @@ public class UpdateMembers2 extends Storage{
     public Button homeBtn;
     ObservableList<ClubMember> memberList= FXCollections.observableArrayList();
     Club updClub= UpdateMembers1.updList;
-    Connection con;
-    Statement stmt;
+
 
     public void initialize() throws SQLException {
 
-        String url="jdbc:mysql://localhost:3307/Club_Management";
-        String user= "root";
-        String password= "";
-
-        con= DriverManager.getConnection(url,user,password);
 
         memberIdColumn.setCellValueFactory((new PropertyValueFactory<>("memberId")));
         fNameColumn.setCellValueFactory((new PropertyValueFactory<>("fName")));
@@ -164,14 +156,7 @@ public class UpdateMembers2 extends Storage{
 
     public void updateMembers(ActionEvent actionEvent) throws IOException, SQLException {
 
-        stmt=con.createStatement();
-        String sql="UPDATE Club "+
-                "SET `Club Members`= '"+String.valueOf(memberList).replaceAll("[\\[\\]]", "")
-                +"' "+ "WHERE `Club ID`= '"+updClub.getClubId()+"' ";
-
-        stmt.executeUpdate(sql);
-
-
+        DBConnection.updateDatabaseClubMember(memberList,updClub.getClubId());
         updClub.setClubMembers(memberList);
         Stage currentStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();

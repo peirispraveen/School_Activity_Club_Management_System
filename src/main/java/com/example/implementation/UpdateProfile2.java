@@ -31,16 +31,9 @@ public class UpdateProfile2 extends Storage{
     List<ClubAdvisor> clubAdvisorList;
     Club updList=UpdateProfile1.updList;
 
-    Connection con;
-    Statement stmt;
 
     public void initialize() throws SQLException {
-        String url= "jdbc:mysql://localhost:3307/Club_Management";
-        String user="root";
-        String password="";
 
-        con= DriverManager.getConnection(url,user,password);
-        stmt=con.createStatement();
 
         clubAdvisorList = getAvailableClubAdvisor();
         for(ClubAdvisor advisor : clubAdvisorList){
@@ -84,13 +77,8 @@ public class UpdateProfile2 extends Storage{
                     if(Integer.parseInt(maxParticipants.getText())>0){
                     errorCall.setText("");
 
-                    String sql="UPDATE Club "+
-                            "SET `Club id`= '"+clubId.getText()+"',`Club Name`= '"+clubName.getText()+
-                            "',`Club Description`= '"+clubDescription.getText()+"',`Club Advisor`= '"+clubAdvisor.getValue()+
-                            "',`Max Number`= "+maxParticipants.getText()+",`Created Date`= '"+createdDate.getValue()+
-                            "' WHERE `Club Id`= '"+updList.getClubId()+"';";
-                        stmt.executeUpdate(sql);
-
+                    DBConnection.updateDatabaseClub(clubId.getText(),clubName.getText(),clubDescription.getText(),
+                                                    clubAdvisor.getValue(), Integer.parseInt(maxParticipants.getText()),Date.valueOf(createdDate.getValue()),updList.getClubId());
 
                     availableClubs.add(new Club(clubId.getText(), clubName.getText(),clubDescription.getText(), new ClubAdvisor(clubAdvisor.getValue().split("\\s+")[0],clubAdvisor.getValue().split("\\s+")[1]),
                             Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue())));

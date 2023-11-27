@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -40,7 +39,7 @@ public class CreateClub extends ClubApplication {
         }
     }
 
-    public void createClub(ActionEvent CreateClub) throws IOException, SQLException {
+    public void createClubBtn(ActionEvent CreateClub) throws IOException, SQLException {
         clubList=Storage.getAvailableClubs();
 
         if (clubId.getText().equals("") ||clubId.getText().contains(";") ) {
@@ -66,19 +65,15 @@ public class CreateClub extends ClubApplication {
                 }else{
                     try{
                         if(Integer.parseInt(maxParticipants.getText())>0){
-                            list = new Club(clubId.getText(), clubName.getText(),clubDescription.getText(),new ClubAdvisor(clubAdvisor.getValue().split("\\s+")[0],clubAdvisor.getValue().split("\\s+")[1]),
+                            String[] name=clubAdvisor.getValue().split("\\s+");
+                            list = new Club(clubId.getText(), clubName.getText(),clubDescription.getText(),new ClubAdvisor(name[0],name[1]),
                                     Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue()));
-
-                            stmt=con.createStatement();
-
-                            String sql="INSERT INTO Club "+
-                                    "Values("+"'"+list.getClubId()+"','"+list.getClubName()+"','"+list.getClubDescription()+
-                                    "','"+list.getClubAdvisor()+"','"+list.getMaxParticipants()+"','"+list.getCreatedDate()+"','"+"');";
-                            stmt.execute(sql);
+                            String sql = "";
+                            DBConnection.insertToDatabase(list.getClubId(), list.getClubName(),list.getClubDescription(),list.getClubAdvisor(),list.getMaxParticipants(),list.getCreatedDate());
+                           
                             clubList.add(list);
                             errorCall.setText("");
-                            confirmation(CreateClub);
-                            con.close();
+                            addAnother(CreateClub);
                         }else{
                             errorCall.setText("Enter positive value");
                         }
@@ -88,11 +83,14 @@ public class CreateClub extends ClubApplication {
                 }
             }
         }
-    public void confirmation(ActionEvent event) throws IOException {
+
+
+
+    public void addAnother(ActionEvent event) throws IOException {
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Add Another item");
-        confirm.setContentText("Do you want to add another item to the list? ");
+        confirm.setContentText("Data saved.\nDo you want to add another item to the list? ");
 
         if (confirm.showAndWait().get() == ButtonType.OK) {
             Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -35,6 +36,7 @@ public class UpdateMembers1 extends Updating implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume);
         Label label=new Label("No clubs were found");
         label.setStyle("-fx-text-fill: white ");
         clubsTable.setPlaceholder(label);

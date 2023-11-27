@@ -8,11 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -36,14 +34,10 @@ public class DeleteClub extends Storage {
     public Text errorCall;
     ObservableList<Club> availableClubsTbl = FXCollections.observableArrayList();
 
-    Connection con;
-    Statement stmt;
 
     public void initialize() throws SQLException {
-        String url= "jdbc:mysql://localhost:3307/Club_Management";
-        String user="root";
-        String password="";
-        con= DriverManager.getConnection(url,user,password);
+        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume);
+
 
 
         Label label=new Label("No clubs were found");
@@ -61,12 +55,7 @@ public class DeleteClub extends Storage {
         for(Club club: getAvailableClubs()){
             if(club.getClubName().equalsIgnoreCase(clubName) || club.getClubId().equals(clubName)){
                 found=true;
-
-                stmt = con.createStatement();
-
-                String sql="DELETE FROM Club "+
-                        "WHERE `Club Id` = '"+club.getClubId()+"'";
-                stmt.execute(sql);
+                DBConnection.deleteClubDatabaseClub(club.getClubId());
 
                 availableClubs.remove(club);
                 availableClubsTbl.clear();
