@@ -6,13 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="consoleAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" styleClass="mainAnchor" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
+<AnchorPane fx:id="consoleAnchor" maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="mainAnchor" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
    <children>
-      <Label layoutX="302.0" layoutY="335.0" styleClass="menuLabel" text="Student" textFill="WHITE" />
-      <Label layoutX="604.0" layoutY="335.0" styleClass="menuLabel" text="Advisor" textFill="WHITE" />
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="150.0" layoutX="225.0" layoutY="179.0" prefHeight="250.0" prefWidth="500.0">
+      <Label layoutX="268.0" layoutY="353.0" styleClass="menuLabel" text="Student" textFill="WHITE" />
+      <Label layoutX="641.0" layoutY="353.0" styleClass="menuLabel" text="Advisor" textFill="WHITE" />
+      <Label layoutX="456.0" layoutY="504.0" styleClass="menuLabel" text="Admin" textFill="WHITE" />
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="220.0" layoutX="177.0" layoutY="156.0" prefHeight="357.0" prefWidth="595.0">
          <children>
             <Button mnemonicParsing="false" onMouseClicked="#studentRegister" prefHeight="150.0" prefWidth="150.0">
                <graphic>
@@ -43,12 +45,11 @@
             </Button>
          </children>
       </FlowPane>
-      <Label layoutX="113.0" layoutY="68.0" styleClass="sacmsLabel" text="School Activity Club Management System" textFill="#712377">
+      <Text fx:id="sacmslabel" fill="#712377" layoutX="128.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="School Activity Club Management System">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Algerian" size="32.0" />
          </font>
-      </Label>
-      <Label layoutX="454.0" layoutY="484.0" styleClass="menuLabel" text="Admin" textFill="WHITE" />
+      </Text>
    </children>
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />

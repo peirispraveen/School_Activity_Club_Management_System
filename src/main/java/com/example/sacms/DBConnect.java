@@ -1,13 +1,11 @@
 package com.example.sacms;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -312,7 +310,6 @@ public class DBConnect {
                 prevStage.close();
             }else {
                 studentSubLabel.setText("Password and ID doesn't match");
-                return;
             }
         }else {
             if (Objects.equals(studentLogin.getText(), "")) {
@@ -387,7 +384,6 @@ public class DBConnect {
                 prevStage.close();
             }else {
                 advisorSubLabel.setText("Password and ID doesn't match");
-                return;
             }
         }else {
             if (Objects.equals(studentLogin.getText(), "")) {

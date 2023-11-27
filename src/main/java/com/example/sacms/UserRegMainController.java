@@ -1,22 +1,16 @@
 package com.example.sacms;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.sql.SQLOutput;
-import java.util.List;
 import java.util.Objects;
-
-import static com.example.sacms.AddMember.studentList;
-import static com.example.sacms.AddMember.advisorList;
 
 public class UserRegMainController {
 
@@ -36,6 +30,8 @@ public class UserRegMainController {
     private AnchorPane adminLogAnchor;
     @FXML
     private Label adminLabel;
+    @FXML
+    private Text sacmslabel;
 
     @FXML
     private void studentRegister() throws IOException {
@@ -104,11 +100,9 @@ public class UserRegMainController {
             adminLabel.setText("Enter Admin Credentials");
             adminLogLabel.setText("*required");
             adminPassLabel.setText("*required");
-            return;
         } else {
             if (!Objects.equals(adminLogin.getText(), "admin") && !Objects.equals(adminLoginPass.getText(),"admin")) {
                 adminLabel.setText("Password does not match the username");
-                return;
             }else {
                 FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
                 Stage newStage = new Stage();
@@ -148,4 +142,5 @@ public class UserRegMainController {
         Stage prevStage = (Stage) viewMembersAnchor.getScene().getWindow();
         prevStage.close();
     }
+
 }

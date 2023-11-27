@@ -15,14 +15,6 @@ public class UserRegApplication extends Application {
         stage.setTitle("Registration");
         stage.setScene(scene);
         stage.show();
-
-//        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
-//        Stage newStage = new Stage();
-//        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
-//        newStage.setTitle("View Members");
-//        newStage.setScene(newScene);
-//        newStage.show();
-
     }
 
     public static void main(String[] args) {
