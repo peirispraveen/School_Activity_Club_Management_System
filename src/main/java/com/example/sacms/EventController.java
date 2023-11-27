@@ -79,6 +79,10 @@ public class EventController
     private Button submitButton;
     @FXML
     private Button generateButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button postponeButton;
 
     // attributes to store validation times
     private int validPoints;
@@ -172,6 +176,14 @@ public class EventController
     {
         clearCommonInputs();
         setRestButtonDisable();
+    }
+
+    @FXML
+    public void onUpdateTextChanged(ActionEvent e) throws Exception
+    {
+        postponeButton.setDisable(false);
+        deleteButton.setDisable(false);
+        resetButton.setDisable(false);
     }
     @FXML
     public void onClickAddEventButton(ActionEvent e) throws Exception
@@ -1301,7 +1313,9 @@ public class EventController
             // clear input
             eventID.clear();
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
-            setRestButtonDisable();
+            postponeButton.setDisable(true);
+            deleteButton.setDisable(true);
+            resetButton.setDisable(true);
         }
     }
 
@@ -1396,7 +1410,9 @@ public class EventController
             newStage.show();
             eventID.clear();
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
-            setRestButtonDisable();
+            postponeButton.setDisable(true);
+            deleteButton.setDisable(true);
+            resetButton.setDisable(true);
         }
     }
 

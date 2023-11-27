@@ -45,7 +45,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="364.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClickCreateActivityButton" prefHeight="35.0" prefWidth="107.0" styleClass="submit-button" text="Create" textFill="WHITE">
+      <Button fx:id="submitButton" disable="true" focusTraversable="false" layoutX="364.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClickCreateActivityButton" prefHeight="35.0" prefWidth="107.0" styleClass="submit-button" text="Create" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font></Button>
