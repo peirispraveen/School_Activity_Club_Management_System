@@ -15,7 +15,6 @@ public class ClubMember implements Comparable<ClubMember>{
     private Date joinedDate;
     private ArrayList<Club> joinedClubs=new ArrayList<>();
     private String contactNumber;
-    static ObservableList<ClubMember> availableMembers = FXCollections.observableArrayList();
 
     public ClubMember(String id, String fName, String lName,Date dob,Date joinedDate, String contactNumber){
         this.memberId = id;

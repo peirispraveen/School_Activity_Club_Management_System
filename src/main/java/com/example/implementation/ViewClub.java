@@ -1,6 +1,5 @@
 package com.example.implementation;
 
-import com.example.sacms.ClubApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

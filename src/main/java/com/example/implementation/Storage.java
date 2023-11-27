@@ -33,6 +33,7 @@ public class Storage {
         Connection con = DriverManager.getConnection(url, user, password);
         Statement stmt = con.createStatement();
 
+
         String query = "SELECT * FROM Club_Members";
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
