@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane fx:id="studentLogAnchor" maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="mainAnchor" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.DBConnect">
+    <stylesheets>
+        <URL value="@../../../Styles/MainPage.css" />
+        <URL value="@../../../Styles/Buttons.css" />
+    </stylesheets>
+    <children>
+        <TextField fx:id="studentLogin" layoutX="610.0" layoutY="189.0" prefHeight="45.0" prefWidth="214.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="studentLoginPass" layoutX="610.0" layoutY="278.0" prefHeight="46.0" prefWidth="214.0" />
+        <Label layoutX="610.0" layoutY="156.0" prefHeight="18.0" prefWidth="103.0" text="Login">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="610.0" layoutY="251.0" prefHeight="18.0" prefWidth="103.0" text="Password">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Label>
+        <Button layoutX="610.0" layoutY="381.0" mnemonicParsing="false" onAction="#onStudentLogButtonClicked" prefHeight="46.0" prefWidth="214.0" styleClass="loginButton" stylesheets="@../../../Styles/Buttons.css" text="Login">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Label fx:id="studentSubLabel" layoutX="610.0" layoutY="352.0" prefHeight="18.0" prefWidth="214.0" text="Welcome!" textFill="#535353">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="studentLogLabel" alignment="CENTER_RIGHT" layoutX="690.0" layoutY="160.0" prefHeight="18.0" prefWidth="132.0" textFill="RED" />
+        <Label fx:id="studentPassLabel" alignment="CENTER_RIGHT" layoutX="690.0" layoutY="255.0" prefHeight="18.0" prefWidth="132.0" textFill="RED" />
+        <Button layoutX="502.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#studentLogBackButton">
+            <graphic>
+                <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
+            </graphic>
+        </Button>
+        <ImageView fx:id="studentLogImage" fitHeight="600.0" fitWidth="480.0" pickOnBounds="true">
+            <image>
+                <Image url="@../../../Images/mainlogin.png" />
+            </image></ImageView>
+      <Label layoutX="582.0" layoutY="76.0" prefHeight="34.0" prefWidth="261.0" text="SACMS Students Login" textFill="#712377">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="691.0" layoutY="494.0" onAction="#studentSignUpButton" text="Sign Up">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="711.0" layoutY="457.0" text="or" />
+    </children>
+</AnchorPane>

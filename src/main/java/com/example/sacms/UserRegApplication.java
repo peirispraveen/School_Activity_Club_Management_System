@@ -16,20 +16,13 @@ public class UserRegApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
-        Stage newStage = new Stage();
-        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Advisor Sign In");
-        newStage.setScene(newScene);
-        newStage.show();
+//        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+//        Stage newStage = new Stage();
+//        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+//        newStage.setTitle("View Members");
+//        newStage.setScene(newScene);
+//        newStage.show();
 
-//        try{
-//            UserRegMainController controller = userRegLoader.getController();
-//            controller.loadStudentsFromFile();
-//            controller.loadAdvisorsFromFile();
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
     }
 
     public static void main(String[] args) {
