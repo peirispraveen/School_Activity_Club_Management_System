@@ -204,7 +204,7 @@ public class DBConnect {
 
     private static boolean isAdvisorMatch(String advisorId, String password) {
         try (Connection connection = getConnection()) {
-            String query = "SELECT 1 FROM advisor WHERE advisorId = ? AND password = ?";
+            String query = "SELECT 1 FROM advisor WHERE advisor_id = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, advisorId);
                 preparedStatement.setString(2, password);
@@ -218,7 +218,6 @@ public class DBConnect {
         }
         return false;
     }
-
 
     private static boolean isAdvisorExists(String advisorId) {
         try (Connection connection = getConnection()) {
@@ -311,6 +310,15 @@ public class DBConnect {
 
                 Stage prevStage = (Stage) studentLogAnchor.getScene().getWindow();
                 prevStage.close();
+            }else {
+                studentSubLabel.setText("Password and ID doesn't match");
+                return;
+            }
+        }else {
+            if (Objects.equals(studentLogin.getText(), "")) {
+                studentLogLabel.setText("*required");
+            }else {
+                studentPassLabel.setText("*required");
             }
         }
     }
@@ -337,33 +345,6 @@ public class DBConnect {
         newStage.show();
         Stage prevStage = (Stage) studentLogAnchor.getScene().getWindow();
         prevStage.close();
-    }
-
-    public static void main(String[] args) {
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch (ClassNotFoundException e){
-            System.out.println("Class not found");
-            e.printStackTrace();
-        }
-
-        System.out.println("Driver class registered");
-        Connection sample = null;
-
-        try {
-            sample = DriverManager.getConnection(url, username, password);
-        }catch (SQLException e2) {
-            System.out.println("sql exception found");
-            e2.printStackTrace();
-            return;
-        }
-
-        if (sample != null){
-            System.out.println("success");
-        }else {
-            System.out.println("failed to connect");
-        }
-
     }
 
     @FXML
@@ -393,6 +374,61 @@ public class DBConnect {
 
     @FXML
     private void onAdvisorLogButtonClicked() throws IOException{
+        if (!Objects.equals(advisorLogin.getText(), "") && !Objects.equals(advisorLoginPass.getText(),"")) {
+            if (isAdvisorMatch(advisorLogin.getText(), advisorLoginPass.getText())) {
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("next-page-sample.fxml"));
+                Scene scene = new Scene(userRegLoader.load(), 476, 281);
+                Stage stage = new Stage();
+                stage.setTitle("Next Page");
+                stage.setScene(scene);
+                stage.show();
+
+                Stage prevStage = (Stage) advisorLogAnchor.getScene().getWindow();
+                prevStage.close();
+            }else {
+                advisorSubLabel.setText("Password and ID doesn't match");
+                return;
+            }
+        }else {
+            if (Objects.equals(studentLogin.getText(), "")) {
+                studentLogLabel.setText("*required");
+            }else {
+                studentPassLabel.setText("*required");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            System.out.println("Class not found");
+            e.printStackTrace();
+        }
+
+        System.out.println("Driver class registered");
+        Connection sample = null;
+
+        try {
+            sample = DriverManager.getConnection(url, username, password);
+        }catch (SQLException e2) {
+            System.out.println("sql exception found");
+            e2.printStackTrace();
+            return;
+        }
+
+        if (sample != null){
+            System.out.println("success");
+        }else {
+            System.out.println("failed to connect");
+        }
+
+        if (isStudentMatch("ST221", "Password1")) {
+            System.out.println("Found");
+        }else {
+            System.out.println("not");
+        }
+
     }
 
 }
