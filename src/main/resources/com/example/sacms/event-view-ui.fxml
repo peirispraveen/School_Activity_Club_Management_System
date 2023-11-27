@@ -26,15 +26,15 @@
             <TableColumn fx:id="startDateColumn" prefWidth="177.0" text="Start Date" />
         </columns>
       </TableView>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="109.0" layoutY="454.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="Enter club ID" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="109.0" layoutY="454.0" onKeyTyped="#onUpdateTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="Enter club ID" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Button focusTraversable="false" layoutX="193.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickUpdateEventButton" styleClass="submit-button" text="Postpone" textFill="WHITE">
+      <Button fx:id="postponeButton" disable="true" focusTraversable="false" layoutX="193.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickUpdateEventButton" styleClass="submit-button" text="Postpone" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button focusTraversable="false" layoutX="79.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickDeleteEventButton" styleClass="submit-button" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteButton" disable="true" focusTraversable="false" layoutX="79.0" layoutY="512.0" mnemonicParsing="false" onAction="#onClickDeleteEventButton" styleClass="submit-button" text="Delete" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -42,7 +42,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button focusTraversable="false" layoutX="592.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" text="Generate Report" textFill="WHITE">
+      <Button fx:id="generateButton" disable="true" focusTraversable="false" layoutX="592.0" layoutY="511.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" text="Generate Report" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -61,7 +61,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="filePath" focusTraversable="false" layoutX="603.0" layoutY="454.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="142.0" promptText="File path" styleClass="input">
+      <TextField fx:id="filePath" focusTraversable="false" layoutX="603.0" layoutY="454.0" onKeyTyped="#onInputFilePathChanged" prefHeight="35.0" prefWidth="142.0" promptText="File path" styleClass="input">
          <font>
             <Font size="18.0" />
          </font>

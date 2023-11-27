@@ -18,7 +18,7 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="↻">
+      <Button fx:id="resetButton" disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickCreateMeetingResetButton" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="↻">
          <font>
             <Font size="16.0" />
          </font></Button>
@@ -28,27 +28,27 @@
             <Font size="37.0" />
          </font>
       </Text>
-      <TextField fx:id="eventLink" focusTraversable="false" layoutX="235.0" layoutY="409.0" prefHeight="35.0" prefWidth="400.0" promptText="https://zoom.us" styleClass="input">
+      <TextField fx:id="eventLink" focusTraversable="false" layoutX="235.0" layoutY="409.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="400.0" promptText="https://zoom.us" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventPlatform" focusTraversable="false" layoutX="235.0" layoutY="334.0" prefHeight="35.0" prefWidth="160.0" promptText="zoom" styleClass="input">
+      <TextField fx:id="eventPlatform" focusTraversable="false" layoutX="235.0" layoutY="334.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="zoom" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventYear" focusTraversable="false" layoutX="591.0" layoutY="144.0" prefHeight="35.0" prefWidth="80.0" promptText="2024" styleClass="input">
+      <TextField fx:id="eventYear" focusTraversable="false" layoutX="591.0" layoutY="144.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="80.0" promptText="2024" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventMonth" focusTraversable="false" layoutX="680.0" layoutY="143.0" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
+      <TextField fx:id="eventMonth" focusTraversable="false" layoutX="680.0" layoutY="143.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventDay" focusTraversable="false" layoutX="740.0" layoutY="142.0" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
+      <TextField fx:id="eventDay" focusTraversable="false" layoutX="740.0" layoutY="142.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="50.0" promptText="4" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="startHour" focusTraversable="false" layoutX="591.0" layoutY="218.0" prefHeight="35.0" prefWidth="60.0" promptText="12" styleClass="input">
+      <TextField fx:id="startHour" focusTraversable="false" layoutX="591.0" layoutY="218.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="60.0" promptText="12" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -57,7 +57,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="364.0" layoutY="498.0" mnemonicParsing="false" onAction="#onClickCreateMeetingButton" prefHeight="35.0" prefWidth="107.0" styleClass="submit-button" text="Create" textFill="WHITE">
+      <Button fx:id="submitButton" disable="true" focusTraversable="false" layoutX="364.0" layoutY="498.0" mnemonicParsing="false" onAction="#onClickCreateMeetingButton" prefHeight="35.0" prefWidth="107.0" styleClass="submit-button" text="Create" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font></Button>
@@ -71,27 +71,27 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="startMin" focusTraversable="false" layoutX="661.0" layoutY="219.0" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
+      <TextField fx:id="startMin" focusTraversable="false" layoutX="661.0" layoutY="219.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="110.0" prefHeight="35.0" prefWidth="160.0" promptText="C001" styleClass="input">
+      <TextField fx:id="clubID" focusTraversable="false" layoutX="235.0" layoutY="110.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="C001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="181.0" prefHeight="35.0" prefWidth="160.0" promptText="E001" styleClass="input">
+      <TextField fx:id="eventID" focusTraversable="false" layoutX="235.0" layoutY="181.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="E001" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="endHour" focusTraversable="false" layoutX="591.0" layoutY="287.0" prefHeight="36.0" prefWidth="60.0" promptText="18" styleClass="input">
+      <TextField fx:id="endHour" focusTraversable="false" layoutX="591.0" layoutY="287.0" onKeyTyped="#onInputTextChanged" prefHeight="36.0" prefWidth="60.0" promptText="18" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="endMin" focusTraversable="false" layoutX="661.0" layoutY="287.0" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
+      <TextField fx:id="endMin" focusTraversable="false" layoutX="661.0" layoutY="287.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="60.0" promptText="30" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="meetingNum" focusTraversable="false" layoutX="235.0" layoutY="256.0" prefHeight="35.0" prefWidth="160.0" promptText="23" styleClass="input">
+      <TextField fx:id="meetingNum" focusTraversable="false" layoutX="235.0" layoutY="256.0" onKeyTyped="#onInputTextChanged" prefHeight="35.0" prefWidth="160.0" promptText="23" styleClass="input">
          <font>
             <Font size="18.0" />
          </font></TextField>
