@@ -285,7 +285,7 @@ public class DBConnect {
         return advisorList;
     }
 
-    private static DateOfBirth parseDateOfBirth(String dateString) {
+    static DateOfBirth parseDateOfBirth(String dateString) {
         String[] dateParts = dateString.split("-");
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
@@ -299,10 +299,14 @@ public class DBConnect {
     private void onStudentLogButtonClicked() throws IOException {
         if (!Objects.equals(studentLogin.getText(), "") && !Objects.equals(studentLoginPass.getText(),"")) {
             if (isStudentMatch(studentLogin.getText(), studentLoginPass.getText())) {
-                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("next-page-sample.fxml"));
-                Scene scene = new Scene(userRegLoader.load(), 476, 281);
+
+                String studentLogId = studentLogin.getText();
+                JoinClub.retrieveCurrentStudent(studentLogId);
+
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("join-club.fxml"));
+                Scene scene = new Scene(userRegLoader.load(), 950, 600);
                 Stage stage = new Stage();
-                stage.setTitle("Next Page");
+                stage.setTitle("Club View");
                 stage.setScene(scene);
                 stage.show();
 

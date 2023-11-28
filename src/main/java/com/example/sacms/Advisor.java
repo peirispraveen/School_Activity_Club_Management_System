@@ -73,31 +73,4 @@ public class Advisor implements Member {
         this.dateOfBirth = dateOfBirth;
     }
 
-//    public static Advisor parseAdvisor(String line) {
-//        String[] parts = line.split(",");
-//        if (parts.length != 6) {
-//            throw new IllegalArgumentException("Invalid data format in the file.");
-//        }
-//
-//        String advisorId = parts[0].trim();
-//        String advisorFirstName = parts[1].trim();
-//        String advisorLastName = parts[2].trim();
-//        String advisorEmail = parts[3].trim();
-//
-//        // Extracting date of birth components
-//        String[] dobParts = parts[4].trim().split("/");
-//        if (dobParts.length != 3) {
-//            throw new IllegalArgumentException("Invalid date of birth format.");
-//        }
-//
-//        int day = Integer.parseInt(dobParts[0]);
-//        int month = Integer.parseInt(dobParts[1]);
-//        int year = Integer.parseInt(dobParts[2]);
-//
-//        DateOfBirth dateOfBirth = new DateOfBirth(day, month, year);
-//
-//        String advisorPassword = parts[5].trim();
-//
-//        return new Advisor(advisorId, advisorFirstName, advisorLastName, advisorEmail, dateOfBirth, advisorPassword);
-//    }
 }

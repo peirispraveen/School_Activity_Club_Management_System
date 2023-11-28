@@ -13,8 +13,21 @@ TableView {
 }
 
 .tableColumnStyle {
-    -fx-background-color: rgb(221, 179, 232);}
+    -fx-background-color: rgb(221, 179, 232);
+    -fx-cell-size: 12px;
+    -fx-content-display: center;
+
+}
 
 .sacmsLabel {
     -fx-font-family: "Arial Rounded MT Bold";
+}
+
+.tableColumnStyle:selected {
+    -fx-background-color: #3b3b3b;
+    -fx-text-fill: white;
+}
+
+.tableColumnJoin {
+    -fx-alignment: center;
 }

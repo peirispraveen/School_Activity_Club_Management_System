@@ -1,0 +1,140 @@
+package com.example.sacms;
+
+import com.example.implementation.Club;
+import com.example.implementation.ClubAdvisor;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.sacms.DBConnect.parseDateOfBirth;
+
+public class JoinClub {
+    private static final String url = "jdbc:mysql://localhost:3306/sacms";
+    private static final String username = "root";
+    private static final String password = "";
+    @FXML
+    private TableColumn clubIdColumn;
+    @FXML
+    private TableColumn clubNameColumn;
+    @FXML
+    private TableColumn clubJoinColumn;
+    @FXML
+    private TableView joinClubTable;
+    public static String studentId;
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
+    }
+
+    @FXML
+    private void initialize() throws SQLException {
+        clubIdColumn.setCellValueFactory(new PropertyValueFactory<>("clubId"));
+        clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
+
+        setupJoinButton();
+        loadClubsIntoTableView();
+    }
+
+    private void setupJoinButton() {
+        clubJoinColumn.setCellFactory(param -> new TableCell<Club, Club>() {
+            private final Button joinButton = new Button("Join");
+
+            {
+                joinButton.setOnAction(event -> {
+                    Club club = getTableView().getItems().get(getIndex());
+                    joinClub(club);
+                });
+            }
+
+            @Override
+            protected void updateItem(Club item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(joinButton);
+                }
+            }
+        });
+    }
+
+    public static List<Club> availableClubs() {
+        List<Club> clubList = new ArrayList<Club>();
+        try (Connection connection = getConnection()) {
+            String query = "SELECT * FROM club";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String clubId = resultSet.getString("club_id");
+                        String clubName = resultSet.getString("club_name");
+
+                        Club club = new Club(clubId, clubName);
+                        clubList.add(club);
+                    }
+                }
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clubList;
+    }
+
+    private void loadClubsIntoTableView() throws SQLException{
+        List<Club> clubData = availableClubs();
+
+        joinClubTable.getItems().clear();
+
+        joinClubTable.getItems().addAll(clubData);
+    }
+
+    public static void retrieveCurrentStudent(String studentId) {
+        try (Connection connection = getConnection()) {
+            String query = "SELECT * FROM student WHERE student_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, studentId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String currStId = resultSet.getString("student_id");
+                        String currStFName = resultSet.getString("first_name");
+                        String currStLName = resultSet.getString("last_name");
+                        String currStEmail = resultSet.getString("email");
+                        DateOfBirth dateOfBirth = parseDateOfBirth(resultSet.getString("dateOfBirth"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void joinClub(Club club) {
+        if (studentId != null && !studentId.isEmpty()) {
+            try (Connection connection = getConnection()) {
+                String query = "INSERT INTO student_club (student_id, club_id) VALUES (?, ?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    preparedStatement.setString(1, studentId);
+                    preparedStatement.setString(2, club.getClubId());
+
+                    preparedStatement.executeUpdate();
+
+                    System.out.println("Student with ID " + studentId + " joined the club " + club.getClubName());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Student ID is not available.");
+        }
+    }
+
+}
