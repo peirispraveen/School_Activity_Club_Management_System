@@ -1688,7 +1688,7 @@ public class EventController
             {
                 workbook.write(fileOut);
                 Stage newStage = new Stage();
-                Stage previousStage = (Stage) downloadButton.getScene().getWindow();
+                Stage previousStage = (Stage) generateButton.getScene().getWindow();
                 newStage.initOwner(previousStage);
                 Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
                 Scene scene = new Scene(root, 400, 73);
