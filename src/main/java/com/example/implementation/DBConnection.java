@@ -19,7 +19,7 @@ public class DBConnection {
         stmt=con.createStatement();
         return stmt;
     }
-    // fasdsad
+    // fasdsadsdftfgsd
 
     public static void insertToDatabase(String clubId, String clubName, String clubDescription, ClubAdvisor advisor, int maxParticipants, Date createdDate) throws SQLException {
 
