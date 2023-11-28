@@ -181,6 +181,3 @@ TabPane {
 #absentRadioButton:focused, #presentRadioButton:focused, #pendingRadioButton:focused {
     -fx-border-color: #4CAF50; /* Change border color on focus */
 }
-
-
-
