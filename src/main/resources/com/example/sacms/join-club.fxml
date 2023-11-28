@@ -2,17 +2,21 @@
 
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.JoinClub">
+<AnchorPane fx:id="joinClubAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.JoinClub">
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />
       <URL value="@../../../Styles/Buttons.css" />
    </stylesheets>
    <children>
-      <TableView fx:id="joinClubTable" layoutX="195.0" layoutY="123.0" prefHeight="354.0" prefWidth="560.0">
+      <TableView fx:id="joinClubTable" layoutX="195.0" layoutY="103.0" prefHeight="354.0" prefWidth="560.0">
         <columns>
           <TableColumn fx:id="clubIdColumn" prefWidth="75.0" styleClass="tableColumnStyle" text="Club ID" />
           <TableColumn fx:id="clubNameColumn" prefWidth="75.0" styleClass="tableColumnStyle" text="Club Name" />
@@ -26,5 +30,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+       <Button fx:id="backButton" layoutX="22.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#backButton" prefHeight="27.0" prefWidth="35.0" styleClass="buttonBorder">
+           <graphic>
+               <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
+           </graphic>
+       </Button>
+      <Label fx:id="joinClubStudentLabel" alignment="CENTER" layoutX="279.0" layoutY="508.0" prefHeight="18.0" prefWidth="391.0" text="Greetings" textFill="#712377">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

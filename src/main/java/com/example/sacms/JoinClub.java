@@ -2,13 +2,16 @@ package com.example.sacms;
 
 import com.example.implementation.Club;
 import com.example.implementation.ClubAdvisor;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,10 @@ public class JoinClub {
     @FXML
     private TableView joinClubTable;
     public static String currStId;
+    @FXML
+    private AnchorPane joinClubAnchor;
+    @FXML
+    private Label joinClubStudentLabel;
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
@@ -66,7 +73,7 @@ public class JoinClub {
     }
 
     public static List<Club> availableClubs() {
-        List<Club> clubList = new ArrayList<Club>();
+        List<Club> clubList = new ArrayList<>();
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM club";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -117,24 +124,63 @@ public class JoinClub {
         }
     }
 
-    private void joinClub(Club club, String studentId) {
+    private void joinClub(Club club, String studentId){
         if (studentId != null && !studentId.isEmpty()) {
-            try (Connection connection = getConnection()) {
-                String query = "INSERT INTO student_club (student_id, club_id) VALUES (?, ?)";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                    preparedStatement.setString(1, studentId);
-                    preparedStatement.setString(2, club.getClubId());
 
-                    preparedStatement.executeUpdate();
+            if (!alreadyInClub(currStId, club.getClubId()))
+                {try (Connection connection = getConnection()) {
+                    String query = "INSERT INTO student_club (student_id, club_id) VALUES (?, ?)";
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                        preparedStatement.setString(1, studentId);
+                        preparedStatement.setString(2, club.getClubId());
 
-                    System.out.println("Student with ID " + studentId + " joined the club " + club.getClubName());
+                        preparedStatement.executeUpdate();
+
+                        System.out.println("Student with ID " + studentId + " joined the club " + club.getClubName());
+                    }
+                    joinClubStudentLabel.setText("Joined to " + club.getClubName());
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            }else {
+                System.out.println("Already a member of the club");
+                joinClubStudentLabel.setText("Already a member of the club");
             }
         } else {
             System.out.println("Student ID is not available.");
         }
     }
 
+    private static boolean alreadyInClub(String currStId, String clubId) {
+        try (Connection connection = getConnection()) {
+            String query = "SELECT COUNT(*) FROM student_club WHERE student_id = ? AND club_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, currStId);
+                preparedStatement.setString(2, clubId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt(1) > 0;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @FXML
+    private void backButton() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        stage.setTitle("Registration");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) joinClubAnchor.getScene().getWindow();
+        prevStage.close();
+    }
 }

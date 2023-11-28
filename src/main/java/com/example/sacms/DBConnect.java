@@ -1,5 +1,7 @@
 package com.example.sacms;
 
+import com.example.implementation.ClubApplication;
+import com.example.implementation.Storage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -374,13 +376,14 @@ public class DBConnect {
     }
 
     @FXML
-    private void onAdvisorLogButtonClicked() throws IOException{
+    private void onAdvisorLogButtonClicked() throws IOException, SQLException{
         if (!Objects.equals(advisorLogin.getText(), "") && !Objects.equals(advisorLoginPass.getText(),"")) {
             if (isAdvisorMatch(advisorLogin.getText(), advisorLoginPass.getText())) {
-                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("next-page-sample.fxml"));
-                Scene scene = new Scene(userRegLoader.load(), 476, 281);
                 Stage stage = new Stage();
-                stage.setTitle("Next Page");
+                Storage.allAvailables();
+                FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+                stage.setTitle("Club");
                 stage.setScene(scene);
                 stage.show();
 
