@@ -24,6 +24,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,6 +85,8 @@ public class EventController
 
     // attributes to store validation times
     private int validPoints;
+    @FXML
+    private Button backButtonY;
 
     // connect with the database
     public static Connection connectDB() throws Exception
@@ -330,7 +333,7 @@ public class EventController
         // setting the observable list in the table
         tableView.setItems(obList);
         // initializing the scene
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 950, 600);
         //setting the scene to the stage
         stage.setScene(scene);
         // showing stage
@@ -1613,5 +1616,18 @@ public class EventController
             filePath.setPromptText("IN");
             filePath.setStyle("-fx-prompt-text-fill: #b22222");
         }
+    }
+
+    @FXML
+    private void backButton() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("View Members");
+        newStage.setScene(newScene);
+        newStage.show();
+
+        Stage prevStage = (Stage) backButtonY.getScene().getWindow();
+        prevStage.close();
     }
 }

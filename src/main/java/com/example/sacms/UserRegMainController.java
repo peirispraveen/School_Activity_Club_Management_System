@@ -113,7 +113,7 @@ public class UserRegMainController {
                 FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
                 Stage newStage = new Stage();
                 Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
-                newStage.setTitle("View Members");
+                newStage.setTitle("Admin");
                 newStage.setScene(newScene);
                 newStage.show();
 
