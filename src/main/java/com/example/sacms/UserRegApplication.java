@@ -15,7 +15,7 @@ public class UserRegApplication extends Application {
         stage.setTitle("Registration");
         stage.setScene(scene);
         stage.show();
-
+        // Main
     }
 
     public static void main(String[] args) {
