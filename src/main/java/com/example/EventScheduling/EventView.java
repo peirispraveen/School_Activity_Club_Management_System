@@ -1,6 +1,6 @@
 package com.example.EventScheduling;
 
-public class EventView
+public final class EventView
 {
     // attributes to be shown in the table
     private String eventID;

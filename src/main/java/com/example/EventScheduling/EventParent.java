@@ -14,10 +14,10 @@ abstract class EventParent
     protected String endMinute;
 
     // default constructor
-    public EventParent() {}
+    protected EventParent() {}
 
     // parametarised constructor
-    public EventParent(String year, String month, String day, String startHour, String startMinute, String endHour,
+    protected EventParent(String year, String month, String day, String startHour, String startMinute, String endHour,
                        String endMinute)
     {
         // inititalizing common attributes for update
@@ -31,7 +31,7 @@ abstract class EventParent
     }
 
     // parametarised constructor
-    public EventParent(String clubID, String eventID, String year, String month, String day, String startHour,
+    protected EventParent(String clubID, String eventID, String year, String month, String day, String startHour,
                        String startMinute, String endHour, String endMinute)
     {
         // initializing common attributes
@@ -48,5 +48,4 @@ abstract class EventParent
 
     // creating abstract method to be implemented in all child classes
     abstract void createEvent();
-
 }

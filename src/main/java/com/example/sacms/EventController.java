@@ -379,10 +379,12 @@ public class EventController
             // find if the club_id exists
             while (dbClubResult.next())
             {
-                if (dbClubResult.getString(1).equals(clubID.getText())) {
+                if (dbClubResult.getString(1).equals(clubID.getText()))
+                {
                     newMeeting.values[0] = clubID.getText();
                     validPoints++;
                     dbClubIDMatch = true;
+                    System.out.println("\033[0;34m[A]ClubID accepted\033[0m");
                 }
             }
             // close the resultset
@@ -390,6 +392,7 @@ public class EventController
             // is club_id does not exists
             if (!dbClubIDMatch)
             {
+                System.out.println("\033[0;31m[E]Activity number rejected\033[0m");
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -397,6 +400,7 @@ public class EventController
         }
         else
         {
+            System.out.println("\033[0;31m[E]ClubID rejected\033[0m");
             clubID.clear();
             clubID.setPromptText("IN");
             clubID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -418,6 +422,7 @@ public class EventController
             // if event_id does not exist
             if (dbEventIDMatch)
             {
+                System.out.println("\033[0;31m[E]EventID rejected\033[0m");
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -425,6 +430,7 @@ public class EventController
             // if event_id exist
             else
             {
+                System.out.println("\033[0;34m[A]EventID accepted\033[0m");
                 newMeeting.values[1] = eventID.getText();
                 validPoints++;
             }
@@ -432,6 +438,7 @@ public class EventController
         // if event_id is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EventID rejected\033[0m");
             eventID.clear();
             eventID.setPromptText("IN");
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -441,10 +448,12 @@ public class EventController
         {
             newMeeting.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]Date accepted\033[0m");
         }
         // if date is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Date rejected\033[0m");
             eventYear.clear();
             eventYear.setPromptText("IN");
             eventYear.setStyle("-fx-prompt-text-fill: #b22222");
@@ -456,13 +465,16 @@ public class EventController
             eventDay.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate start_time
-        if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin()) {
+        if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
+        {
             newMeeting.values[3] = startHour.getText() + ":" + startMin.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]StartTime accepted\033[0m");
         }
         // is start_time invalid
         else
         {
+            System.out.println("\033[0;31m[E]StartTime rejected\033[0m");
             startHour.clear();
             startHour.setPromptText("IN");
             startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -471,16 +483,20 @@ public class EventController
             startMin.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate end_time
-        if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
+        if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
+        {
             if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
                     (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                            (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
+                            (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
+            {
                 newMeeting.values[4] = endHour.getText() + ":" + endMin.getText();
+                System.out.println("\033[0;34m[A]EndTime accepted\033[0m");
                 validPoints++;
             }
             // if end_time is invalid
             else
             {
+                System.out.println("\033[0;31m[E]EndTime rejected\033[0m");
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -492,6 +508,7 @@ public class EventController
         // if end time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EndTime rejected\033[0m");
             endHour.clear();
             endHour.setPromptText("IN");
             endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -500,13 +517,15 @@ public class EventController
             endMin.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate meeting_no
-        if (EventValidator.isValidNum()) {
+        if (EventValidator.isValidNum())
+        {
             boolean dbMeetingNoMatch = false;
             // result set to store meeting numbers
             ResultSet dbResult = statement.executeQuery("select meeting_no from Meeting");
             // find if meeting_no exist
             while (dbResult.next()) {
-                if (dbResult.getString(1).equals(meetingNum.getText())) {
+                if (dbResult.getString(1).equals(meetingNum.getText()))
+                {
                     dbMeetingNoMatch = true;
                 }
 
@@ -514,7 +533,9 @@ public class EventController
             // close resultset
             dbResult.close();
             // is the meeting_no exist
-            if (dbMeetingNoMatch) {
+            if (dbMeetingNoMatch)
+            {
+                System.out.println("\033[0;31m[E]Meeting Number rejected\033[0m");
                 meetingNum.clear();
                 meetingNum.setPromptText("IN");
                 meetingNum.setStyle("-fx-prompt-text-fill: #b22222");
@@ -522,6 +543,7 @@ public class EventController
             // if the meeting_no does not exist
             else
             {
+                System.out.println("\033[0;34m[A]Meeting Number accepted\033[0m");
                 newMeeting.values[5] = meetingNum.getText();
                 validPoints++;
             }
@@ -529,18 +551,22 @@ public class EventController
         // if the meeting_no is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Meeting Number rejected\033[0m");
             meetingNum.clear();
             meetingNum.setPromptText("IN");
             meetingNum.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate platform
-        if (EventValidator.isValidPlatform()) {
+        if (EventValidator.isValidPlatform())
+        {
+            System.out.println("\033[0;34m[A]Platform accepted\033[0m");
             newMeeting.values[6] = eventPlatform.getText();
             validPoints++;
         }
         // if platform is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Platform rejected\033[0m");
             eventPlatform.clear();
             eventPlatform.setPromptText("IN");
             eventPlatform.setStyle("-fx-prompt-text-fill: #b22222");
@@ -548,12 +574,14 @@ public class EventController
         // validate link
         if (EventValidator.isValidLink())
         {
+            System.out.println("\033[0;34m[A]Link accepted\033[0m");
             newMeeting.values[7] = eventLink.getText();
             validPoints++;
         }
         // if link is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Link rejected\033[0m");
             eventLink.clear();
             eventLink.setPromptText("IN");
             eventLink.setStyle("-fx-prompt-text-fill: #b22222");
@@ -578,12 +606,14 @@ public class EventController
             }
             preparedStatement2.executeUpdate();
             actionCompleted(e);
+            System.out.println("\033[0;34m[A]Action completed\033[0m");
             // clear all inputs
             onClickViewEventButton(e);
         }
         // if validation check failed
         else
         {
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -681,6 +711,7 @@ public class EventController
                     newEvent.values[0] = clubID.getText();
                     validPoints++;
                     dbClubIDMatch = true;
+                    System.out.println("\033[0;34m[A]ClubID accepted\033[0m");
                 }
             }
             // close resultset
@@ -688,6 +719,7 @@ public class EventController
             // if the club_id does not exist
             if (!dbClubIDMatch)
             {
+                System.out.println("\033[0;31m[E]ClubID rejected\033[0m");
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -696,6 +728,7 @@ public class EventController
         // if the club_id not valid
         else
         {
+            System.out.println("\033[0;31m[E]ClubID rejected\033[0m");
             clubID.clear();
             clubID.setPromptText("IN");
             clubID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -717,6 +750,7 @@ public class EventController
             //if the event_id exist
             if (dbEventIDMatch)
             {
+                System.out.println("\033[0;31m[E]EventID rejected\033[0m");
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -726,23 +760,28 @@ public class EventController
             {
                 newEvent.values[1] = eventID.getText();
                 validPoints++;
+                System.out.println("\033[0;34m[A]EventID accepted\033[0m");
             }
         }
         // if the event_id is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EventID rejected\033[0m");
             eventID.clear();
             eventID.setPromptText("IN");
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate date
-        if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
+        if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay())
+        {
             newEvent.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]Date rejected\033[0m");
         }
         // if the date is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Date rejected\033[0m");
             eventYear.clear();
             eventYear.setPromptText("IN");
             eventYear.setStyle("-fx-prompt-text-fill: #b22222");
@@ -756,12 +795,14 @@ public class EventController
         // validate start_time
         if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
         {
+            System.out.println("\033[0;34m[A]StartHour accepted\033[0m");
             newEvent.values[3] = startHour.getText() + ":" + startMin.getText();
             validPoints++;
         }
         // if the start_time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]StartHour rejected\033[0m");
             startHour.clear();
             startHour.setPromptText("IN");
             startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -770,16 +811,20 @@ public class EventController
             startMin.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate end_time
-        if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin()) {
+        if (EventValidator.isValidEndHour() && EventValidator.isValidEndMin())
+        {
             if (Integer.parseInt(startHour.getText()) < Integer.parseInt(endHour.getText()) ||
                     (Integer.parseInt(startHour.getText()) == Integer.parseInt(endHour.getText()) &&
-                            (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
+                            (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText()))))
+            {
                 newEvent.values[4] = endHour.getText() + ":" + endMin.getText();
                 validPoints++;
+                System.out.println("\033[0;34m[A]EndHour accepted\033[0m");
             }
             // if the end_time is invalid
             else
             {
+                System.out.println("\033[0;31m[E]EndHour rejected\033[0m");
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -791,6 +836,7 @@ public class EventController
         // if the end_time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EndHour rejected\033[0m");
             endHour.clear();
             endHour.setPromptText("IN");
             endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -803,10 +849,12 @@ public class EventController
         {
             newEvent.values[5] = eventName.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]Name rejected\033[0m");
         }
         // if the name is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Name rejected\033[0m");
             eventName.clear();
             eventName.setPromptText("IN");
             eventName.setStyle("-fx-prompt-text-fill: #b22222");
@@ -816,10 +864,12 @@ public class EventController
         {
             newEvent.values[6] = eventPlace.getText();
             validPoints++;
+            System.out.println("\033[0;31m[E]Place rejected\033[0m");
         }
         //if the place is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Place rejected\033[0m");
             eventPlace.clear();
             eventPlace.setPromptText("IN");
             eventPlace.setStyle("-fx-prompt-text-fill: #b22222");
@@ -843,12 +893,14 @@ public class EventController
                 preparedStatement2.setString(i + 2, newEvent.values[i + 5]);
             }
             preparedStatement2.executeUpdate();
+            System.out.println("\033[0;34m[A]Action completed\033[0m");
             actionCompleted(e);
             onClickViewEventButton(e);
         }
         // if the inputs are invalid
         else
         {
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -901,6 +953,7 @@ public class EventController
                     newActivity.values[0] = clubID.getText();
                     validPoints++;
                     dbClubIDMatch = true;
+                    System.out.println("\033[0;34m[A]ClubID accepted\033[0m");
                 }
             }
             // close the resultset
@@ -908,6 +961,7 @@ public class EventController
             // if the clud_id does not exist
             if (!dbClubIDMatch)
             {
+                System.out.println("\033[0;31m[E]ClubID rejected\033[0m");
                 clubID.clear();
                 clubID.setPromptText("IN");
                 clubID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -916,12 +970,14 @@ public class EventController
         // if the club_id invalid
         else
         {
+            System.out.println("\033[0;31m[E]ClubID rejected\033[0m");
             clubID.clear();
             clubID.setPromptText("IN");
             clubID.setStyle("-fx-prompt-text-fill: #b22222");
         }
         // validate event_id
-        if (EventValidator.isValidEventID()) {
+        if (EventValidator.isValidEventID())
+        {
             boolean dbEventIDMatch = false;
             // resultset to store event_id
             ResultSet dbResult = statement.executeQuery("select event_id from EventParent");
@@ -938,6 +994,7 @@ public class EventController
             // if the event_id exist
             if (dbEventIDMatch)
             {
+                System.out.println("\033[0;31m[E]EventID rejected\033[0m");
                 eventID.clear();
                 eventID.setPromptText("IN");
                 eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -945,6 +1002,7 @@ public class EventController
             // if the event_id does not exist
             else
             {
+                System.out.println("\033[0;34m[A]EventID accepted\033[0m");
                 newActivity.values[1] = eventID.getText();
                 validPoints++;
             }
@@ -952,6 +1010,7 @@ public class EventController
         // if the event_id invalid
         else
         {
+            System.out.println("\033[0;31m[E]EventID rejected\033[0m");
             eventID.clear();
             eventID.setPromptText("IN");
             eventID.setStyle("-fx-prompt-text-fill: #b22222");
@@ -960,10 +1019,12 @@ public class EventController
         if (EventValidator.isValidYear() && EventValidator.isValidMonth() && EventValidator.isValidDay()) {
             newActivity.values[2] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]Date accepted\033[0m");
         }
         // if the date is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Date rejected\033[0m");
             eventYear.clear();
             eventYear.setPromptText("IN");
             eventYear.setStyle("-fx-prompt-text-fill: #b22222");
@@ -977,12 +1038,14 @@ public class EventController
         // validate start_time
         if (EventValidator.isValidStartHour() && EventValidator.isValidStartMin())
         {
+            System.out.println("\033[0;34m[A]StartHour accepted\033[0m");
             newActivity.values[3] = startHour.getText() + ":" + startMin.getText();
             validPoints++;
         }
         // if the start_time invalid
         else
         {
+            System.out.println("\033[0;31m[E]StartHour rejected\033[0m");
             startHour.clear();
             startHour.setPromptText("IN");
             startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -998,10 +1061,12 @@ public class EventController
                             (Integer.parseInt(startMin.getText()) < Integer.parseInt(endMin.getText())))) {
                 newActivity.values[4] = endHour.getText() + ":" + endMin.getText();
                 validPoints++;
+                System.out.println("\033[0;34m[A]EndHour accepted\033[0m");
             }
             // if the end_time is invalid
             else
             {
+                System.out.println("\033[0;31m[E]EndHour rejected\033[0m");
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1013,6 +1078,7 @@ public class EventController
         // if the end_time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EndHour rejected\033[0m");
             endHour.clear();
             endHour.setPromptText("IN");
             endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1023,12 +1089,14 @@ public class EventController
         // validate type
         if (EventValidator.isValidType())
         {
+            System.out.println("\033[0;34m[A]Type accepted\033[0m");
             newActivity.values[5] = eventType.getText();
             validPoints++;
         }
         // if the type is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Type rejected\033[0m");
             eventType.clear();
             eventType.setPromptText("IN");
             eventType.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1036,12 +1104,14 @@ public class EventController
         // validate name
         if (EventValidator.isValidName())
         {
+            System.out.println("\033[0;34m[A]Name accepted\033[0m");
             newActivity.values[6] = eventName.getText();
             validPoints++;
         }
         // if the name is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Name rejected\033[0m");
             eventName.clear();
             eventName.setPromptText("IN");
             eventName.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1063,6 +1133,7 @@ public class EventController
             // if the activity_no exist
             if (dbActivityNoMatch)
             {
+                System.out.println("\033[0;31m[E]Activity Number rejected\033[0m");
                 activityNo.clear();
                 activityNo.setPromptText("IN");
                 activityNo.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1072,11 +1143,13 @@ public class EventController
             {
                 newActivity.values[7] = activityNo.getText();
                 validPoints++;
+                System.out.println("\033[0;34m[A]Activity Number accepted\033[0m");
             }
         }
         // if the activity_no invalid
         else
         {
+            System.out.println("\033[0;31m[E]Activity Number rejected\033[0m");
             activityNo.clear();
             activityNo.setPromptText("IN");
             activityNo.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1084,12 +1157,14 @@ public class EventController
         // validate link
         if (EventValidator.isValidLink())
         {
+            System.out.println("\033[0;34m[A]Link accepted\033[0m");
             newActivity.values[8] = eventLink.getText();
             validPoints++;
         }
-        // if the link is invalif
+        // if the link is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Link rejected\033[0m");
             eventLink.clear();
             eventLink.setPromptText("IN");
             eventLink.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1113,6 +1188,7 @@ public class EventController
                 preparedStatement2.setString(i + 2, newActivity.values[i + 5]);
             }
             preparedStatement2.executeUpdate();
+            System.out.println("\033[0;34m[A]Action completed\033[0m");
             actionCompleted(e);
             onClickViewEventButton(e);
             setRestButtonDisable();
@@ -1120,6 +1196,7 @@ public class EventController
         // if inputs are invalid
         else
         {
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -1130,9 +1207,9 @@ public class EventController
     // delete event
     public void onClickDeleteEventButton(ActionEvent e) throws Exception
     {
-        EventValidator validateClubID = new EventValidator(eventID.getText());
+        EventValidator validateEventID = new EventValidator(eventID.getText());
         // validate event_id
-        if (validateClubID.isValidEventID())
+        if (validateEventID.isValidEventID())
         {
             Statement statement = connectDB().createStatement();
             String query1 = "select event_id from EventParent";
@@ -1143,6 +1220,7 @@ public class EventController
             {
                 if (resultSet1.getString(1).equals(eventID.getText()))
                 {
+                    System.out.println("\033[0;34m[A]EventID accepted\033[0m");
                     resultSet1.close();
                     String query5 = "DELETE from Meeting WHERE event_id = ?";
                     PreparedStatement preparedStatement1 = connectDB().prepareStatement(query5);
@@ -1171,6 +1249,7 @@ public class EventController
         // if event_id is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EventID rejected\033[0m");
             invalidInformation(e);
             // clear input
             eventID.clear();
@@ -1207,6 +1286,7 @@ public class EventController
             // if the event_id exist
             if (eventIDMatch)
             {
+                System.out.println("\033[0;34m[A]EventID accepted\033[0m");
                 // capture previous stage
                 Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                 // load ui
@@ -1222,6 +1302,7 @@ public class EventController
             }
             else
             {
+                System.out.println("\033[0;31m[E]EventID rejected\033[0m");
                 invalidInformation(e);
             }
             // close database connection
@@ -1255,10 +1336,12 @@ public class EventController
         {
             postponeEvent.values[0] = eventYear.getText() + "/" + eventMonth.getText() + "/" + eventDay.getText();
             validPoints++;
+            System.out.println("\033[0;34m[A]EDate accepted\033[0m");
         }
         // if date is invalid
         else
         {
+            System.out.println("\033[0;31m[E]Date rejected\033[0m");
             eventYear.clear();
             eventYear.setPromptText("IN");
             eventYear.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1274,10 +1357,12 @@ public class EventController
         {
             postponeEvent.values[1] = startHour.getText() + ":" + startMin.getText();
             validPoints++;
+            System.out.println("\033[0;314m[E]StartTime accepted\033[0m");
         }
         // if start time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]StartTime rejected\033[0m");
             startHour.clear();
             startHour.setPromptText("IN");
             startHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1294,10 +1379,12 @@ public class EventController
             {
                 postponeEvent.values[2] = endHour.getText() + ":" + endMin.getText();
                 validPoints++;
+                System.out.println("\033[0;34m[A]EndTime accepted\033[0m");
             }
             // if end time is invalid
             else
             {
+                System.out.println("\033[0;31m[E]EndTime rejected\033[0m");
                 endHour.clear();
                 endHour.setPromptText("IN");
                 endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1309,6 +1396,7 @@ public class EventController
         // if end time is invalid
         else
         {
+            System.out.println("\033[0;31m[E]EndTime rejected\033[0m");
             endHour.clear();
             endHour.setPromptText("IN");
             endHour.setStyle("-fx-prompt-text-fill: #b22222");
@@ -1329,12 +1417,14 @@ public class EventController
             preparedStatement1.executeUpdate();
             // close databse conncetion
             connectDB().close();
+            System.out.println("\033[0;34m[A]Action completed\033[0m");
             actionCompleted(e);
             // caling event view method
             onClickViewEventButton(e);
         }
         else
         {
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
            invalidInformation(e);
            setRestButtonDisable();
         }
@@ -1347,6 +1437,7 @@ public class EventController
         EventValidator validator = new EventValidator();
         if (validator.validateString(filePath.getText()))
         {
+            System.out.println("\033[0;34m[A]FilePath accepted\033[0m");
             // get all data from EventParent
             String query1 = "SELECT * FROM EventParent";
             Statement statement1 = connectDB().createStatement();
@@ -1491,10 +1582,12 @@ public class EventController
                 newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
                 newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
                 newStage.show();
+                System.out.println("\033[0;34m[A]Action completed\033[0m");
                 filePath.clear();
                 resetButton.setDisable(true);
             } catch (Exception f)
             {
+                System.out.println("\033[0;31m[E]Action rejected\033[0m");
                 f.printStackTrace();
             }
             // close the database connection
@@ -1502,7 +1595,8 @@ public class EventController
         }
         else
         {
-            actionCompleted(e);
+            invalidInformation(e);
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
             filePath.clear();
             filePath.setPromptText("IN");
             filePath.setStyle("-fx-prompt-text-fill: #b22222");
