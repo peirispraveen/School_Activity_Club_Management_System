@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.JoinClub">
+   <stylesheets>
+      <URL value="@../../../Styles/MainPage.css" />
+      <URL value="@../../../Styles/Buttons.css" />
+   </stylesheets>
+   <children>
+      <TableView fx:id="joinClubTable" layoutX="195.0" layoutY="123.0" prefHeight="354.0" prefWidth="560.0">
+        <columns>
+          <TableColumn fx:id="clubIdColumn" prefWidth="75.0" styleClass="tableColumnStyle" text="Club ID" />
+          <TableColumn fx:id="clubNameColumn" prefWidth="75.0" styleClass="tableColumnStyle" text="Club Name" />
+            <TableColumn fx:id="clubJoinColumn" prefWidth="75.0" text="Join">
+               <styleClass>
+                  <String fx:value="tableColumnStyle" />
+                  <String fx:value="tableColumnJoin" />
+               </styleClass></TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</AnchorPane>

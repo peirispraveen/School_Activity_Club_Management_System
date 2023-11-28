@@ -27,7 +27,7 @@ public class JoinClub {
     private TableColumn clubJoinColumn;
     @FXML
     private TableView joinClubTable;
-    public static String studentId;
+    public static String currStId;
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
@@ -49,7 +49,7 @@ public class JoinClub {
             {
                 joinButton.setOnAction(event -> {
                     Club club = getTableView().getItems().get(getIndex());
-                    joinClub(club);
+                    joinClub(club, currStId);
                 });
             }
 
@@ -104,7 +104,7 @@ public class JoinClub {
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
-                        String currStId = resultSet.getString("student_id");
+                        currStId = resultSet.getString("student_id");
                         String currStFName = resultSet.getString("first_name");
                         String currStLName = resultSet.getString("last_name");
                         String currStEmail = resultSet.getString("email");
@@ -117,7 +117,7 @@ public class JoinClub {
         }
     }
 
-    private void joinClub(Club club) {
+    private void joinClub(Club club, String studentId) {
         if (studentId != null && !studentId.isEmpty()) {
             try (Connection connection = getConnection()) {
                 String query = "INSERT INTO student_club (student_id, club_id) VALUES (?, ?)";
