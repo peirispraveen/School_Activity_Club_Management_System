@@ -75,8 +75,6 @@ public class EventController
     @FXML
     private Button resetButton;
     @FXML
-    private TextField filePath;
-    @FXML
     private Button submitButton;
     @FXML
     private Button generateButton;
@@ -122,11 +120,9 @@ public class EventController
     public void onClickEventViewResetButton()
     {
         eventID.clear();
-        filePath.clear();
         resetButton.setDisable(true);
         deleteButton.setDisable(true);
         postponeButton.setDisable(true);
-        generateButton.setDisable(true);
     }
 
     public void clearCommonInputs()
@@ -169,13 +165,6 @@ public class EventController
         eventPlatform.clear();
         eventLink.clear();
         setRestButtonDisable();
-    }
-
-    @FXML
-    public void onInputFilePathChanged()
-    {
-        resetButton.setDisable(false);
-        generateButton.setDisable(false);
     }
 
     @FXML
@@ -1451,10 +1440,6 @@ public class EventController
 
     public void onClickGenerateEventReportButton(ActionEvent e) throws Exception
     {
-        // validate file path
-        EventValidator validator = new EventValidator();
-        if (validator.validateString(filePath.getText()))
-        {
             System.out.println("\033[0;34m[A]FilePath accepted\033[0m");
             // get all data from EventParent
             String query1 = "SELECT * FROM EventParent";
@@ -1626,16 +1611,6 @@ public class EventController
 //                System.out.println("No file path specified");
 //            }
 
-        }
-        else
-        {
-            invalidInformation(e);
-            System.out.println("\033[0;31m[E]Action rejected\033[0m");
-            System.out.println();
-            filePath.clear();
-            filePath.setPromptText("IN");
-            filePath.setStyle("-fx-prompt-text-fill: #b22222");
-        }
     }
 
     @FXML
@@ -1701,7 +1676,6 @@ public class EventController
                 System.out.println("\033[0;34m[A]Action completed\033[0m");
                 System.out.println();
 //                    filePath.clear();
-                resetButton.setDisable(true);
             } catch (Exception f)
             {
                 System.out.println("\033[0;31m[E]Action rejected\033[0m");
