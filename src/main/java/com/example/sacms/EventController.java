@@ -32,9 +32,9 @@ public class EventController
 {
 
     // attributes to connect with the database
-    private String url = "jdbc:mysql://localhost:3306/SACMS";
-    private String user = "root";
-    private String password = "";
+    private final String url = "jdbc:mysql://localhost:3306/SACMS";
+    private final String user = "root";
+    private final String password = "";
 
     // access fx elements
     @FXML
@@ -607,6 +607,7 @@ public class EventController
             preparedStatement2.executeUpdate();
             actionCompleted(e);
             System.out.println("\033[0;34m[A]Action completed\033[0m");
+            System.out.println();
             // clear all inputs
             onClickViewEventButton(e);
         }
@@ -614,6 +615,7 @@ public class EventController
         else
         {
             System.out.println("\033[0;31m[E]Action rejected\033[0m");
+            System.out.println();
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -894,6 +896,7 @@ public class EventController
             }
             preparedStatement2.executeUpdate();
             System.out.println("\033[0;34m[A]Action completed\033[0m");
+            System.out.println();
             actionCompleted(e);
             onClickViewEventButton(e);
         }
@@ -901,6 +904,7 @@ public class EventController
         else
         {
             System.out.println("\033[0;31m[E]Action rejected\033[0m");
+            System.out.println();
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -1189,6 +1193,7 @@ public class EventController
             }
             preparedStatement2.executeUpdate();
             System.out.println("\033[0;34m[A]Action completed\033[0m");
+            System.out.println();
             actionCompleted(e);
             onClickViewEventButton(e);
             setRestButtonDisable();
@@ -1197,6 +1202,7 @@ public class EventController
         else
         {
             System.out.println("\033[0;31m[E]Action rejected\033[0m");
+            System.out.println();
             invalidInformation(e);
             setRestButtonDisable();
         }
@@ -1418,6 +1424,7 @@ public class EventController
             // close databse conncetion
             connectDB().close();
             System.out.println("\033[0;34m[A]Action completed\033[0m");
+            System.out.println();
             actionCompleted(e);
             // caling event view method
             onClickViewEventButton(e);
@@ -1425,8 +1432,9 @@ public class EventController
         else
         {
             System.out.println("\033[0;31m[E]Action rejected\033[0m");
-           invalidInformation(e);
-           setRestButtonDisable();
+            System.out.println();
+            invalidInformation(e);
+            setRestButtonDisable();
         }
     }
 
@@ -1583,11 +1591,13 @@ public class EventController
                 newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
                 newStage.show();
                 System.out.println("\033[0;34m[A]Action completed\033[0m");
+                System.out.println();
                 filePath.clear();
                 resetButton.setDisable(true);
             } catch (Exception f)
             {
                 System.out.println("\033[0;31m[E]Action rejected\033[0m");
+                System.out.println();
                 f.printStackTrace();
             }
             // close the database connection
@@ -1597,6 +1607,7 @@ public class EventController
         {
             invalidInformation(e);
             System.out.println("\033[0;31m[E]Action rejected\033[0m");
+            System.out.println();
             filePath.clear();
             filePath.setPromptText("IN");
             filePath.setStyle("-fx-prompt-text-fill: #b22222");
