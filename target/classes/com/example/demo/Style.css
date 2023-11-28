@@ -97,20 +97,19 @@ TextField:focused, DatePicker:focused {
 /* Apply styles to the button */
 Button {
     -fx-font-size: 14px;
-    /*-fx-pref-width: 150px;*/
-    -fx-background-color: #4CAF50; /* Green background color for the button */
+    /*-fx-background-color: #4CAF50; !* Green background color for the button *!*/
     -fx-text-fill: black; /* White text color for the button */
     -fx-border-radius: 5px; /* Rounded corners for the button */
     -fx-padding: 8px 12px; /* Padding inside the button */
     -fx-cursor: hand; /* Add hand cursor for better indication of interactivity */
-    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Segoe UI Semibold";
+
 }
 
-/* Add a hover effect for the button */
 Button:hover {
-    -fx-background-color: #45a049; /* Darker green background color on hover */
+    -fx-background-color: #712377;
+    -fx-text-fill: #fff;
 }
-
 /* Apply styles to the AnchorPane */
 AnchorPane {
     -fx-background-color: white; /* Light gray background color */
@@ -168,19 +167,17 @@ TabPane {
 
 /* Apply styles to the selected RadioButton */
 #absentRadioButton:selected, #presentRadioButton:selected, #pendingRadioButton:selected {
-    -fx-text-fill: #fff; /* Set text color for selected state */
+    -fx-text-fill: black; /* Set text color for selected state */
 }
 
 /* Apply styles to the RadioButton indicators (dots) */
 .radio-button .radio {
-    -fx-background-color: #4CAF50; /* Set indicator color */
-    -fx-border-color: #4CAF50; /* Set border color */
+    -fx-background-color: #ffffff; /* Set indicator color */
+    -fx-border-color: #712377; /* Set border color */
+    -fx-border-radius: 8px; /* Set border radius */
 }
 
 /* Apply styles to the focused RadioButton */
 #absentRadioButton:focused, #presentRadioButton:focused, #pendingRadioButton:focused {
-    -fx-border-color: #4CAF50; /* Change border color on focus */
+    /*-fx-border-color: #4CAF50; !* Change border color on focus *!*/
 }
-
-
-

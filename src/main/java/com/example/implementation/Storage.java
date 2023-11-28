@@ -25,16 +25,17 @@ public class Storage {
 
         return Storage.availableMembers;
     }
+
+    public static final String url = "jdbc:mysql://localhost:3306/sacms";
+    public static final String user = "root";
+    public static final String password = "";
+
     public static void allAvailables() throws SQLException {
-        String url = "jdbc:mysql://localhost:3307/Club_Management";
-        String user = "root";
-        String password = "";
 
         Connection con = DriverManager.getConnection(url, user, password);
         Statement stmt = con.createStatement();
 
-
-        String query = "SELECT * FROM Club_Members";
+        String query = "SELECT * FROM student_club";
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             availableMembers.add(new ClubMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6)));
@@ -50,10 +51,36 @@ public class Storage {
             availableClubs.add(new Club(rs.getString(1), rs.getString(2), rs.getString(3), new ClubAdvisor(name[0], name[1]), rs.getInt(5), rs.getDate(6), Club.parseClubMembers(rs.getString(7))));
         }
 
-        query = "SELECT * FROM Club_Advisor";
+        query = "SELECT * FROM advisor_club";
         rs = stmt.executeQuery(query);
         while (rs.next()) {
             availableClubAdvisor.add(new ClubAdvisor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+        }
+    }
+
+    public static void main(String[] args) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            System.out.println("Class not found");
+            e.printStackTrace();
+        }
+
+        System.out.println("Driver class registered");
+        Connection sample = null;
+
+        try {
+            sample = DriverManager.getConnection(url, user, password);
+        }catch (SQLException e2) {
+            System.out.println("sql exception found");
+            e2.printStackTrace();
+            return;
+        }
+
+        if (sample != null){
+            System.out.println("success");
+        }else {
+            System.out.println("failed to connect");
         }
     }
 

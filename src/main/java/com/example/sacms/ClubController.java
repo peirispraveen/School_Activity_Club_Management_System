@@ -1,10 +1,13 @@
 package com.example.sacms;
 
-import com.example.sacms.ClubApplication;
+import com.example.implementation.ClubApplication;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +19,7 @@ public class ClubController {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage createStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Create Club.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Create Club.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         createStage.setTitle("Create Club");
         createStage.setScene(scene);
@@ -28,7 +31,7 @@ public class ClubController {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage updateStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Update Profile1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Update Profile1.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         updateStage.setTitle("Update Club");
         updateStage.setScene(scene);
@@ -40,7 +43,7 @@ public class ClubController {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage deleteStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Delete Club.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Delete Club.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         deleteStage.setTitle("Delete Club");
         deleteStage.setScene(scene);
@@ -54,7 +57,7 @@ public class ClubController {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage generateReportsStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Generate Report.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Generate Report.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         generateReportsStage.setTitle("Generated Reports");
         generateReportsStage.setScene(scene);
@@ -67,7 +70,7 @@ public class ClubController {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage viewStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("View Club.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("View Club.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         viewStage.setTitle("View Club");
         viewStage.setScene(scene);
