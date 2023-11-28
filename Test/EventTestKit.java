@@ -905,5 +905,4 @@ public class EventTestKit
         EventValidator validationObj = new EventValidator();
         assertEquals(validationObj.validateString(str), expectedOut);
     }
-
 }
