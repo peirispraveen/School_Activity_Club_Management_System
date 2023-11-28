@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="viewMembersAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
+<AnchorPane fx:id="viewMembersAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
    <children>
       <Button layoutX="278.0" layoutY="215.0" mnemonicParsing="false" onMouseClicked="#viewStudents" prefHeight="150.0" prefWidth="140.0">
          <graphic>
@@ -20,6 +20,7 @@
             <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
          </graphic>
       </Button>
+      <Button layoutX="418.0" layoutY="86.0" mnemonicParsing="false" onAction="#onClickViewEventButton" text="View Clubs" />
    </children>
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />

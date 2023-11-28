@@ -1,5 +1,6 @@
 package com.example.sacms;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class UserRegMainController {
     private Label adminLabel;
     @FXML
     private Text sacmslabel;
+
+
 
     @FXML
     private void studentRegister() throws IOException {
@@ -143,4 +146,8 @@ public class UserRegMainController {
         prevStage.close();
     }
 
+    public void onClickViewEventButton(ActionEvent e) throws Exception
+    {
+        EventController.onClickViewEventButton(e);
+    }
 }

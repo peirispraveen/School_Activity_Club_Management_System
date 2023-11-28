@@ -32,9 +32,9 @@ public class EventController
 {
 
     // attributes to connect with the database
-    private final String url = "jdbc:mysql://localhost:3306/SACMS";
-    private final String user = "root";
-    private final String password = "";
+    private static final String url = "jdbc:mysql://localhost:3306/SACMS";
+    private static final String user = "root";
+    private static final String password = "";
 
     // access fx elements
     @FXML
@@ -86,7 +86,7 @@ public class EventController
     private int validPoints;
 
     // connect with the database
-    public Connection connectDB() throws Exception
+    public static Connection connectDB() throws Exception
     {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url, user, password);
@@ -217,12 +217,12 @@ public class EventController
 
     // view events in a table
     @FXML
-    public void onClickViewEventButton(ActionEvent e) throws Exception
+    public static void onClickViewEventButton(ActionEvent e) throws Exception
     {
         // capturing previous stage
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         // loading fxml file
-        Parent root = FXMLLoader.load(getClass().getResource("event-view-ui.fxml"));
+        Parent root = FXMLLoader.load(EventController.class.getResource("event-view-ui.fxml"));
         // capturing table and columns
         TableView tableView = (TableView<EventView>) root.lookup("#eventTableView");
         TableColumn<EventView, String> column1 = (TableColumn<EventView, String>) tableView.getColumns().get(0);
@@ -1244,6 +1244,7 @@ public class EventController
                     PreparedStatement preparedStatement4 = connectDB().prepareStatement(query8);
                     preparedStatement4.setString(1, eventID.getText());
                     preparedStatement4.executeUpdate();
+                    System.out.println("\033[0;34m[A]Action completed\033[0m");
                     actionCompleted(e);
                     eventID.clear();
                     break;

@@ -128,6 +128,8 @@ public class EventValidator implements EventValidation
             validActivityNo = false;
         }
     }
+
+    @Override
     public void validateClubID(String clubID)
     {
         if(!clubID.isEmpty() && clubID.length() < 5 && clubID.charAt(0) == 'C') {
@@ -139,6 +141,7 @@ public class EventValidator implements EventValidation
         }
     }
 
+    @Override
     public void validateEventID(String eventID)
     {
         if(!eventID.isEmpty() && eventID.length() < 9 && eventID.charAt(0) == 'E')
@@ -209,7 +212,9 @@ public class EventValidator implements EventValidation
         }
     }
 
+
     // validate year
+    @Override
     public void validateDate(String year)
     {
         if (validateInt(year))
@@ -231,6 +236,7 @@ public class EventValidator implements EventValidation
     }
 
     // validate month
+    @Override
     public void validateDate(String year, String month)
     {
         if(validateInt(month))
@@ -252,6 +258,7 @@ public class EventValidator implements EventValidation
     }
 
     // validate day
+    @Override
     public void validateDate(String yearStr, String monthStr, String day)
     {
         if(isValidYear() && isValidMonth())
@@ -294,6 +301,7 @@ public class EventValidator implements EventValidation
     }
 
     // restricting the method access for threads
+    @Override
     public synchronized boolean validateHour(String hour)
     {
         if(validateInt(hour)) {
@@ -308,6 +316,7 @@ public class EventValidator implements EventValidation
     }
 
     // restricting the method access for threads
+    @Override
     public synchronized boolean validateMinute(String minute)
     {
         if(validateInt(minute)) {
