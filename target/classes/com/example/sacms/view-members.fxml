@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane fx:id="viewMembersAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
+<AnchorPane fx:id="viewMembersAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
    <children>
-      <Button layoutX="278.0" layoutY="215.0" mnemonicParsing="false" onMouseClicked="#viewStudents" prefHeight="150.0" prefWidth="140.0">
+      <Button layoutX="263.0" layoutY="127.0" mnemonicParsing="false" onMouseClicked="#viewStudents" prefHeight="150.0" prefWidth="140.0">
          <graphic>
             <FontIcon iconLiteral="ion4-ios-people" iconSize="120" />
          </graphic></Button>
-      <Button layoutX="562.0" layoutY="215.0" mnemonicParsing="false" onMouseClicked="#viewAdvisors" prefHeight="150.0" prefWidth="140.0">
+      <Button layoutX="547.0" layoutY="127.0" mnemonicParsing="false" onMouseClicked="#viewAdvisors" prefHeight="150.0" prefWidth="140.0">
          <graphic>
             <FontIcon iconLiteral="ion4-ios-person" iconSize="100" />
          </graphic></Button>
@@ -20,7 +20,15 @@
             <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
          </graphic>
       </Button>
-      <Button layoutX="418.0" layoutY="86.0" mnemonicParsing="false" onAction="#onClickViewEventButton" text="View Clubs" />
+      <Button layoutX="263.0" layoutY="323.0" mnemonicParsing="false" onAction="#onClickViewEventButton" prefHeight="150.0" prefWidth="140.0">
+         <graphic>
+            <FontIcon iconLiteral="fltfmz-preview-link-20" iconSize="80" />
+         </graphic></Button>
+      <Button layoutX="547.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#trackingPage" prefHeight="150.0" prefWidth="140.0">
+         <graphic>
+            <FontIcon iconLiteral="fltfal-eye-tracking-24" iconSize="70" />
+         </graphic>
+      </Button>
    </children>
    <stylesheets>
       <URL value="@../../../Styles/MainPage.css" />

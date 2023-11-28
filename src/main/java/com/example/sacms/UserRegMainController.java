@@ -1,14 +1,17 @@
 package com.example.sacms;
 
+import com.example.demo.HelloController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.*;
 import java.util.Objects;
@@ -149,5 +152,19 @@ public class UserRegMainController {
     public void onClickViewEventButton(ActionEvent e) throws Exception
     {
         EventController.onClickViewEventButton(e);
+    }
+
+    @FXML
+    private void trackingPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("hello-view.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Style.css")).toExternalForm());
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) viewMembersAnchor.getScene().getWindow();
+        prevStage.close();
     }
 }

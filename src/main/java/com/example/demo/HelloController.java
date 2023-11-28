@@ -1,12 +1,20 @@
 package com.example.demo;
 
+import com.example.sacms.UserRegApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
 
@@ -87,6 +95,8 @@ public class HelloController {
 
     @FXML
     private Button T_submitButton;
+    @FXML
+    private Button backButtonX;
 
     public void initialize(){
         ObservableList<String> list = FXCollections.observableArrayList("Event_01", "Event_02", "Event_03");
@@ -389,6 +399,20 @@ public class HelloController {
         alert.setHeaderText(null);
         alert.setContentText(errorMessage);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void backButton(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("View Members");
+        newStage.setScene(newScene);
+        newStage.show();
+
+        Node node = (Node) actionEvent.getSource();
+        Stage currentStage = (Stage) node.getScene().getWindow();
+        currentStage.close();
     }
 }
 
