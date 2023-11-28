@@ -209,6 +209,7 @@ public class EventValidator implements EventValidation
         }
     }
 
+    // validate year
     public void validateDate(String year)
     {
         if (validateInt(year))
@@ -229,7 +230,7 @@ public class EventValidator implements EventValidation
         }
     }
 
-
+    // validate month
     public void validateDate(String year, String month)
     {
         if(validateInt(month))
@@ -249,6 +250,8 @@ public class EventValidator implements EventValidation
             validMonth = false;
         }
     }
+
+    // validate day
     public void validateDate(String yearStr, String monthStr, String day)
     {
         if(isValidYear() && isValidMonth())

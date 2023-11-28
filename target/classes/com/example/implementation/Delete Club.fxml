@@ -28,7 +28,7 @@
          </font></Button>
       <TableView fx:id="clubsTable" layoutY="245.0" prefHeight="264.0" prefWidth="800.0" styleClass="tables">
          <columns>
-            <TableColumn fx:id="clubId" editable="false" prefWidth="391.4578347206116" resizable="false" styleClass="tableColumn">
+            <TableColumn fx:id="clubId" editable="false" prefWidth="398.5" resizable="false" styleClass="tableColumn">
                <graphic>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Club ID">
                      <font>
@@ -36,7 +36,7 @@
                      </font>
                   </Text>
                </graphic></TableColumn>
-            <TableColumn fx:id="clubName" editable="false" prefWidth="407.54217529296875" resizable="false" styleClass="tableColumn">
+            <TableColumn fx:id="clubName" editable="false" prefWidth="400.5" resizable="false" styleClass="tableColumn">
                <graphic>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Name">
                      <font>
