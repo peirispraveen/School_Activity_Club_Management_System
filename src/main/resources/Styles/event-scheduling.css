@@ -65,4 +65,5 @@
 .text-topic
 {
     -fx-effect: dropshadow(gaussian, #712377,1, 1, 0, 0);
+    -fx-font-family: "Segoe UI";
 }
