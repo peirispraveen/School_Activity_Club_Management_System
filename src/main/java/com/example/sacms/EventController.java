@@ -15,6 +15,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -87,6 +89,10 @@ public class EventController
     private int validPoints;
     @FXML
     private Button backButtonY;
+    @FXML
+    private AnchorPane rumethAnchor;
+    @FXML
+    private Button downloadButton;
 
     // connect with the database
     public static Connection connectDB() throws Exception
@@ -1544,47 +1550,145 @@ public class EventController
                     }
                 }
             }
-            // Create a new workbook
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            // Create a sheet in the workbook
-            XSSFSheet sheet = workbook.createSheet("Event Report");
-            Font boldFont = workbook.createFont();
-            boldFont.setBold(true);
-            // Create a cell style with the bold font
-            CellStyle boldStyle = workbook.createCellStyle();
-            boldStyle.setFont(boldFont);
-            // Create header row
-            XSSFRow headerRow = sheet.createRow(0);
-            headerRow.createCell(0).setCellValue("Club ID");
-            headerRow.createCell(1).setCellValue("Event ID");
-            headerRow.createCell(2).setCellValue("Start Date");
-            headerRow.createCell(3).setCellValue("Start Time");
-            headerRow.createCell(4).setCellValue("End Time");
-            headerRow.createCell(5).setCellValue("Name");
-            headerRow.createCell(6).setCellValue("Place");
-            headerRow.createCell(7).setCellValue("Type");
-            headerRow.createCell(8).setCellValue("Activity No");
-            headerRow.createCell(9).setCellValue("Meeting No");
-            headerRow.createCell(10).setCellValue("Platform");
-            headerRow.createCell(11).setCellValue("Link");
-            for (int i = 0; i < headerRow.getLastCellNum(); i++)
-            {
-                headerRow.getCell(i).setCellStyle(boldStyle);
-            }
-            for (int i = 0; i < report.size(); i++) {
-                // Iterate over the result set and add data to the sheet
-                XSSFRow row = sheet.createRow(i + 1);
-                for (int j = 0; j < report.get(0).size(); j++) {
-                    row.createCell(j).setCellValue(report.get(i).get(j));
-                }
-            }
 
+            downloadExcel(report);
+//            // Create a new workbook
+//            XSSFWorkbook workbook = new XSSFWorkbook();
+//            // Create a sheet in the workbook
+//            XSSFSheet sheet = workbook.createSheet("Event Report");
+//            Font boldFont = workbook.createFont();
+//            boldFont.setBold(true);
+//            // Create a cell style with the bold font
+//            CellStyle boldStyle = workbook.createCellStyle();
+//            boldStyle.setFont(boldFont);
+//            // Create header row
+//            XSSFRow headerRow = sheet.createRow(0);
+//            headerRow.createCell(0).setCellValue("Club ID");
+//            headerRow.createCell(1).setCellValue("Event ID");
+//            headerRow.createCell(2).setCellValue("Start Date");
+//            headerRow.createCell(3).setCellValue("Start Time");
+//            headerRow.createCell(4).setCellValue("End Time");
+//            headerRow.createCell(5).setCellValue("Name");
+//            headerRow.createCell(6).setCellValue("Place");
+//            headerRow.createCell(7).setCellValue("Type");
+//            headerRow.createCell(8).setCellValue("Activity No");
+//            headerRow.createCell(9).setCellValue("Meeting No");
+//            headerRow.createCell(10).setCellValue("Platform");
+//            headerRow.createCell(11).setCellValue("Link");
+//            for (int i = 0; i < headerRow.getLastCellNum(); i++)
+//            {
+//                headerRow.getCell(i).setCellStyle(boldStyle);
+//            }
+//            for (int i = 0; i < report.size(); i++) {
+//                // Iterate over the result set and add data to the sheet
+//                XSSFRow row = sheet.createRow(i + 1);
+//                for (int j = 0; j < report.get(0).size(); j++) {
+//                    row.createCell(j).setCellValue(report.get(i).get(j));
+//                }
+//            }
+//
+//            DirectoryChooser directoryChooser = new DirectoryChooser();
+//            directoryChooser.setTitle("Select Download Path");
+//
+//            Stage stage = (Stage) rumethAnchor.getScene().getWindow();
+//
+//            File selectedDirectory = directoryChooser.showDialog(stage.getOwner());
+//            if (selectedDirectory != null) {
+//                String filePath = selectedDirectory.getAbsolutePath();
+//                // Save the workbook to a file
+//                try (FileOutputStream fileOut = new FileOutputStream(filePath + File.separator + "events_report.xlsx"))
+//                {
+//                    workbook.write(fileOut);
+//                    Stage newStage = new Stage();
+//                    Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//                    newStage.initOwner(previousStage);
+//                    Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
+//                    Scene scene = new Scene(root, 400, 73);
+//                    newStage.setScene(scene);
+//                    newStage.setResizable(false);
+//                    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+//                    newStage.setX((primaryScreenBounds.getWidth() - scene.getWidth()) / 2);
+//                    newStage.setY((primaryScreenBounds.getHeight() - scene.getHeight()) / 2);
+//                    newStage.show();
+//                    System.out.println("\033[0;34m[A]Action completed\033[0m");
+//                    System.out.println();
+////                    filePath.clear();
+//                    resetButton.setDisable(true);
+//                } catch (Exception f)
+//                {
+//                    System.out.println("\033[0;31m[E]Action rejected\033[0m");
+//                    System.out.println();
+//                    f.printStackTrace();
+//                }
+//                // close the database connection
+//                connectDB().close();
+//            }else {
+//                System.out.println("No file path specified");
+//            }
+
+        }
+        else
+        {
+            invalidInformation(e);
+            System.out.println("\033[0;31m[E]Action rejected\033[0m");
+            System.out.println();
+            filePath.clear();
+            filePath.setPromptText("IN");
+            filePath.setStyle("-fx-prompt-text-fill: #b22222");
+        }
+    }
+
+    @FXML
+    private void downloadExcel (ArrayList<ArrayList<String>> report) throws Exception {
+        // Create a new workbook
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        // Create a sheet in the workbook
+        XSSFSheet sheet = workbook.createSheet("Event Report");
+        Font boldFont = workbook.createFont();
+        boldFont.setBold(true);
+        // Create a cell style with the bold font
+        CellStyle boldStyle = workbook.createCellStyle();
+        boldStyle.setFont(boldFont);
+        // Create header row
+        XSSFRow headerRow = sheet.createRow(0);
+        headerRow.createCell(0).setCellValue("Club ID");
+        headerRow.createCell(1).setCellValue("Event ID");
+        headerRow.createCell(2).setCellValue("Start Date");
+        headerRow.createCell(3).setCellValue("Start Time");
+        headerRow.createCell(4).setCellValue("End Time");
+        headerRow.createCell(5).setCellValue("Name");
+        headerRow.createCell(6).setCellValue("Place");
+        headerRow.createCell(7).setCellValue("Type");
+        headerRow.createCell(8).setCellValue("Activity No");
+        headerRow.createCell(9).setCellValue("Meeting No");
+        headerRow.createCell(10).setCellValue("Platform");
+        headerRow.createCell(11).setCellValue("Link");
+        for (int i = 0; i < headerRow.getLastCellNum(); i++)
+        {
+            headerRow.getCell(i).setCellStyle(boldStyle);
+        }
+        for (int i = 0; i < report.size(); i++) {
+            // Iterate over the result set and add data to the sheet
+            XSSFRow row = sheet.createRow(i + 1);
+            for (int j = 0; j < report.get(0).size(); j++) {
+                row.createCell(j).setCellValue(report.get(i).get(j));
+            }
+        }
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Download Path");
+
+        Stage stage = (Stage) rumethAnchor.getScene().getWindow();
+
+        File selectedDirectory = directoryChooser.showDialog(stage.getOwner());
+        if (selectedDirectory != null) {
+            String filePath = selectedDirectory.getAbsolutePath();
             // Save the workbook to a file
-            try (FileOutputStream fileOut = new FileOutputStream(filePath.getText() + File.separator + "events_report.xlsx"))
+            try (FileOutputStream fileOut = new FileOutputStream(filePath + File.separator + "events_report.xlsx"))
             {
                 workbook.write(fileOut);
                 Stage newStage = new Stage();
-                Stage previousStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                Stage previousStage = (Stage) downloadButton.getScene().getWindow();
                 newStage.initOwner(previousStage);
                 Parent root = FXMLLoader.load(getClass().getResource("event-report-successful-ui.fxml"));
                 Scene scene = new Scene(root, 400, 73);
@@ -1596,7 +1700,7 @@ public class EventController
                 newStage.show();
                 System.out.println("\033[0;34m[A]Action completed\033[0m");
                 System.out.println();
-                filePath.clear();
+//                    filePath.clear();
                 resetButton.setDisable(true);
             } catch (Exception f)
             {
@@ -1606,15 +1710,8 @@ public class EventController
             }
             // close the database connection
             connectDB().close();
-        }
-        else
-        {
-            invalidInformation(e);
-            System.out.println("\033[0;31m[E]Action rejected\033[0m");
-            System.out.println();
-            filePath.clear();
-            filePath.setPromptText("IN");
-            filePath.setStyle("-fx-prompt-text-fill: #b22222");
+        }else {
+            System.out.println("No file path specified");
         }
     }
 

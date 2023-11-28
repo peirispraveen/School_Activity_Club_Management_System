@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
+<AnchorPane fx:id="rumethAnchor" maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
    <children>
       <Line endX="-60.1712646484375" endY="-132.0" layoutX="256.0" layoutY="184.0" startX="-60.1712646484375" startY="-184.0" strokeWidth="0.5" />
       <Line endX="685.0000610351562" endY="-144.0" layoutX="265.0" layoutY="195.0" startX="-263.0" startY="-144.0" strokeWidth="0.5" />
@@ -92,6 +92,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="downloadButton" disable="true" focusTraversable="false" layoutX="801.0" layoutY="296.0" mnemonicParsing="false" onAction="#onClickGenerateEventReportButton" styleClass="submit-button" textFill="#712377">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon iconLiteral="fas-file-download" iconSize="30" />
+         </graphic>
+      </Button>
    </children>
    <stylesheets>
       <URL value="@../../../Styles/event-scheduling.css" />
