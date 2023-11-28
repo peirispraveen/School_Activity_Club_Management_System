@@ -1,19 +1,45 @@
-.tab-header-area .tab {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
+.tab-pane {
+    -fx-background-color: white;
+}
+
+TabPane {
+    -fx-background-color: white;
+}
+
+.tab {
+    -fx-pref-width: 23350%;
+    -fx-pref-height: 3500%;/* Set the preferred width for each tab */
+    -fx-alignment: center; /* Center the tab content */
+    -fx-background-color: #3b3b3b; /* Green background color for the tabs */
+    -fx-text-fill: white; /* White text color for the tabs */
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-font-size: 20px;
     -fx-cursor: hand; /* Add cursor style for a more interactive feel */
     -fx-transition: background-color 0.5s; /* Add transition for background color change */
-    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-family: "Segoe UI";
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+}
+
+.tab .tab-label {
+    -fx-text-fill: white;
+}
+
+.tab:selected{
+    -fx-background-color: white;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #712377;
 }
 
 .tab:hover {
-    -fx-background-color: #45a049; /* Change background color on hover */
+    -fx-background-color: #712377;
+    -fx-text-fill: white;/* Change background color on hover */
 }
 
-.tab-pane {
-    -fx-background-color: pink;
+.tab:hover .tab-label {
+    -fx-text-fill: white;
 }
 
 /* Apply styles to the labels */
@@ -71,7 +97,7 @@ TextField:focused, DatePicker:focused {
 /* Apply styles to the button */
 Button {
     -fx-font-size: 14px;
-    -fx-pref-width: 150px;
+    /*-fx-pref-width: 150px;*/
     -fx-background-color: #4CAF50; /* Green background color for the button */
     -fx-text-fill: black; /* White text color for the button */
     -fx-border-radius: 5px; /* Rounded corners for the button */
@@ -87,9 +113,14 @@ Button:hover {
 
 /* Apply styles to the AnchorPane */
 AnchorPane {
-    -fx-background-color: pink; /* Light gray background color */
+    -fx-background-color: white; /* Light gray background color */
     -fx-padding: 20px; /* Add some padding around the content */
 }
+
+TabPane {
+    -fx-background-color: white;
+}
+
 /* Apply background color to the AnchorPane with fx:id "background" */
 /*#background {*/
 /*    -fx-background-color: pink; !* Light gray background color *!*/
@@ -125,7 +156,7 @@ AnchorPane {
 
 /* Apply styles to the selected ComboBox item */
 #Eventlist .list-cell:selected {
-    -fx-background-color: #4CAF50; /* Set selected item background color */
+    -fx-background-color: #3b3b3b; /* Set selected item background color */
     -fx-text-fill: #fff; /* Set selected item text color */
 }
 

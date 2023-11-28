@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -11,52 +12,56 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+<TabPane maxHeight="600.0" maxWidth="950.0" minHeight="600.0" minWidth="950.0" prefHeight="600.0" prefWidth="950.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
   <tabs>
-    <Tab text="DELETE Student">
+    <Tab styleClass="tabContent" text="Delete Student">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane prefHeight="367.0" prefWidth="600.0">
+                  <AnchorPane layoutY="9.0" prefHeight="541.0" prefWidth="932.0">
                      <children>
-                        <Label layoutX="38.0" layoutY="50.0" prefHeight="18.0" prefWidth="50.0" text="Name" />
-                        <TextField fx:id="deleteNameTextField" layoutX="178.0" layoutY="46.0" />
-                        <Label layoutX="38.0" layoutY="108.0" prefHeight="18.0" prefWidth="65.0" text="Student ID" />
-                        <TextField fx:id="deleteStuIdTextField" layoutX="178.0" layoutY="104.0" />
-                        <Button fx:id="deleteButton" layoutX="234.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="26.0" prefWidth="102.0" text="DELETE" />
-                        <Label layoutX="38.0" layoutY="155.0" prefHeight="18.0" prefWidth="100.0" text="Name of the Club" />
-                        <TextField fx:id="deleteClubNameTextField" layoutX="178.0" layoutY="151.0" />
+                        <Label layoutX="376.0" layoutY="113.0" prefHeight="18.0" prefWidth="50.0" text="Name" />
+                        <TextField fx:id="deleteNameTextField" layoutX="376.0" layoutY="133.0" prefHeight="40.0" />
+                        <Label layoutX="376.0" layoutY="196.0" prefHeight="20.0" prefWidth="78.0" text="Student ID" />
+                        <TextField fx:id="deleteStuIdTextField" layoutX="376.0" layoutY="216.0" prefHeight="40.0" />
+                        <Button fx:id="deleteButton" layoutX="433.0" layoutY="391.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="48.0" prefWidth="65.0">
+                           <graphic>
+                              <FontIcon iconLiteral="fas-trash-alt" iconSize="30" />
+                           </graphic></Button>
+                        <Label layoutX="376.0" layoutY="279.0" prefHeight="20.0" prefWidth="122.0" text="Name of the Club" />
+                        <TextField fx:id="deleteClubNameTextField" layoutX="376.0" layoutY="299.0" prefHeight="40.0" />
                      </children>
                   </AnchorPane>
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab onSelectionChanged="#initialize" text="MARK Attendance">
+      <Tab onSelectionChanged="#initialize" styleClass="tabContent" text="Mark Attendance">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TabPane prefHeight="368.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="519.0" prefWidth="760.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Student's Attendance">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="528.0" prefWidth="847.0">
                                  <children>
-                                    <Label layoutX="35.0" layoutY="37.0" prefHeight="18.0" prefWidth="79.0" text="Name" />
-                                    <TextField fx:id="markNameTextField" layoutX="106.0" layoutY="33.0" styleClass="" />
-                                    <Label layoutX="310.0" layoutY="36.0" prefHeight="18.0" prefWidth="71.0" text="Student ID" />
-                                    <TextField fx:id="markStuIdTextField" layoutX="413.0" layoutY="33.0" />
-                                    <Label layoutX="310.0" layoutY="85.0" prefHeight="18.0" prefWidth="71.0" text="Club Name" />
-                                    <TextField fx:id="markClubNameTextField" layoutX="413.0" layoutY="82.0" />
-                                    <Label layoutX="129.0" layoutY="152.0" text="Event Name" />
-                                    <ComboBox fx:id="Eventlist" layoutX="255.0" layoutY="148.0" prefWidth="150.0" />
-                                    <Label layoutX="39.0" layoutY="203.0" prefHeight="18.0" prefWidth="71.0" text="Status" />
-                                    <RadioButton fx:id="absentRadioButton" layoutX="151.0" layoutY="203.0" mnemonicParsing="false" text="Absent" />
-                                    <RadioButton fx:id="presentRadioButton" layoutX="256.0" layoutY="203.0" mnemonicParsing="false" text="Present" />
-                                    <Button fx:id="submitButton" layoutX="397.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="32.0" prefWidth="130.0" text="SUBMIT" />
-                                    <Button layoutX="121.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleCheckButton" prefHeight="26.0" prefWidth="118.0" text="CHECK" />
-                                    <Button layoutX="128.0" layoutY="260.0" mnemonicParsing="false" onAction="#Updatestatus" prefHeight="32.0" prefWidth="130.0" text="UPDATE" />
-                                    <RadioButton fx:id="pendingRadioButton" layoutX="372.0" layoutY="203.0" mnemonicParsing="false" text="Pending" />
+                                    <Label layoutX="297.0" layoutY="82.0" prefHeight="18.0" prefWidth="79.0" text="Name" />
+                                    <TextField fx:id="markNameTextField" layoutX="297.0" layoutY="102.0" prefHeight="40.0" styleClass="" />
+                                    <Label layoutX="503.0" layoutY="82.0" prefHeight="18.0" prefWidth="71.0" text="Student ID" />
+                                    <TextField fx:id="markStuIdTextField" layoutX="503.0" layoutY="102.0" prefHeight="40.0" />
+                                    <Label layoutX="296.0" layoutY="148.0" prefHeight="20.0" prefWidth="83.0" text="Club Name" />
+                                    <TextField fx:id="markClubNameTextField" layoutX="296.0" layoutY="167.0" prefHeight="40.0" />
+                                    <Label layoutX="296.0" layoutY="239.0" text="Event Name" />
+                                    <ComboBox fx:id="Eventlist" layoutX="296.0" layoutY="259.0" prefHeight="38.0" prefWidth="150.0" />
+                                    <Label layoutX="296.0" layoutY="343.0" prefHeight="20.0" prefWidth="51.0" text="Status:" />
+                                    <RadioButton fx:id="absentRadioButton" layoutX="387.0" layoutY="342.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="78.0" text="Absent" />
+                                    <RadioButton fx:id="presentRadioButton" layoutX="485.0" layoutY="342.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="79.0" text="Present" />
+                                    <Button fx:id="submitButton" layoutX="506.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="35.0" prefWidth="90.0" text="SUBMIT" />
+                                    <Button layoutX="497.0" layoutY="167.0" mnemonicParsing="false" onAction="#handleCheckButton" prefHeight="40.0" prefWidth="82.0" text="CHECK" />
+                                    <Button layoutX="333.0" layoutY="415.0" mnemonicParsing="false" onAction="#Updatestatus" prefHeight="35.0" prefWidth="90.0" text="UPDATE" />
+                                    <RadioButton fx:id="pendingRadioButton" layoutX="591.0" layoutY="342.0" mnemonicParsing="false" text="Pending" />
                                  </children>
                               </AnchorPane>
                         </content>
@@ -90,7 +95,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="VIEW Progess">
+      <Tab styleClass="tabContent" text="View Progess">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -137,7 +142,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="GENERATE Report">
+      <Tab styleClass="tabContent" text="Generate Report">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -145,7 +150,7 @@
                     <tabs>
                       <Tab text="Student's Report">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="474.0" prefWidth="744.0">
                                  <children>
                                     <Button layoutX="256.0" layoutY="146.0" mnemonicParsing="false" onAction="#exportToCsv" text="GENERATE" />
                                  </children>
@@ -168,4 +173,9 @@
         </content>
       </Tab>
   </tabs>
+   <stylesheets>
+      <URL value="@Style.css" />
+      <URL value="@../../../Styles/MainPage.css" />
+      <URL value="@../../../Styles/Buttons.css" />
+   </stylesheets>
 </TabPane>
