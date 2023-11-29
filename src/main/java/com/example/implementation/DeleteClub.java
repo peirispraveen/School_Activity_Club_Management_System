@@ -46,6 +46,7 @@ public class DeleteClub extends Storage {
         clubId.setCellValueFactory(new PropertyValueFactory<>("clubId"));
         clubName.setCellValueFactory(new PropertyValueFactory<>("clubName"));
         getList();
+        FXCollections.sort(availableClubsTbl);
         clubsTable.setItems(availableClubsTbl);
     }
 

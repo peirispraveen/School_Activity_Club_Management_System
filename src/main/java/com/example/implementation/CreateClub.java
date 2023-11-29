@@ -141,8 +141,8 @@ public class CreateClub extends ClubApplication {
     }
     public void descReleased() {
         try {
-            clubDescription.setText(clubDescription.getText().substring(0,60));
-            clubDescription.positionCaret(60);
+            clubDescription.setText(clubDescription.getText().substring(0,255));
+            clubDescription.positionCaret(255);
         }catch (Exception ignored) {}
     } public void partReleased() {
         try {
