@@ -38,11 +38,7 @@
          <FontIcon iconLiteral="fltfal-arrow-curve-down-left-20" iconSize="40" />
       </graphic>
     </Button>
-    <Text fx:id="errorCall" fill="WHITE" layoutX="436.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="319.18113708496094">
-        <font>
-            <Font size="18.0" />
-        </font>
-    </Text>
+    <Text fx:id="errorCall" layoutX="436.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="319.18113708496094" />
     <Line endX="853.0" endY="7.62939453125E-6" layoutX="97.0" layoutY="56.0" startX="-100.0" />
    <Label layoutX="403.0" layoutY="14.0" text="Update Club" textFill="#712377">
       <font>

@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class DBConnection {
 
-    private static final String url = "jdbc:mysql://localhost:3307/Club_Management";
+    private static final String url = "jdbc:mysql://localhost:3306/sacms";  //Muaadh port eka hadapan!!
     private static final String username = "root";
     private static final String password = "";
     private static Connection con;

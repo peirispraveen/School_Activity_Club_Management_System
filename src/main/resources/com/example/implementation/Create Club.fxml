@@ -51,9 +51,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Text fx:id="errorCall" fill="WHITE" layoutX="513.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="330.65956294027774">
+      <Text fx:id="errorCall" layoutX="534.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="310.6595324226996">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Text>
       <ComboBox fx:id="clubAdvisor" layoutX="147.0" layoutY="336.0" prefHeight="40.0" prefWidth="249.0" promptText="Select Advisor" />
