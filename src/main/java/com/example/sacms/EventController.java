@@ -91,6 +91,8 @@ public class EventController
     private AnchorPane rumethAnchor;
     @FXML
     private Button downloadButton;
+    @FXML
+    private AnchorPane studentEventAnchor;
 
     // connect with the database
     public static Connection connectDB() throws Exception
