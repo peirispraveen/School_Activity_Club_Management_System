@@ -12,24 +12,30 @@ public class Update_Teacher {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ood";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
+    private final validations validator = new Att_Validate();
+
 
     @FXML
-    public void handleUpdateTea_record(String T_status_U, String T_markName_U, String markTeaId_U, String markTeaClubName_U, String selectedEvent_U) {
+    public void handleUpdateTea_record(String T_status_U, String T_FmarkName_U, String T_LmarkName_U, String markTeaId_U, String markTeaClubName_U, String selectedEvent_U) {
+        // Validate inputs using the validation interface
+        validator.advidCheck(markTeaId_U);
+        validator.clubnameCheck(markTeaClubName_U);
         // Validate input fields
-        if (T_markName_U.isEmpty() || markTeaId_U.isEmpty() || markTeaClubName_U.isEmpty() || selectedEvent_U.isEmpty() || T_status_U.isEmpty()) {
+        if (T_FmarkName_U.isEmpty() || T_LmarkName_U.isEmpty() || markTeaId_U.isEmpty() || markTeaClubName_U.isEmpty() || selectedEvent_U.isEmpty() || T_status_U.isEmpty()) {
             showErroralert();
             return;
         }
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Create a prepared statement for the UPDATE query
-            String updateQuery = "UPDATE teacher_attendance SET Status = ? WHERE Name = ? AND Teacher_ID = ? AND Club_Name = ? AND Event_Name = ?";
+            String updateQuery = "UPDATE teacher_attendance SET Status = ? WHERE First_Name = ? AND Last_Name = ? AND Teacher_ID = ? AND Club_Name = ? AND Event_Name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
                 // Set values for the prepared statement
                 preparedStatement.setString(1, T_status_U);
-                preparedStatement.setString(2, T_markName_U);
-                preparedStatement.setString(3, markTeaId_U);
-                preparedStatement.setString(4, markTeaClubName_U);
-                preparedStatement.setString(5, selectedEvent_U);
+                preparedStatement.setString(2, T_FmarkName_U);
+                preparedStatement.setString(3, T_LmarkName_U);
+                preparedStatement.setString(4, markTeaId_U);
+                preparedStatement.setString(5, markTeaClubName_U);
+                preparedStatement.setString(6, selectedEvent_U);
 
                 // Execute the UPDATE query
                 int rowsAffected = preparedStatement.executeUpdate();

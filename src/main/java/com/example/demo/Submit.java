@@ -15,27 +15,31 @@ public class Submit {
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
 
+    private final validations validator = new Att_Validate();
+
     // Event handler for the SUBMIT button
     @FXML
-    public void handleSubmitrecord(String Name, String markStudentId, String markClubName, String selectedEvent, String status) {
+    public void handleSubmitrecord(String firstNameToCheck, String lastNameToCheck, String studentIdToCheck, String clubNameToCheck, String selectedEvent, String status) {
+        // Validate inputs using the validation interface
+        validator.stuIdCheck(studentIdToCheck);
+        validator.clubnameCheck(clubNameToCheck);
         // Validate input fields
-        if (Name.isEmpty() || markStudentId.isEmpty() || markClubName.isEmpty() || selectedEvent.isEmpty() || status.isEmpty()) {
+        if (firstNameToCheck.isEmpty() || lastNameToCheck.isEmpty() || studentIdToCheck.isEmpty() || clubNameToCheck.isEmpty() || selectedEvent.isEmpty() || status.isEmpty()) {
             showErroralert();
             return;
         }
         // Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Create a prepared statement for the INSERT query
-            String insertQuery = "INSERT INTO student_attendance(Name,Student_ID,Club_Name,Event_Name,Status) " +
-                    "VALUES (?, ?, ?, ?, ?)";
-            //System.out.println("done");
+            String insertQuery = "INSERT INTO student_attendance(First_Name,Last_Name,Student_ID,Club_Name,Event_Name,Status) " + "VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                 // Set values for the prepared statement
-                preparedStatement.setString(1, Name);
-                preparedStatement.setString(2, markStudentId);
-                preparedStatement.setString(3, markClubName);
-                preparedStatement.setString(4, selectedEvent);
-                preparedStatement.setString(5, status);
+                preparedStatement.setString(1, firstNameToCheck);
+                preparedStatement.setString(2, lastNameToCheck);
+                preparedStatement.setString(3, studentIdToCheck);
+                preparedStatement.setString(4, clubNameToCheck);
+                preparedStatement.setString(5, selectedEvent);
+                preparedStatement.setString(6, status);
 
                 // Execute the INSERT query
                 preparedStatement.executeUpdate();
@@ -68,5 +72,6 @@ public class Submit {
         alert.setContentText("Please enter data in all fields.");
         alert.showAndWait();
     }
+
 }
 

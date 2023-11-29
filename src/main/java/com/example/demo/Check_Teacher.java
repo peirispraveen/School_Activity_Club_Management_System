@@ -9,11 +9,16 @@ public class Check_Teacher {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ood";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
+    public static boolean found ;
+    private final validations validator = new Att_Validate();
 
     @FXML
-    public void handleCheckTea_record(String T_nameToCheck, String teacherIdToCheck, String T_clubNameToCheck) {
+    public void handleCheckTea_record(String T_FnameToCheck, String T_LnameToCheck, String teacherIdToCheck, String T_clubNameToCheck) {
+        // Validate inputs using the validation interface
+        validator.advidCheck(teacherIdToCheck);
+        validator.clubnameCheck(T_clubNameToCheck);
         // Validate input fields
-        if (T_nameToCheck.isEmpty() || teacherIdToCheck.isEmpty() || T_clubNameToCheck.isEmpty()) {
+        if (T_FnameToCheck.isEmpty() || T_LnameToCheck.isEmpty() || teacherIdToCheck.isEmpty() || T_clubNameToCheck.isEmpty()) {
             showErroralert();
             return;
         }
@@ -21,32 +26,36 @@ public class Check_Teacher {
         // Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Create a prepared statement for the SELECT query
-            String selectQuery = "SELECT * FROM teacher_attendance WHERE Name = ? AND Teacher_ID = ? AND Club_Name = ?";
+            String selectQuery = "SELECT * FROM teacher_table WHERE First_Name = ? AND Last_Name = ? AND Teacher_ID = ? AND Club_Name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
                 // Set values for the prepared statement
-                preparedStatement.setString(1, T_nameToCheck);
-                preparedStatement.setString(2, teacherIdToCheck);
-                preparedStatement.setString(3, T_clubNameToCheck);
+                preparedStatement.setString(1, T_FnameToCheck);
+                preparedStatement.setString(2, T_LnameToCheck);
+                preparedStatement.setString(3, teacherIdToCheck);
+                preparedStatement.setString(4, T_clubNameToCheck);
 
 
                 // Execute the SELECT query
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 // Check if a record exists
-                if (resultSet.next()) {
+                boolean recordFound = resultSet.next();
+
+                // Check if a record exists
+                if (recordFound) {
                     // Display a message indicating that the record exists
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Record Found");
                     alert.setHeaderText(null);
-                    alert.setContentText("Record already exists in the database." +
-                            "You can UPDATE and SUBMIT the records.");
+                    alert.setContentText("Record already exists in the database." + "You can UPDATE and SUBMIT the records.");
                     alert.showAndWait();
+                    found = true;
                 } else {
                     // Display a message indicating that the record does not exist
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Record Not Found");
                     alert.setHeaderText(null);
-                    alert.setContentText("Record does not exist in the database. NEW TEACHER ENTRY !!");
+                    alert.setContentText("Record does not exist in the database.Try again !!");
                     alert.showAndWait();
                 }
             }
