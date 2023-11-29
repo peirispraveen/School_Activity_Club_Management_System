@@ -13,17 +13,19 @@
                <children>
                   <AnchorPane layoutY="2.0" prefHeight="367.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="31.0" layoutY="43.0" prefHeight="18.0" prefWidth="87.0" text="First Name" />
-                        <TextField fx:id="deleteFNameTextField" layoutX="234.0" layoutY="39.0" />
-                        <Label layoutX="31.0" layoutY="152.0" prefHeight="18.0" prefWidth="114.0" text="Student/Teacher ID" />
-                        <TextField fx:id="deleteStuIdTextField" layoutX="234.0" layoutY="149.0" />
-                        <Button fx:id="deleteButton" layoutX="234.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="26.0" prefWidth="102.0" text="DELETE" />
-                        <Label layoutX="31.0" layoutY="213.0" prefHeight="18.0" prefWidth="100.0" text="Name of the Club" />
-                        <TextField fx:id="deleteClubNameTextField" layoutX="234.0" layoutY="210.0" />
-                        <Label layoutX="31.0" layoutY="91.0" prefHeight="18.0" prefWidth="93.0" text="Last Name" />
-                        <TextField fx:id="deleteLNameTextField" layoutX="235.0" layoutY="88.0" />
-                        <Button layoutX="462.0" layoutY="39.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
+                        <Label layoutX="28.0" layoutY="81.0" prefHeight="18.0" prefWidth="87.0" text="First Name" />
+                        <TextField fx:id="deleteFNameTextField" layoutX="234.0" layoutY="77.0" />
+                        <Label layoutX="31.0" layoutY="184.0" prefHeight="18.0" prefWidth="114.0" text="Student/Teacher ID" />
+                        <TextField fx:id="deleteStuIdTextField" layoutX="235.0" layoutY="180.0" />
+                        <Button fx:id="deleteButton" layoutX="234.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="26.0" prefWidth="102.0" text="DELETE" />
+                        <Label layoutX="28.0" layoutY="248.0" prefHeight="18.0" prefWidth="100.0" text="Name of the Club" />
+                        <TextField fx:id="deleteClubNameTextField" layoutX="234.0" layoutY="244.0" />
+                        <Label layoutX="31.0" layoutY="127.0" prefHeight="18.0" prefWidth="93.0" text="Last Name" />
+                        <TextField fx:id="deleteLNameTextField" layoutX="235.0" layoutY="123.0" />
+                        <Button layoutX="466.0" layoutY="78.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
                         <Button fx:id="exitbutton" layoutX="470.0" layoutY="267.0" mnemonicParsing="false" onAction="#exit" text="EXIT" />
+                        <Label layoutX="31.0" layoutY="30.0" prefHeight="18.0" prefWidth="111.0" text="Select the event" />
+                        <ComboBox fx:id="deltablelist" layoutX="235.0" layoutY="27.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </children></AnchorPane>
