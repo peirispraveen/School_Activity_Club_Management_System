@@ -379,11 +379,10 @@ public class DBConnect {
     private void onAdvisorLogButtonClicked() throws IOException, SQLException{
         if (!Objects.equals(advisorLogin.getText(), "") && !Objects.equals(advisorLoginPass.getText(),"")) {
             if (isAdvisorMatch(advisorLogin.getText(), advisorLoginPass.getText())) {
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-options.fxml"));
+                Scene scene = new Scene(userRegLoader.load(), 950, 600);
                 Stage stage = new Stage();
-                Storage.allAvailables();
-                FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-                stage.setTitle("Club");
+                stage.setTitle("Advisor Overview");
                 stage.setScene(scene);
                 stage.show();
 

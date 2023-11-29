@@ -93,6 +93,10 @@ public class EventController
     private Button downloadButton;
     @FXML
     private AnchorPane studentEventAnchor;
+    @FXML
+    private AnchorPane advisorEventAnchor;
+    @FXML
+    private Button backButtonF;
 
     // connect with the database
     public static Connection connectDB() throws Exception
@@ -1693,14 +1697,27 @@ public class EventController
 
     @FXML
     private void backButton() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
         Stage newStage = new Stage();
         Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("View Members");
+        newStage.setTitle("Student Overview");
         newStage.setScene(newScene);
         newStage.show();
 
         Stage prevStage = (Stage) backButtonY.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void backButtonV() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-options.fxml"));
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Advisor Overview");
+        newStage.setScene(newScene);
+        newStage.show();
+
+        Stage prevStage = (Stage) backButtonF.getScene().getWindow();
         prevStage.close();
     }
 }

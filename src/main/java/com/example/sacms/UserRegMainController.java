@@ -1,6 +1,8 @@
 package com.example.sacms;
 
 import com.example.demo.HelloController;
+import com.example.implementation.ClubApplication;
+import com.example.implementation.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class UserRegMainController {
@@ -38,6 +41,8 @@ public class UserRegMainController {
     private Text sacmslabel;
     @FXML
     private AnchorPane studentOptionAnchor;
+    @FXML
+    private AnchorPane advisorOptionAnchor;
 
 
     @FXML
@@ -170,7 +175,7 @@ public class UserRegMainController {
     }
 
     @FXML
-    private void backButtonZ() throws IOException {
+    private void backButtonC() throws IOException {
         FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-login-page.fxml"));
         Scene scene = new Scene(userRegLoader.load(), 950, 600);
         Stage stage = new Stage();
@@ -179,6 +184,19 @@ public class UserRegMainController {
         stage.show();
 
         Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void backButtonZ() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-login-page.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Advisor Login");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) advisorOptionAnchor.getScene().getWindow();
         prevStage.close();
     }
 
@@ -205,6 +223,33 @@ public class UserRegMainController {
         stage.show();
 
         Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void viewAdvisorEventsButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-event-view.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Ongoing Events Events");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) advisorOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void clubEditPageButton() throws IOException, SQLException {
+        Stage stage = new Stage();
+        Storage.allAvailables();
+        FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        stage.setTitle("Club");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) advisorOptionAnchor.getScene().getWindow();
         prevStage.close();
     }
 }

@@ -173,10 +173,10 @@ public class JoinClub {
 
     @FXML
     private void backButton() throws IOException {
-        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(userRegLoader.load(), 950, 600);
-        stage.setTitle("Registration");
+        stage.setTitle("Student Overview");
         stage.setScene(scene);
         stage.show();
 
