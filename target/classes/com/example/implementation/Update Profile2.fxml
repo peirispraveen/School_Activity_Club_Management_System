@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,97 +13,101 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@StyleSheets/Main.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.UpdateProfile2">
+<AnchorPane prefHeight="600.0" prefWidth="950.0" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.implementation.UpdateProfile2">
    <children>
-      <TextField fx:id="clubId" layoutX="93.0" layoutY="111.0" onKeyReleased="#idReleased" prefHeight="40.0" prefWidth="300.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <Text fill="WHITE" layoutX="93.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club ID">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="93.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Name">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <TextField fx:id="clubName" layoutX="93.0" layoutY="209.0" onKeyReleased="#nameReleased" prefHeight="40.0" prefWidth="300.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <Text fill="WHITE" layoutX="420.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created Date">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <DatePicker fx:id="createdDate" editable="false" layoutX="420.0" layoutY="296.0" prefHeight="40.0" prefWidth="300.0" />
-      <Button layoutX="486.0" layoutY="409.0" mnemonicParsing="false" onAction="#updateClub" prefHeight="61.0" prefWidth="159.0" text="Update">
-         <font>
-            <Font size="23.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="44.0" fitWidth="46.0">
-               <image>
-                  <Image url="@Icons/Update club.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutY="-6.0" mnemonicParsing="false" onAction="#backBtn" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="55.0">
-               <image>
-                  <Image url="@Icons/back_arrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Text fill="WHITE" layoutX="420.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Advisor">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="errorCall" fill="WHITE" layoutX="417.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="330.65956294027774">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="clubAdvisor" layoutX="420.0" layoutY="109.0" prefHeight="40.0" prefWidth="300.0" promptText="Select Advisor" />
-      <Text fill="WHITE" layoutX="420.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Particpants">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <TextField fx:id="maxParticipants" layoutX="420.0" layoutY="208.0" onKeyReleased="#partReleased" prefHeight="40.0" prefWidth="300.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </TextField>
-      <Text fill="WHITE" layoutX="93.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Description" wrappingWidth="148.2144317626953">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <TextArea fx:id="clubDescription" layoutX="93.0" layoutY="296.0" onKeyReleased="#descReleased" prefHeight="175.0" prefWidth="300.0" />
-      <Line endX="800.0" layoutY="56.0" stroke="WHITE" />
-      <Button layoutX="739.0" layoutY="2.0" mnemonicParsing="false" onAction="#homeButton" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
-         <graphic>
-            <ImageView fitHeight="41.0" fitWidth="42.0">
-               <image>
-                  <Image url="@Icons/home.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="373.0" layoutY="4.0">
+      <ImageView fitHeight="565.0" fitWidth="580.0" layoutX="188.0" layoutY="18.0" opacity="0.15">
          <image>
             <Image url="@Icons/Update club.png" />
          </image>
       </ImageView>
+      <TextField fx:id="clubId" layoutX="146.0" layoutY="164.0" onKeyReleased="#idReleased" prefHeight="40.0" prefWidth="137.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text layoutX="146.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club ID">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="146.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Name">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="clubName" layoutX="146.0" layoutY="254.0" onKeyReleased="#nameReleased" prefHeight="40.0" prefWidth="300.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text layoutX="145.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Created Date">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="createdDate" editable="false" layoutX="145.0" layoutY="343.0" prefHeight="40.0" prefWidth="138.0" />
+      <Button layoutX="644.0" layoutY="384.0" mnemonicParsing="false" onAction="#updateClub" prefHeight="21.0" prefWidth="34.0">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <graphic>
+            <FontIcon iconLiteral="fas-user-edit" iconSize="40" />
+         </graphic>
+      </Button>
+      <Button layoutX="34.0" layoutY="78.0" mnemonicParsing="false" onAction="#backBtn" prefHeight="40.0" prefWidth="20.0" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <FontIcon iconLiteral="ion4-ios-arrow-round-back" iconSize="40" />
+         </graphic>
+      </Button>
+      <Text layoutX="146.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Advisor">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="errorCall" layoutX="535.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="330.65956294027774">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="clubAdvisor" layoutX="146.0" layoutY="429.0" prefHeight="40.0" prefWidth="300.0" promptText="Select Advisor" />
+      <Text layoutX="307.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Particpants">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="maxParticipants" layoutX="307.0" layoutY="343.0" onKeyReleased="#partReleased" prefHeight="40.0" prefWidth="138.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text layoutX="535.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Club Description" wrappingWidth="148.2144317626953">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="clubDescription" layoutX="535.0" layoutY="168.0" onKeyReleased="#descReleased" prefHeight="138.0" prefWidth="300.0" />
+      <Line endX="950.0000610351562" endY="-7.62939453125E-6" layoutY="56.0" />
+      <Button layoutX="835.0" layoutY="3.0" mnemonicParsing="false" onAction="#homeButton" prefHeight="35.0" prefWidth="34.0" style="-fx-border-color: transparent;" styleClass="homeBackBtn">
+         <graphic>
+            <FontIcon iconLiteral="fltfal-home-24" iconSize="35" />
+         </graphic>
+      </Button>
+      <Label layoutX="664.0" layoutY="456.0" text="Update" textFill="#712377">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="405.0" layoutY="10.0" text="Update Club" textFill="#712377">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
+   <stylesheets>
+      <URL value="@StyleSheets/Main.css" />
+      <URL value="@../../../Styles/MainPage.css" />
+      <URL value="@../../../Styles/Buttons.css" />
+   </stylesheets>
 </AnchorPane>

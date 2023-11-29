@@ -65,7 +65,7 @@
         <Label fx:id="ademailLabel" layoutX="294.0" layoutY="202.0" prefHeight="18.0" prefWidth="86.0" textFill="RED" />
         <Label fx:id="addoBLabel" layoutX="124.0" layoutY="271.0" prefHeight="18.0" prefWidth="76.0" textFill="RED" />
         <Label fx:id="adpassLabel" layoutX="319.0" layoutY="272.0" prefHeight="18.0" prefWidth="86.0" textFill="RED" />
-        <Label fx:id="adpassLabel2" alignment="TOP_LEFT" layoutX="258.0" layoutY="400.0" prefHeight="42.0" prefWidth="150.0" textFill="RED" />
+        <Label fx:id="adpassLabel2" alignment="TOP_LEFT" layoutX="258.0" layoutY="400.0" prefHeight="90.0" prefWidth="150.0" textFill="RED" />
 
     </children>
 </AnchorPane>
