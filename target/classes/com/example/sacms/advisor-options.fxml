@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
 <AnchorPane fx:id="advisorOptionAnchor" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
     <children>
         <Label layoutX="295.0" layoutY="373.0" text="View Events" textFill="#712377">
@@ -15,7 +14,7 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <Label layoutX="597.0" layoutY="373.0" text="Club Options" textFill="#712377">
+        <Label layoutX="587.0" layoutY="373.0" text="Club Options" textFill="#712377">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

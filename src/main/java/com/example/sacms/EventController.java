@@ -97,6 +97,10 @@ public class EventController
     private AnchorPane advisorEventAnchor;
     @FXML
     private Button backButtonF;
+    @FXML
+    private Button backButtonA;
+    @FXML
+    private Button backBtnQ;
 
     // connect with the database
     public static Connection connectDB() throws Exception
@@ -354,7 +358,7 @@ public class EventController
         // loading ui
         Parent root = FXMLLoader.load(getClass().getResource("create-meeting-ui.fxml"));
         // intitializing new scene and setting it to previous stage
-        previousStage.setScene(new Scene(root, 800, 600));
+        previousStage.setScene(new Scene(root, 950, 600));
         // showing the previous stage
         previousStage.show();
     }
@@ -685,7 +689,7 @@ public class EventController
         // load ui
         Parent root = FXMLLoader.load(getClass().getResource("create-event-ui.fxml"));
         // initializing neew scene and setting it to previous stage
-        previousStage.setScene(new Scene(root, 800, 600));
+        previousStage.setScene(new Scene(root, 950, 600));
         // show previous stage
         previousStage.show();
     }
@@ -928,7 +932,7 @@ public class EventController
         // load ui
         Parent root = FXMLLoader.load(getClass().getResource("create-activity-ui.fxml"));
         // initializing new scene and setting it to previous stage
-        previousStage.setScene(new Scene(root, 800, 600));
+        previousStage.setScene(new Scene(root, 950, 600));
         // showing the previous stage
         previousStage.show();
     }
@@ -1709,6 +1713,19 @@ public class EventController
     }
 
     @FXML
+    private void backButtonU() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Admin");
+        newStage.setScene(newScene);
+        newStage.show();
+
+        Stage prevStage = (Stage) backButtonA.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
     private void backButtonV() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-options.fxml"));
         Stage newStage = new Stage();
@@ -1718,6 +1735,19 @@ public class EventController
         newStage.show();
 
         Stage prevStage = (Stage) backButtonF.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void backButtonQ() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("event-view-ui.fxml"));
+        Stage newStage = new Stage();
+        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Advisor Overview");
+        newStage.setScene(newScene);
+        newStage.show();
+
+        Stage prevStage = (Stage) backBtnQ.getScene().getWindow();
         prevStage.close();
     }
 }
