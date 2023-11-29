@@ -36,7 +36,7 @@ public class ClubController {
         currentStage.close();
         Stage updateStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Update Profile1.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         updateStage.setTitle("Update Club");
         updateStage.setScene(scene);
         updateStage.setResizable(false);
@@ -48,7 +48,7 @@ public class ClubController {
         currentStage.close();
         Stage deleteStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Delete Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         deleteStage.setTitle("Delete Club");
         deleteStage.setScene(scene);
         deleteStage.setResizable(false);
@@ -62,7 +62,7 @@ public class ClubController {
         currentStage.close();
         Stage generateReportsStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Generate Report.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         generateReportsStage.setTitle("Generated Reports");
         generateReportsStage.setScene(scene);
         generateReportsStage.setResizable(false);
@@ -75,7 +75,7 @@ public class ClubController {
         currentStage.close();
         Stage viewStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("View Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         viewStage.setTitle("View Club");
         viewStage.setScene(scene);
         viewStage.setResizable(false);
@@ -87,7 +87,7 @@ public class ClubController {
         currentStage.close();
         Stage updateMembers = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Update Members1.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         updateMembers.setTitle("Update Members");
         updateMembers.setScene(scene);
         updateMembers.setResizable(false);
