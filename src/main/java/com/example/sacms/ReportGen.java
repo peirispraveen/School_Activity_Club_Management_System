@@ -28,6 +28,7 @@ public class ReportGen {
         return DriverManager.getConnection(url, username, password);
     }
 
+    // The details of the enrolled students are generated into an excel sheet
     public static boolean excelGenerateStudents(String path) throws SQLException {
         try (Connection newCon = getConnection()) {
             String query = "SELECT * FROM student";
@@ -45,7 +46,7 @@ public class ReportGen {
 
                 // Create a cell style with the bold font
                 CellStyle boldStyle = workbook.createCellStyle();
-                boldStyle.setFont(boldFont);
+                boldStyle.setFont(boldFont);  // the column header is bolded
 
                 // Create header row
                 XSSFRow headerRow = sheet.createRow(0);
@@ -61,7 +62,7 @@ public class ReportGen {
 
                 int rowNum = 1;
                 while (rs.next()) {
-                    // Iterate over the result set and add data to the sheet
+                    // Iterate over the result set and add student data to the sheet
                     XSSFRow row = sheet.createRow(rowNum++);
                     row.createCell(0).setCellValue(rs.getString("student_id"));
                     row.createCell(1).setCellValue(rs.getString("first_name"));
@@ -71,9 +72,7 @@ public class ReportGen {
                     row.createCell(4).setCellValue(studentDateOfBirth.toString());
                 }
 
-                // Save the workbook to a file or perform other operations
-
-                // For example, you can save it to a file
+                // Save the excel sheet in a specific directory
                 try (FileOutputStream fileOut = new FileOutputStream(path + File.separator + "students_registered.xlsx")) {
                     workbook.write(fileOut);
                     return true;
@@ -91,6 +90,8 @@ public class ReportGen {
         }
     }
 
+
+    // same process as above
     public static boolean excelGenerateAdvisors(String path) throws SQLException {
         try (Connection newCon = getConnection()) {
             String query = "SELECT * FROM advisor";
@@ -124,7 +125,7 @@ public class ReportGen {
 
                 int rowNum = 1;
                 while (rs.next()) {
-                    // Iterate over the result set and add data to the sheet
+                    // Iterate over the result set and add advisor data to the sheet
                     XSSFRow row = sheet.createRow(rowNum++);
                     row.createCell(0).setCellValue(rs.getString("advisor_id"));
                     row.createCell(1).setCellValue(rs.getString("first_name"));
@@ -133,8 +134,6 @@ public class ReportGen {
                     DateOfBirth studentDateOfBirth = parseDateOfBirth(rs.getString("dateOfBirth"));
                     row.createCell(4).setCellValue(studentDateOfBirth.toString());
                 }
-
-                // Save the workbook to a file or perform other operations
 
                 try (FileOutputStream fileOut = new FileOutputStream(path + File.separator + "advisors_registered.xlsx")) {
                     workbook.write(fileOut);
@@ -154,7 +153,7 @@ public class ReportGen {
         }
     }
 
-    private static DateOfBirth parseDateOfBirth(String dateString) {
+    private static DateOfBirth parseDateOfBirth(String dateString) {  // processing date of birth
         String[] dateParts = dateString.split("-");
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
@@ -174,12 +173,5 @@ public class ReportGen {
     }
 
 
-//    public static void main(String[] args) {
-//        try {
-//            excelGenerateStudents();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

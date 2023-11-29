@@ -38,23 +38,17 @@ public class ViewStudents {
     private AnchorPane studentViewAnchor;
 
     @FXML
-    private void initialize() {
+    private void initialize() {  // enrolled students are shown
         studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         fnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         dobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
 
-//        studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("studentId"));
-//        lnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentLastName"));
-//        emailColumn.setCellValueFactory(new PropertyValueFactory<>("studentEmail"));
-//        dobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
-//        fnameColumn.setCellValueFactory(new PropertyValueFactory<>("studentFirstName"));
-
         loadDataIntoTableView();
     }
 
-    private void loadDataIntoTableView() {
+    private void loadDataIntoTableView() {  // loading the student data into a list to be passed into the table
         try {
             List<Student> studentData = DBConnect.fetchStudentData();
 
@@ -79,10 +73,10 @@ public class ViewStudents {
     }
 
     @FXML
-    private void downloadStudentExcel() throws IOException {
+    private void downloadStudentExcel() throws IOException {  // student excel sheet download prompts from here
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Select Download Path");
+        directoryChooser.setTitle("Select Download Path");  // asks for the directory to download
 
         Stage stage = (Stage) studentViewAnchor.getScene().getWindow();
 
@@ -90,7 +84,7 @@ public class ViewStudents {
         if (selectedDirectory != null) {
             String path = selectedDirectory.getAbsolutePath();
             try {
-                if (ReportGen.excelGenerateStudents(path)){
+                if (ReportGen.excelGenerateStudents(path)){  // directory path is passed into the generate method
                     FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("excel-download.fxml"));
                     Stage newStage = new Stage();
                     Scene newScene = new Scene(fxmlLoader.load(), 350, 180);
