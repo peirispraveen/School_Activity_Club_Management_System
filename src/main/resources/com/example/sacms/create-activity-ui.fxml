@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
    <children>
       <Line endX="-60.1712646484375" endY="-132.0" layoutX="256.0" layoutY="183.0" startX="-60.1712646484375" startY="-184.0" strokeWidth="0.5" />
       <Line endX="685.0000610351562" endY="-144.0" layoutX="265.0" layoutY="195.0" startX="-263.0" startY="-144.0" strokeWidth="0.5" />
@@ -42,7 +42,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text fill="WHITE" layoutX="536.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="End Time" wrappingWidth="140.08154296875">
+      <Text fill="WHITE" layoutX="536.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="End Time" wrappingWidth="140.08154296875">
          <font>
             <Font size="30.0" />
          </font>
@@ -105,7 +105,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="536.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Start Time" wrappingWidth="150.08154296875">
+      <Text fill="WHITE" layoutX="536.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-topic" text="Start Time" wrappingWidth="150.08154296875">
          <font>
             <Font size="30.0" />
          </font>
