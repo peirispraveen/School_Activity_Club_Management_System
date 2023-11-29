@@ -36,7 +36,8 @@ public class UpdateMembers1 extends Updating implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume);
+        // initialize the environment
+        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume); // disable touchpad scroll
         Label label=new Label("No clubs were found");
         label.setStyle("-fx-text-fill: white ");
         clubsTable.setPlaceholder(label);

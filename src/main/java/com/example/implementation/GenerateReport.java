@@ -36,9 +36,10 @@ public class GenerateReport extends Storage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // initialize the environment
+
         Label label=new Label("No clubs were found");
         report.setPlaceholder(label);
-
         clubId.setCellValueFactory(new PropertyValueFactory<>("clubId"));
         clubName.setCellValueFactory(new PropertyValueFactory<>("clubName"));
         clubAdvisor.setCellValueFactory(new PropertyValueFactory<>("clubAdvisor"));
@@ -49,7 +50,7 @@ public class GenerateReport extends Storage implements Initializable {
         report.setItems(reportTable);
     }
 
-    public void appendList(){
+    public void appendList(){ // add all the details of the club to table
         for (Club club : getAvailableClubs()) {
             try {
                 reportTable.add(new Club(club.getClubId(), club.getClubName(),club.getClubDescription(),club.getClubAdvisor(),

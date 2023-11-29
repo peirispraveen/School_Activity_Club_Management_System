@@ -36,10 +36,9 @@ public class DeleteClub extends Storage {
 
 
     public void initialize() throws SQLException {
-        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume);
+        // initialize the environment
 
-
-
+        clubsTable.addEventFilter(ScrollEvent.SCROLL, ScrollEvent::consume); //disable touchpad scroll due to table unknown bug
         Label label=new Label("No clubs were found");
         clubsTable.setPlaceholder(label);
 
