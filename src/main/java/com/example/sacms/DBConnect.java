@@ -305,10 +305,10 @@ public class DBConnect {
                 String studentLogId = studentLogin.getText();
                 JoinClub.retrieveCurrentStudent(studentLogId);
 
-                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("join-club.fxml"));
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
                 Scene scene = new Scene(userRegLoader.load(), 950, 600);
                 Stage stage = new Stage();
-                stage.setTitle("Club View");
+                stage.setTitle("Student Overview");
                 stage.setScene(scene);
                 stage.show();
 

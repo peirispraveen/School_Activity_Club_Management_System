@@ -7,6 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="950.0" styleClass="main-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
    <children>
@@ -107,7 +108,7 @@
             <Font size="30.0" />
          </font>
       </Text>
-      <Button fx:id="exitButton" focusTraversable="false" layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="40.0" prefWidth="40.0" styleClass="exit-button" stylesheets="@../../../Styles/event-scheduling.css" text="⏻">
+      <Button fx:id="exitButton" focusTraversable="false" layoutX="23.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickExitButton" prefHeight="40.0" prefWidth="40.0" styleClass="exit-button" stylesheets="@../../../Styles/event-scheduling.css" text="X">
          <font>
             <Font size="16.0" />
          </font>
@@ -117,10 +118,13 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="resetButton" disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickPostponeEventResetButton" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css" text="↻">
+      <Button fx:id="resetButton" disable="true" focusTraversable="false" layoutX="127.0" layoutY="6.0" mnemonicParsing="false" onAction="#onClickPostponeEventResetButton" prefHeight="40.0" prefWidth="40.0" styleClass="control-button" stylesheets="@../../../Styles/event-scheduling.css">
          <font>
             <Font size="16.0" />
          </font>
+         <graphic>
+            <FontIcon iconLiteral="fltral-arrow-counterclockwise-24" iconSize="20" />
+         </graphic>
       </Button>
    </children>
    <stylesheets>

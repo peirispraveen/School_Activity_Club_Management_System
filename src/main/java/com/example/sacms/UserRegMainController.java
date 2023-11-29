@@ -36,7 +36,8 @@ public class UserRegMainController {
     private Label adminLabel;
     @FXML
     private Text sacmslabel;
-
+    @FXML
+    private AnchorPane studentOptionAnchor;
 
 
     @FXML
@@ -165,6 +166,45 @@ public class UserRegMainController {
         stage.show();
 
         Stage prevStage = (Stage) viewMembersAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void backButtonZ() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-login-page.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Student Login");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void viewStudentEventsButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-event-view.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Student Events");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void joinClubButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("join-club.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Join Club");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
         prevStage.close();
     }
 }
