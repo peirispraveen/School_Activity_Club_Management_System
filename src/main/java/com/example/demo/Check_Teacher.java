@@ -22,7 +22,6 @@ public class Check_Teacher {
             showErroralert();
             return;
         }
-
         // Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Create a prepared statement for the SELECT query
@@ -64,6 +63,7 @@ public class Check_Teacher {
             showErrorAlert();
         }
     }
+    // Method to show an error alert
     private void showErrorAlert () {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -71,6 +71,7 @@ public class Check_Teacher {
         alert.setContentText("An error occurred while saving the record to the database.");
         alert.showAndWait();
     }
+    // Method to show an error alert
     private void showErroralert () {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

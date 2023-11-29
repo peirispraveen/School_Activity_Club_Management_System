@@ -1,6 +1,9 @@
 package com.example.demo;
 
+// Class implementing validations interface for student attendance records
 public class Att_Validate implements validations {
+
+    // Method to check and validate student ID
     @Override
     public void stuIdCheck(String studentId) {
         if (studentId.startsWith("S")) {
@@ -10,6 +13,7 @@ public class Att_Validate implements validations {
         }
     }
 
+    // Method to check and validate advisor ID
     @Override
     public void advidCheck(String teacherId) {
         if (teacherId.startsWith("T")) {
@@ -19,6 +23,7 @@ public class Att_Validate implements validations {
         }
     }
 
+    // Method to check and validate club name
     @Override
     public void clubnameCheck(String clubName) {
         if (clubName.matches("[a-zA-Z]+")) {
@@ -28,3 +33,4 @@ public class Att_Validate implements validations {
         }
     }
 }
+

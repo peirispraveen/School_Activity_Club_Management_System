@@ -14,7 +14,6 @@ public class Update_Teacher {
     private static final String DB_PASSWORD = "";
     private final validations validator = new Att_Validate();
 
-
     @FXML
     public void handleUpdateTea_record(String T_status_U, String T_FmarkName_U, String T_LmarkName_U, String markTeaId_U, String markTeaClubName_U, String selectedEvent_U) {
         // Validate inputs using the validation interface

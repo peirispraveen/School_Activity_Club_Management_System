@@ -119,6 +119,7 @@ public class HelloController {
     @FXML
     private Button backButtonX;
 
+    //initialize method
     public void initialize(){
         ObservableList<String> list = FXCollections.observableArrayList("Event_01", "Event_02", "Event_03");
         Eventlist.setItems(list);
@@ -137,7 +138,6 @@ public class HelloController {
     private void handleDeleteButton() {
         // Instantiate the delete class
         Delete deleteInstance = new Delete();
-
         try {
             String deleteFName = deleteFNameTextField.getText();
             String deleteLName = deleteLNameTextField.getText();
@@ -190,6 +190,7 @@ public class HelloController {
                 presentRadioButton.setSelected(false);
             }
 
+            // Call the submit class method
             submitInstance.handleSubmitrecord(firstNameToCheck,lastNameToCheck,markStudentId,markClubName,selectedEvent,status);
 
             // Clear the input fields
@@ -213,6 +214,7 @@ public class HelloController {
         }
     }
 
+    // Event handler for the CHECK button
     @FXML
     private void handleCheckButton(ActionEvent event) {
         Check.found = false;
@@ -224,6 +226,7 @@ public class HelloController {
             String studentIdToCheck = markStuIdTextField.getText();
             String clubNameToCheck = markClubNameTextField.getText();
 
+            // Call the check class method
             checkInstance.checkRecord(firstNameToCheck,lastNameToCheck,studentIdToCheck,clubNameToCheck);
             if (Check.found){
                 submitButton.setDisable(false);
@@ -238,6 +241,7 @@ public class HelloController {
         }
     }
 
+    // Event handler for the UPDATE button
     @FXML
     private void Updatestatus(){
         // Instantiate the update class
@@ -264,6 +268,7 @@ public class HelloController {
             String markStuClubName_U = markClubNameTextField.getText();
             String S_selectedEvent_U = Eventlist.getValue();
 
+            // Call the update class method
             updateInstance.handleUpdaterecord(status_U, markFName_U ,markLName_U , markStuId_U, markStuClubName_U, S_selectedEvent_U);
 
             // Clear the input fields
@@ -285,7 +290,7 @@ public class HelloController {
         }
     }
 
-    // Event handler for the SUBMIT button
+    // Event handler for the TEACHER SUBMIT button
     @FXML
     private void T_handleSubmitButton() {
         // Instantiate the teacher's submit class
@@ -311,6 +316,7 @@ public class HelloController {
                 T_presentRadioButton.setSelected(false);
             }
 
+            // Call the submit teacher class method
             Tea_submitInstance.handleSubmitTea_record( T_FmarkName,T_LmarkName, markTeaId, markTeaClubName, selectedEvent_2, T_status);
 
             // Clear the input fields
@@ -334,6 +340,7 @@ public class HelloController {
         }
     }
 
+    // Event handler for the TEACHER CHECK button
     @FXML
     private void T_handleCheckButton() {
         Check.found = false;
@@ -345,6 +352,7 @@ public class HelloController {
             String teacherIdToCheck = markTeaIdTextField.getText();
             String T_clubNameToCheck = markTeaClubNameTextField.getText();
 
+            // Call the check teacher class method
             Tea_checkInstance.handleCheckTea_record(T_FnameToCheck, T_LnameToCheck, teacherIdToCheck, T_clubNameToCheck);
             if (Check.found){
                 T_submitButton.setDisable(false);
@@ -359,6 +367,7 @@ public class HelloController {
         }
     }
 
+    // Event handler for the TEACHER UPDATE button
     @FXML
     private void T_Updatestatus(){
         // Instantiate the teacher's update class
@@ -385,6 +394,7 @@ public class HelloController {
             String markTeaClubName_U = markTeaClubNameTextField.getText();
             String selectedEvent_U = T_Eventlist.getValue();
 
+            // Call the update teacher class method
             Tea_updateInstance.handleUpdateTea_record(T_status_U, T_FmarkName_U, T_LmarkName_U,  markTeaId_U, markTeaClubName_U, selectedEvent_U);
 
             // Clear the input fields
@@ -405,6 +415,7 @@ public class HelloController {
             showErrorAlert("Please enter a valid number for numeric fields.");
         }
     }
+    // Event handler for the SET button
     @FXML
     private void showEventStatusChart() {
         // Instantiate the student's chart class
@@ -418,6 +429,7 @@ public class HelloController {
         ObservableList<XYChart.Data<String, Number>> absentData = FXCollections.observableArrayList();
         ObservableList<XYChart.Data<String, Number>> presentData = FXCollections.observableArrayList();
 
+        // Call the chart class method
         Stu_chartInstance.handleStu_Chart(selectedEvent,absentData,presentData);
 
         XYChart.Series<String, Number> absentSeries = new XYChart.Series<>("Absent", absentData);
@@ -427,6 +439,7 @@ public class HelloController {
         attendanceRchart.getData().addAll(absentSeries, presentSeries);
     }
 
+    // Event handler for the TEACHER SET button
     public void showEventStatusChart_T() {
         // Instantiate the teacher's chart class
         Chart_Teacher Tea_chartInstance = new Chart_Teacher();
@@ -439,6 +452,7 @@ public class HelloController {
         ObservableList<XYChart.Data<String, Number>> absentData = FXCollections.observableArrayList();
         ObservableList<XYChart.Data<String, Number>> presentData = FXCollections.observableArrayList();
 
+        // Call the chart teacher class method
         Tea_chartInstance.handleTea_Chart(selectedEvent,absentData,presentData);
 
         XYChart.Series<String, Number> absentSeries = new XYChart.Series<>("Absent", absentData);
@@ -448,16 +462,22 @@ public class HelloController {
         attendanceRchart_T.getData().addAll(absentSeries, presentSeries);
     }
 
+    // Event handler for the GENERATE button
     @FXML
     private void exportToCsv() {
         Export_Student.exportCSV_stu("student_attendance");
     }
+
+    // Event handler for the TEACHER GENERATE button
     @FXML
     private void exportToCsv_T() {
         Export_Teacher.exportCSV_tea("teacher_attendance");
     }
+
+    // Event handler for the RESET button
     @FXML
     private void reset(){
+        // Clear the input fields
         deleteFNameTextField.clear();
         deleteLNameTextField.clear();
         deleteStuIdTextField.clear();
@@ -480,6 +500,8 @@ public class HelloController {
         T_pendingRadioButton.setSelected(false);
         T_Eventlist.getSelectionModel().clearSelection();
     }
+
+    // Event handler for the EXIT button
     @FXML
     private void exit() {
         // Create a confirmation dialog
@@ -498,6 +520,7 @@ public class HelloController {
         }
     }
 
+    // showErrorAlert method
     private void showErrorAlert(String errorMessage) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -506,6 +529,7 @@ public class HelloController {
         alert.showAndWait();
     }
 
+    // Event handler for the BACK button
     @FXML
     private void backButton(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));

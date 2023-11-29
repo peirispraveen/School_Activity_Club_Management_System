@@ -7,27 +7,37 @@ import javafx.scene.control.TextInputDialog;
 import java.sql.*;
 import java.util.Optional;
 
+// Class for checking records in the database
 public class Check {
+
+    // Database connection parameters
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ood";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
-    public static boolean found ;
 
+    // Flag to indicate whether a record is found
+    public static boolean found;
+
+    // Object for validation using the validation interface
     private final validations validator = new Att_Validate();
 
+    // Method to check if a record exists in the database
     public void checkRecord(String firstNameToCheck, String lastNameToCheck, String studentIdToCheck, String clubNameToCheck) {
         // Validate inputs using the validation interface
         validator.stuIdCheck(studentIdToCheck);
         validator.clubnameCheck(clubNameToCheck);
+
         // Validate input fields
-        if (firstNameToCheck.isEmpty() || lastNameToCheck.isEmpty() || studentIdToCheck.isEmpty() || clubNameToCheck.isEmpty() ) {
-            showErroralert();
+        if (firstNameToCheck.isEmpty() || lastNameToCheck.isEmpty() || studentIdToCheck.isEmpty() || clubNameToCheck.isEmpty()) {
+            showErrorAlert();
             return;
         }
+
         // Establish a database connection
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             // Create a prepared statement for the SELECT query
             String selectQuery = "SELECT * FROM student_table WHERE First_Name = ? AND Last_Name = ? AND Student_ID = ? AND Club_Name = ?";
+
             try (PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
                 // Set values for the prepared statement
                 preparedStatement.setString(1, firstNameToCheck);
@@ -50,15 +60,13 @@ public class Check {
                     alert.setContentText("Record already exists in the database. You can UPDATE and SUBMIT the records.");
                     alert.showAndWait();
                     found = true;
-
                 } else {
                     // Display a message indicating that the record does not exist
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Record Not Found");
                     alert.setHeaderText(null);
-                    alert.setContentText("Record does not exist in the database.Try again !!");
+                    alert.setContentText("Record does not exist in the database. Try again!!");
                     alert.showAndWait();
-
                 }
             }
         } catch (SQLException e) {
@@ -67,15 +75,17 @@ public class Check {
         }
     }
 
+    // Method to display an error alert
     private void showErrorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("An error occurred while saving the record to the database_11.");
+        alert.setContentText("An error occurred while saving the record to the database.");
         alert.showAndWait();
     }
 
-    private void showErroralert () {
+    // Method to display an error alert for missing data
+    private void showErroralert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -83,3 +93,4 @@ public class Check {
         alert.showAndWait();
     }
 }
+
