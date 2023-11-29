@@ -1,5 +1,7 @@
 package com.example.sacms;
 
+import com.example.demo.HelloController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,14 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.*;
-import java.sql.SQLOutput;
-import java.util.List;
-
-import static com.example.sacms.AddMember.studentList;
-import static com.example.sacms.AddMember.advisorList;
+import java.util.Objects;
 
 public class UserRegMainController {
 
@@ -30,13 +30,22 @@ public class UserRegMainController {
     private Label adminLogLabel;
     @FXML
     private Label adminPassLabel;
+    @FXML
+    private AnchorPane adminLogAnchor;
+    @FXML
+    private Label adminLabel;
+    @FXML
+    private Text sacmslabel;
+    @FXML
+    private AnchorPane studentOptionAnchor;
+
 
     @FXML
     private void studentRegister() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-reg.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-login-page.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Student Sign In");
+        newStage.setTitle("Student Login");
         newStage.setScene(scene);
         newStage.show();
         Stage prevStage = (Stage) consoleAnchor.getScene().getWindow();
@@ -45,42 +54,14 @@ public class UserRegMainController {
 
     @FXML
     private void advisorRegister() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-reg.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-login-page.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Advisor Sign In");
+        newStage.setTitle("Advisor Login");
         newStage.setScene(scene);
         newStage.show();
         Stage prevStage = (Stage) consoleAnchor.getScene().getWindow();
         prevStage.close();
-    }
-
-    @FXML
-    protected void loadStudentsFromFile() throws IOException {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("StudentDetails.ser"))) {
-            studentList = (List<Student>) objectInputStream.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: StudentDetails.ser");
-        } catch (EOFException e) {
-            System.out.println("End of file reached unexpectedly. The file might be empty.");
-        } catch (Exception e) {
-            System.out.println("Error reading from StudentDetails.ser");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void loadAdvisorsFromFile() {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("AdvisorDetails.ser"))) {
-            advisorList = (List<Advisor>) objectInputStream.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: AdvisorDetails.ser");
-        } catch (EOFException e) {
-            System.out.println("End of file reached unexpectedly. The file might be empty.");
-        } catch (Exception e) {
-            System.out.println("Error reading from AdvisorDetails.ser");
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -108,6 +89,122 @@ public class UserRegMainController {
     }
 
     @FXML
-    private void adminPage(MouseEvent mouseEvent) {
+    private void adminPage() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-login.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Administrator Login");
+        newStage.setScene(scene);
+        newStage.show();
+
+        Stage prevStage = (Stage) consoleAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void onAdminLogButtonClicked() throws IOException{
+        if (Objects.equals(adminLogin.getText(), "") || Objects.equals(adminLoginPass.getText(),"")) {
+            adminLabel.setText("Enter Admin Credentials");
+            adminLogLabel.setText("*required");
+            adminPassLabel.setText("*required");
+        } else {
+            if (!Objects.equals(adminLogin.getText(), "admin") && !Objects.equals(adminLoginPass.getText(),"admin")) {
+                adminLabel.setText("Password does not match the username");
+            }else {
+                FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
+                Stage newStage = new Stage();
+                Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
+                newStage.setTitle("Admin");
+                newStage.setScene(newScene);
+                newStage.show();
+
+                Stage prevStage = (Stage) adminLogAnchor.getScene().getWindow();
+                prevStage.close();
+            }
+        }
+    }
+
+    @FXML
+    private void adminLogBackButton() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Home Page");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) adminLogAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void viewMembersBackButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Home Page");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) viewMembersAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    public void onClickViewEventButton(ActionEvent e) throws Exception
+    {
+        EventController.onClickViewEventButton(e);
+    }
+
+    @FXML
+    private void trackingPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("hello-view.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load());
+//        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Style.css")).toExternalForm());
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) viewMembersAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void backButtonZ() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-login-page.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Student Login");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void viewStudentEventsButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-event-view.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Student Events");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void joinClubButton() throws IOException{
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("join-club.fxml"));
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Join Club");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) studentOptionAnchor.getScene().getWindow();
+        prevStage.close();
     }
 }

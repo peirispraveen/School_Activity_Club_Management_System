@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.time.LocalDate;
 
-public class AddMember implements Member {
+public class AddMember {
 
     @FXML
     private Button backButton;
@@ -148,7 +148,6 @@ public class AddMember implements Member {
                 if (!Objects.equals(studentIdBox.getText(), "")){
                     studentId = studentIdBox.getText();
                 }else{
-//                    studentRegLabel.setText("Enter your Student ID");
                     stIdLabel.setText("*required");
                     return;
                 }
@@ -302,13 +301,13 @@ public class AddMember implements Member {
                 studentList.add(student);
                 DBConnect.insertStudent(studentId, studentFirstName, studentLastName, studentEmail,dateOfBirth, studentPassword);
 
-                for (Object i: studentList){
-                    System.out.println(student.getStudentId());
-                    System.out.println(student.getStudentFirstName());
-                    System.out.println(student.getStudentLastName());
-                    System.out.println(student.getStudentEmail());
+                for (Student i: studentList){
+                    System.out.println(student.getId());
+                    System.out.println(student.getFirstName());
+                    System.out.println(student.getLastName());
+                    System.out.println(student.getEmail());
                     System.out.println(student.getDateOfBirth().toString());
-                    System.out.println(student.getStudentPassword());
+                    System.out.println(student.getPassword());
                 }
 
                 clearStudentFields();
@@ -318,13 +317,6 @@ public class AddMember implements Member {
                 System.out.println(e7.getMessage());
                 studentRegLabel.setText("Error Encountered");
             }
-
-            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("StudentDetails.ser"))) {
-                objectOutputStream.writeObject(studentList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
         }
     }
 
@@ -503,13 +495,13 @@ public class AddMember implements Member {
                 advisorList.add(advisor);
                 DBConnect.insertAdvisor(advisorId, advisorFirstName, advisorLastName, advisorEmail, dateOfBirth, advisorPassword);
 
-                for (Object i : advisorList) {
-                    System.out.println(advisor.getAdvisorId());
-                    System.out.println(advisor.getAdvisorFirstName());
-                    System.out.println(advisor.getAdvisorLastName());
-                    System.out.println(advisor.getAdvisorEmail());
+                for (Advisor i : advisorList) {
+                    System.out.println(advisor.getId());
+                    System.out.println(advisor.getFirstName());
+                    System.out.println(advisor.getLastName());
+                    System.out.println(advisor.getEmail());
                     System.out.println(advisor.getDateOfBirth().toString());
-                    System.out.println(advisor.getAdvisorPassword());
+                    System.out.println(advisor.getPassword());
                 }
 
                 clearAdvisorFields();
@@ -518,12 +510,6 @@ public class AddMember implements Member {
             } catch (Exception e7) {
                 System.out.println(e7.getMessage());
                 advisorRegLabel.setText("Error Encountered");
-            }
-
-            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("AdvisorDetails.ser"))) {
-                objectOutputStream.writeObject(advisorList);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -570,10 +556,6 @@ public class AddMember implements Member {
     }
 
     @FXML
-    private void onPassCheckClicked() {
-    }
-
-    @FXML
     private void backButton() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
         Stage mainStage = new Stage();
@@ -585,11 +567,4 @@ public class AddMember implements Member {
         prevStage.close();
     }
 
-
-//    @FXML
-//    private void onPassCheckClicked() throws IOException {
-//        if (passCheckBox.isSelected()){
-//            passField.setVisible(true);
-//        }
-//    }
 }

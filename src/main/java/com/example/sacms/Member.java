@@ -1,7 +1,13 @@
 package com.example.sacms;
 
-import java.io.Serializable;
+public interface Member {
 
-public interface Member extends Serializable {
-    String toString();
+    String getId();
+    String getFirstName();
+    String getLastName();
+    String getEmail();
+    String getPassword();
+    DateOfBirth getDateOfBirth();
+
+    // Interface Testing
 }

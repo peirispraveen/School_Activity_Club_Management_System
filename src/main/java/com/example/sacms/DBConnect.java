@@ -1,14 +1,55 @@
 package com.example.sacms;
 
+import com.example.implementation.ClubApplication;
+import com.example.implementation.Storage;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DBConnect {
 
     private static final String url = "jdbc:mysql://localhost:3306/sacms";
     private static final String username = "root";
     private static final String password = "";
+    @FXML
+    private AnchorPane studentLogAnchor;
+    @FXML
+    private TextField studentLogin;
+    @FXML
+    private TextField studentLoginPass;
+    @FXML
+    private Label studentSubLabel;
+    @FXML
+    private Label studentLogLabel;
+    @FXML
+    private Label studentPassLabel;
+    @FXML
+    private ImageView studentLogImage;
+    @FXML
+    private AnchorPane advisorLogAnchor;
+    @FXML
+    private TextField advisorLogin;
+    @FXML
+    private TextField advisorLoginPass;
+    @FXML
+    private Label advisorSubLabel;
+    @FXML
+    private Label advisorLogLabel;
+    @FXML
+    private Label advisorPassLabel;
+    @FXML
+    private ImageView advisorLogImage;
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
@@ -144,6 +185,40 @@ public class DBConnect {
         return false;
     }
 
+    private static boolean isStudentMatch(String studentId, String password) {
+        try (Connection connection = getConnection()) {
+            String query = "SELECT 1 FROM student WHERE student_id = ? AND password = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, studentId);
+                preparedStatement.setString(2, password);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static boolean isAdvisorMatch(String advisorId, String password) {
+        try (Connection connection = getConnection()) {
+            String query = "SELECT 1 FROM advisor WHERE advisor_id = ? AND password = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, advisorId);
+                preparedStatement.setString(2, password);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    return resultSet.next();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private static boolean isAdvisorExists(String advisorId) {
         try (Connection connection = getConnection()) {
             String query = "SELECT COUNT(*) FROM advisor WHERE advisor_id = ?";
@@ -212,13 +287,118 @@ public class DBConnect {
         return advisorList;
     }
 
-    private static DateOfBirth parseDateOfBirth(String dateString) {
+    static DateOfBirth parseDateOfBirth(String dateString) {
         String[] dateParts = dateString.split("-");
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
         int day = Integer.parseInt(dateParts[2]);
 
         return new DateOfBirth(day, month, year);
+    }
+
+
+    @FXML
+    private void onStudentLogButtonClicked() throws IOException {
+        if (!Objects.equals(studentLogin.getText(), "") && !Objects.equals(studentLoginPass.getText(),"")) {
+            if (isStudentMatch(studentLogin.getText(), studentLoginPass.getText())) {
+
+                String studentLogId = studentLogin.getText();
+                JoinClub.retrieveCurrentStudent(studentLogId);
+
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
+                Scene scene = new Scene(userRegLoader.load(), 950, 600);
+                Stage stage = new Stage();
+                stage.setTitle("Student Overview");
+                stage.setScene(scene);
+                stage.show();
+
+                Stage prevStage = (Stage) studentLogAnchor.getScene().getWindow();
+                prevStage.close();
+            }else {
+                studentSubLabel.setText("Password and ID doesn't match");
+            }
+        }else {
+            if (Objects.equals(studentLogin.getText(), "")) {
+                studentLogLabel.setText("*required");
+            }else {
+                studentPassLabel.setText("*required");
+            }
+        }
+    }
+
+    @FXML
+    private void studentSignUpButton() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-reg.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Student Sign In");
+        newStage.setScene(scene);
+        newStage.show();
+        Stage prevStage = (Stage) studentLogAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void studentLogBackButton() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Home");
+        newStage.setScene(scene);
+        newStage.show();
+        Stage prevStage = (Stage) studentLogAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void advisorLogBackButton() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Home");
+        newStage.setScene(scene);
+        newStage.show();
+        Stage prevStage = (Stage) advisorLogAnchor.getScene().getWindow();
+        prevStage.close();
+
+    }
+
+    @FXML
+    private void advisorSignUpButton() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-reg.fxml"));
+        Stage newStage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        newStage.setTitle("Advisor Sign In");
+        newStage.setScene(scene);
+        newStage.show();
+        Stage prevStage = (Stage) advisorLogAnchor.getScene().getWindow();
+        prevStage.close();
+    }
+
+    @FXML
+    private void onAdvisorLogButtonClicked() throws IOException, SQLException{
+        if (!Objects.equals(advisorLogin.getText(), "") && !Objects.equals(advisorLoginPass.getText(),"")) {
+            if (isAdvisorMatch(advisorLogin.getText(), advisorLoginPass.getText())) {
+                Stage stage = new Stage();
+                Storage.allAvailables();
+                FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+                stage.setTitle("Club");
+                stage.setScene(scene);
+                stage.show();
+
+                Stage prevStage = (Stage) advisorLogAnchor.getScene().getWindow();
+                prevStage.close();
+            }else {
+                advisorSubLabel.setText("Password and ID doesn't match");
+            }
+        }else {
+            if (Objects.equals(studentLogin.getText(), "")) {
+                studentLogLabel.setText("*required");
+            }else {
+                studentPassLabel.setText("*required");
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -246,5 +426,18 @@ public class DBConnect {
             System.out.println("failed to connect");
         }
 
+        if (isStudentMatch("ST221", "Password1")) {
+            System.out.println("Found");
+        }else {
+            System.out.println("not");
+        }
+
+        if (isAdvisorMatch("AD443", "Password5")) {
+            System.out.println("Found");
+        }else {
+            System.out.println("not");
+        }
+
     }
+
 }

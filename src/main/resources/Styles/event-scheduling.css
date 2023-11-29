@@ -1,6 +1,6 @@
 .main-pane
 {
-    -fx-background-color: #070b14;
+    -fx-background-color: white;
 }
 
 .exit-button
@@ -16,12 +16,12 @@
 
 .control-button
 {
-    -fx-background-color: #004db1;
+    -fx-background-color: #ffffff;
     -fx-border-stule :none;
     -fx-background-radius: 28.28;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-border-color: #fff;
+    -fx-border-color: #712377;
     -fx-border-width: 0.5px;
     -fx-border-radius:  28.28;
 }
@@ -45,10 +45,11 @@
 
 .submit-button
 {
-    -fx-background-color: #004db1;
-    -fx-border-color: #fff;
+    /*-fx-background-color: #004db1;*/
+    /*-fx-border-color: #fff;*/
     -fx-border-width: 0.5px;
 }
+
 .submit-button:hover
 {
     -fx-background-color: #108610;
@@ -63,5 +64,6 @@
 
 .text-topic
 {
-    -fx-effect: dropshadow(gaussian, #004db1,1, 1, 0, 0);
+    -fx-effect: dropshadow(gaussian, #712377,1, 1, 0, 0);
+    -fx-font-family: "Segoe UI";
 }

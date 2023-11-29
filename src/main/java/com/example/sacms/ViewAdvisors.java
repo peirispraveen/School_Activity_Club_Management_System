@@ -40,11 +40,16 @@ public class ViewAdvisors {
 
     @FXML
     private void initialize() {
-        advisorIdColumn.setCellValueFactory(new PropertyValueFactory<>("advisorId"));
-        adfnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorFirstName"));
-        adlnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorLastName"));
-        ademailColumn.setCellValueFactory(new PropertyValueFactory<>("advisorEmail"));
+        advisorIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        adfnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        adlnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ademailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         addobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+
+//        advisorIdColumn.setCellValueFactory(new PropertyValueFactory<>("advisorId"));
+//        adfnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorFirstName"));
+//        adlnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorLastName"));
+//        ademailColumn.setCellValueFactory(new PropertyValueFactory<>("advisorEmail"));
 
         loadDataIntoTableView();
     }

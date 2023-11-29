@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="281.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.UserRegMainController">
+   <children>
+      <Label layoutX="211.0" layoutY="132.0" text="Next Page" />
+      <Label layoutX="30.0" layoutY="43.0" text="Back button or re login button" />
+   </children>
+</AnchorPane>

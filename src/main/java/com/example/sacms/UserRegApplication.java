@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class UserRegApplication extends Application {
@@ -15,21 +14,7 @@ public class UserRegApplication extends Application {
         stage.setTitle("Registration");
         stage.setScene(scene);
         stage.show();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("view-members.fxml"));
-        Stage newStage = new Stage();
-        Scene newScene = new Scene(fxmlLoader.load(), 950, 600);
-        newStage.setTitle("Advisor Sign In");
-        newStage.setScene(newScene);
-        newStage.show();
-
-        try{
-            UserRegMainController controller = userRegLoader.getController();
-            controller.loadStudentsFromFile();
-            controller.loadAdvisorsFromFile();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        // Main
     }
 
     public static void main(String[] args) {

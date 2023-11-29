@@ -1,14 +1,8 @@
-@font-face {
-    font-family: "Bourton";
-    src: url("Fonts/BourtonInline.ttf");
-}
-
 .mainAnchor {
     -fx-background-color: white;
 }
 
 .menuLabel {
-    -fx-font-family: Bourton;
     -fx-text-fill: #712377;
     -fx-font-weight: bold;
 }
@@ -19,8 +13,21 @@ TableView {
 }
 
 .tableColumnStyle {
-    -fx-background-color: rgb(221, 179, 232);}
+    -fx-background-color: rgb(221, 179, 232);
+    -fx-cell-size: 12px;
+    -fx-content-display: center;
+
+}
 
 .sacmsLabel {
     -fx-font-family: "Arial Rounded MT Bold";
+}
+
+.tableColumnStyle:selected {
+    -fx-background-color: #3b3b3b;
+    -fx-text-fill: white;
+}
+
+.tableColumnJoin {
+    -fx-alignment: center;
 }
