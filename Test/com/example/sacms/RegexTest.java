@@ -6,36 +6,137 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegexTest {
 
     @Test
-    void emailPatternMatches() {
-        boolean test1 = Regex.emailPatternMatches("praveen@example.com");
-        boolean test2 = Regex.emailPatternMatches("sample.email.com");  // No @ symbol
-        boolean test3 = Regex.emailPatternMatches("something.332@iit.ac.lk");
-        boolean test4 = Regex.emailPatternMatches("amazing@example");  // No .com or .lk, etc.
-        assertTrue(test1); // Correct email
-        assertFalse(test2); // Wrong email
-        assertTrue(test3); // Correct email
-        assertFalse(test4); // Wrong email
+    void emailPatternValid1() {
+        boolean test = Regex.emailPatternMatches("praveen@example.com");
+        assertTrue(test);
     }
 
     @Test
-    void namePatternMatches() {
-        boolean test1 = Regex.namePatternMatches("Praveen");
-        boolean test2 = Regex.namePatternMatches("John99");  // Must not contain special characters
-        boolean test3 = Regex.namePatternMatches("Fernando");
-        assertTrue(test1); // Correct name
-        assertFalse(test2); // Wrong name
-        assertTrue(test3); // Correct name
+    void emailPatternValid2() {
+        boolean test = Regex.emailPatternMatches("something.332@iit.ac.lk");
+        assertTrue(test);
     }
 
     @Test
-    void passwordPatternMatches() {
-        boolean test1 = Regex.passwordPatternMatches("Hdeec33msss");
-        boolean test2 = Regex.passwordPatternMatches("sdfdsfse32"); // No upper case letter
-        boolean test3 = Regex.passwordPatternMatches("DSDssdefii"); // No number
-        boolean test4 = Regex.passwordPatternMatches("sdf32W"); // Lesser than 8 characters
-        assertTrue(test1); // Correct password
-        assertFalse(test2); // Wrong password
-        assertFalse(test3); // Wrong password
-        assertFalse(test4); // Wrong password
+    void emailPatternInt()
+    {
+        boolean test = Regex.emailPatternMatches("2");
+        assertFalse(test);
+    }
+
+    @Test
+    void emailPatternDouble()
+    {
+        boolean test = Regex.emailPatternMatches("2.2");
+        assertFalse(test);
+    }
+
+    @Test
+    void emailPatternString()
+    {
+        boolean test = Regex.emailPatternMatches("str");
+        assertFalse(test);
+    }
+
+    @Test
+    void emailPatternEmpty()
+    {
+        boolean test = Regex.emailPatternMatches("");
+        assertFalse(test);
+    }
+
+    @Test
+    void emailPatternNoAt()
+    {
+        boolean test = Regex.emailPatternMatches("sample.email.com");
+        assertFalse(test);
+    }
+
+    @Test
+    void emailPatternNoDomainType()
+    {
+        boolean test = Regex.emailPatternMatches("amazing@example");
+        assertFalse(test);
+    }
+
+    @Test
+    void namePatternValid1() {
+        boolean test = Regex.namePatternMatches("Praveen");
+        assertTrue(test);
+    }
+
+    @Test
+    void namePatternValid2() {
+        boolean test = Regex.namePatternMatches("Fernando");
+        assertTrue(test);
+    }
+     @Test
+    void namePatternInvalidStr() {
+        boolean test = Regex.namePatternMatches("Fernando99");
+        assertFalse(test);
+    }
+
+    @Test
+    void namePatternInt() {
+        boolean test = Regex.namePatternMatches("99");
+        assertFalse(test);
+    }
+
+    @Test
+    void namePatternDouble() {
+        boolean test = Regex.namePatternMatches("99.9");
+        assertFalse(test);
+    }
+
+    @Test
+    void namePatternEmpty() {
+        boolean test = Regex.namePatternMatches("");
+        assertFalse(test);
+    }
+
+    @Test
+    void namePatternEmail() {
+        boolean test = Regex.namePatternMatches("example@example.com");
+        assertFalse(test);
+    }
+    @Test
+    void passwordPatternValid() {
+        boolean test = Regex.passwordPatternMatches("Hdeec33msss");
+        assertTrue(test);
+
+    }
+
+    @Test
+    void passwordPatternCoUpperCase() {
+        boolean test = Regex.passwordPatternMatches("sdfdsfse32");
+        assertFalse(test);
+    }
+    @Test
+    void passwordPatternNoInt() {
+        boolean test = Regex.passwordPatternMatches("DSDssdefii");
+        assertFalse(test);
+    }
+    @Test
+    void passwordPatternEmpty() {
+        boolean test = Regex.passwordPatternMatches("");
+        assertFalse(test);
+    }
+
+    @Test
+    void passwordPatternInt() {
+        boolean test = Regex.passwordPatternMatches("99");
+        assertFalse(test);
+    }
+
+    @Test
+    void passwordPatternDouble() {
+        boolean test = Regex.passwordPatternMatches("99.9");
+        assertFalse(test);
+    }
+
+    @Test
+    void passwordPatternSpecialChar() {
+        boolean test = Regex.passwordPatternMatches("exAmplEexample21$");
+        assertTrue(test);
     }
 }
