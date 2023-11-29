@@ -38,7 +38,6 @@ public class UpdateMembers2 extends Storage{
 
     public void initialize() throws SQLException {
 
-
         memberIdColumn.setCellValueFactory((new PropertyValueFactory<>("memberId")));
         fNameColumn.setCellValueFactory((new PropertyValueFactory<>("fName")));
         lNameColumn.setCellValueFactory((new PropertyValueFactory<>("lName")));
@@ -54,12 +53,14 @@ public class UpdateMembers2 extends Storage{
     }
 
     public void deleteMember(ActionEvent actionEvent) {
+        // deleting a member from the club
         ClubMember member=clubMemberTbl.getSelectionModel().getSelectedItem();
         memberList.remove(member);
         clubMemberTbl.refresh();
     }
 
     public void addMember(ActionEvent actionEvent) {
+        // adding members to the club
 
         Stage addMembersStage = new Stage();
         Label emptyLabel = new Label("No Members available");
@@ -92,7 +93,7 @@ public class UpdateMembers2 extends Storage{
 
         for (ClubMember member : getAvailableClubMembers()) {
             try {
-                if (!updClub.getClubMembers().contains(member)) {
+                if (!updClub.getClubMembers().contains(member)) { // Check if member is already in the club
                     addingClubMembers.add(member);
                 }
             }catch (NullPointerException ignored){
@@ -115,7 +116,7 @@ public class UpdateMembers2 extends Storage{
         Scene currentScene=currentStage.getScene();
 
 
-        currentScene.setOnMouseClicked(event -> {
+        currentScene.setOnMouseClicked(event -> { // Check if the mouse is clicked outside the table so that the table can be closed
             double clickX = event.getSceneX();
             double clickY = event.getSceneY();
             Bounds bounds = addMembersTable.localToScene(addMembersTable.getBoundsInLocal());
@@ -135,7 +136,7 @@ public class UpdateMembers2 extends Storage{
 
         addMembersTable.setOnMouseClicked(mouseEvent -> {
 
-            if (mouseEvent.getClickCount() == 2) {
+            if (mouseEvent.getClickCount() == 2) { // adding the member to the table
                 ClubMember selectedMember = addMembersTable.getSelectionModel().getSelectedItem();
                 if (!memberList.contains(selectedMember)){
                     addingClubMembers.remove(selectedMember);
@@ -155,6 +156,7 @@ public class UpdateMembers2 extends Storage{
 
     }
 
+    // Update the member of the club considering inserting and removing
     public void updateMembers(ActionEvent actionEvent) throws IOException, SQLException {
         ArrayList<String> memberIDs=new ArrayList<>();
         for(ClubMember member : memberList){

@@ -52,6 +52,7 @@ public class UpdateProfile1 extends Updating implements Initializable {
 
     @Override
     public void getList(){
+        // add all the club name and id to the table to select from it
         for(Club club: Storage.getAvailableClubs()){
             availableClubs.add(new Club(club.getClubId(),club.getClubName()));
         }
@@ -65,7 +66,7 @@ public class UpdateProfile1 extends Updating implements Initializable {
         });
     }
 
-
+    // Transfer the selected club to the new class to update the members of the selected club
     @Override
     public Club getDetails(ActionEvent e) throws IOException {
         String itemCodeUpd = updClub.getText();

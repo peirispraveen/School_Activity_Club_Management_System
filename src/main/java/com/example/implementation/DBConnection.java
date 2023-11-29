@@ -76,7 +76,6 @@ public class DBConnection {
             stmt.execute(sql);
 
         }catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
             sql="UPDATE Club SET `club_Name`= '"+clubName+                                        // If an error occurred while inserting due to club name
                     "',`club_Description`= '"+clubDescription+"',`club_advisor_id`= '"+advisor+   // or id conflict update other data except id or name
                     "',`max_number`= '"+maxParticipants+"',`created_Date`= '"+createdDate+

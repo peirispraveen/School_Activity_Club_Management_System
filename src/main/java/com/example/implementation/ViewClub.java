@@ -62,7 +62,7 @@ public class ViewClub extends Storage implements Initializable {
         clubsTbl.setItems(clubList);
 
         clubsTbl.setOnMouseClicked(event -> {
-            if (event.getClickCount()==2){
+            if (event.getClickCount()==2){ // Get the details of the selected club if double clicked
                 Club selectedClub = clubsTbl.getSelectionModel().getSelectedItem();
                 if(selectedClub!=null){
                     displayDetails(selectedClub);
@@ -73,6 +73,7 @@ public class ViewClub extends Storage implements Initializable {
     }
 
     public void displayDetails(Club selectedClub){
+        // To be called when a club is selected
 
         clubId.setText(selectedClub.getClubId());
         clubName.setText(selectedClub.getClubName());
