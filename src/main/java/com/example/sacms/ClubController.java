@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,12 +16,15 @@ import java.io.IOException;
 public class ClubController {
 
 
+    @FXML
+    private AnchorPane muaadhAnchor;
+
     public void createClub(ActionEvent actionEvent) throws IOException {
         Stage currentStage =(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();
         Stage createStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(com.example.implementation.ClubApplication.class.getResource("Create Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         createStage.setTitle("Create Club");
         createStage.setScene(scene);
         createStage.setResizable(false);
@@ -88,5 +92,18 @@ public class ClubController {
         updateMembers.setScene(scene);
         updateMembers.setResizable(false);
         updateMembers.show();
+    }
+
+    @FXML
+    private void backButton() throws IOException {
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-login-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(userRegLoader.load(), 950, 600);
+        stage.setTitle("Advisor Login");
+        stage.setScene(scene);
+        stage.show();
+
+        Stage prevStage = (Stage) muaadhAnchor.getScene().getWindow();
+        prevStage.close();
     }
 }

@@ -382,7 +382,7 @@ public class DBConnect {
                 Stage stage = new Stage();
                 Storage.allAvailables();
                 FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+                Scene scene = new Scene(fxmlLoader.load(), 950, 600);
                 stage.setTitle("Club");
                 stage.setScene(scene);
                 stage.show();

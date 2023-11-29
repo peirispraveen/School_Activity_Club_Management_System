@@ -85,7 +85,7 @@ public class UpdateProfile1 extends Updating implements Initializable {
             prevStage.close();
             Stage updateStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Update Profile2.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+            Scene scene = new Scene(fxmlLoader.load(), 950, 600);
             updateStage.setTitle("Update Club Details of "+updList.getClubName());
             updateStage.setScene(scene);
             updateStage.setResizable(false);
@@ -99,7 +99,7 @@ public class UpdateProfile1 extends Updating implements Initializable {
         currentStage.close();
         Stage prevStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         prevStage.setTitle("Club");
         prevStage.setScene(scene);
         prevStage.setResizable(false);

@@ -76,7 +76,7 @@ public class DeleteClub extends Storage {
         currentStage.close();
         Stage prevStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         prevStage.setTitle("Update Club");
         prevStage.setScene(scene);
         prevStage.setResizable(false);

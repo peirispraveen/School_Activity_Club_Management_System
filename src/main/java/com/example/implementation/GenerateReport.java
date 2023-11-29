@@ -66,7 +66,7 @@ public class GenerateReport extends Storage implements Initializable {
         currentStage.close();
         Stage reportStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         reportStage.setTitle("Club");
         reportStage.setScene(scene);
         reportStage.setResizable(false);

@@ -102,13 +102,11 @@ public class ViewClub extends Storage implements Initializable {
         currentStage.close();
         Stage homeStage=new Stage();
         FXMLLoader fxmlLoader=new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene=new Scene(fxmlLoader.load(),800,500);
+        Scene scene=new Scene(fxmlLoader.load(),950,600);
         homeStage.setScene(scene);
         homeStage.setTitle("Home");
         homeStage.show();
     }
-
-
 
 
 }

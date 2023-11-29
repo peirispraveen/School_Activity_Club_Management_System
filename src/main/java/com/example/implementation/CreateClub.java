@@ -95,7 +95,7 @@ public class CreateClub extends ClubApplication {
             prevStage.close();
             Stage currentStage = new Stage();
             FXMLLoader loader=new FXMLLoader(ClubApplication.class.getResource("Create Club.fxml"));
-            Scene scene = new Scene(loader.load(),800,500);
+            Scene scene = new Scene(loader.load(),950,600);
             currentStage.setScene(scene);
             currentStage.setTitle("Create Club");
             currentStage.show();
@@ -105,7 +105,7 @@ public class CreateClub extends ClubApplication {
             Stage prevStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             prevStage.close();
             FXMLLoader homeFXML = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-            Scene scene1 = new Scene(homeFXML.load(), 800, 500);
+            Scene scene1 = new Scene(homeFXML.load(), 950, 600);
             Stage homePage = new Stage();
             homePage.setScene(scene1);
             homePage.show();
@@ -118,7 +118,7 @@ public class CreateClub extends ClubApplication {
         currentStage.close();
         Stage prevStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         prevStage.setTitle("Club");
         prevStage.setScene(scene);
         prevStage.setResizable(false);

@@ -166,7 +166,7 @@ public class UpdateMembers2 extends Storage{
         currentStage.close();
         Stage homeStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Update Members1.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         homeStage.setTitle("Select Club");
         homeStage.setScene(scene);
         homeStage.show();
@@ -177,7 +177,7 @@ public class UpdateMembers2 extends Storage{
         currentStage.close();
         Stage reportStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Update Members1.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         reportStage.setTitle("Select Club");
         reportStage.setScene(scene);
         reportStage.setResizable(false);
@@ -189,7 +189,7 @@ public class UpdateMembers2 extends Storage{
         currentStage.close();
         Stage homeStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
         homeStage.setTitle("Club");
         homeStage.setScene(scene);
         homeStage.setResizable(false);
