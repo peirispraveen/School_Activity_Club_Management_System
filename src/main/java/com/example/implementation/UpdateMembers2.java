@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class UpdateMembers2 extends Storage{
@@ -155,8 +156,11 @@ public class UpdateMembers2 extends Storage{
     }
 
     public void updateMembers(ActionEvent actionEvent) throws IOException, SQLException {
-
-        DBConnection.updateDatabaseClubMember(memberList,updClub.getClubId());
+        ArrayList<String> memberIDs=new ArrayList<>();
+        for(ClubMember member : memberList){
+            memberIDs.add(member.getMemberId());
+        }
+        DBConnection.updateDatabaseClubMember(memberIDs,updClub.getClubId());
         updClub.setClubMembers(memberList);
         Stage currentStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         currentStage.close();

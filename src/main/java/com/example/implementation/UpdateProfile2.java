@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -77,11 +78,17 @@ public class UpdateProfile2 extends Storage{
                     if(Integer.parseInt(maxParticipants.getText())>0){
                     errorCall.setText("");
 
-                    DBConnection.updateDatabaseClub(clubId.getText(),clubName.getText(),clubDescription.getText(),
-                                                    clubAdvisor.getValue(), Integer.parseInt(maxParticipants.getText()),Date.valueOf(createdDate.getValue()),updList.getClubId());
 
-                    availableClubs.add(new Club(clubId.getText(), clubName.getText(),clubDescription.getText(), new ClubAdvisor(clubAdvisor.getValue().split("\\s+")[0],clubAdvisor.getValue().split("\\s+")[1]),
-                            Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue())));
+                        String advisorId=clubAdvisor.getValue().split("\\s")[0];
+                        DBConnection.updateDatabaseClub(clubId.getText(),clubName.getText(),clubDescription.getText(),
+                                advisorId, Integer.parseInt(maxParticipants.getText()),Date.valueOf(createdDate.getValue()),updList.getClubId());
+
+                        availableClubs.add(new Club(clubId.getText(), clubName.getText(),clubDescription.getText(), new ClubAdvisor(clubAdvisor.getValue()),
+                                Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue())));
+                        for(Club club:availableClubs){
+                            club.setClubMembers(new ArrayList<>());
+                        }
+                    fillMembers();
                     Stage currentStage=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
                     currentStage.close();
                     Stage homeStage=new Stage();

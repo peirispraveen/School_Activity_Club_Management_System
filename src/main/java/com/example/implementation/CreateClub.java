@@ -28,14 +28,11 @@ public class CreateClub extends ClubApplication {
     Statement stmt;
 
     public void initialize() throws SQLException {
-        String url= "jdbc:mysql://localhost:3306/sacms";
-        String user="root";
-        String password="";
-        con=DriverManager.getConnection(url,user,password);
+
 
         clubAdvisorList = Storage.getAvailableClubAdvisor();
         for(ClubAdvisor advisor : clubAdvisorList){
-            clubAdvisor.getItems().add(advisor.getFName()+" "+advisor.getLName());
+            clubAdvisor.getItems().add(advisor.getAdvisorId()+" "+advisor.getFName()+" "+advisor.getLName());
         }
     }
 
@@ -65,12 +62,13 @@ public class CreateClub extends ClubApplication {
                 }else{
                     try{
                         if(Integer.parseInt(maxParticipants.getText())>0){
-                            String[] name=clubAdvisor.getValue().split("\\s+");
-                            list = new Club(clubId.getText(), clubName.getText(),clubDescription.getText(),new ClubAdvisor(name[0],name[1]),
+
+                            String advisorId=clubAdvisor.getValue().split("\\s")[0];
+                            list = new Club(clubId.getText(), clubName.getText(),clubDescription.getText(),new ClubAdvisor(advisorId),
                                     Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue()));
                             String sql = "";
                             DBConnection.insertToDatabase(list.getClubId(), list.getClubName(),list.getClubDescription(),list.getClubAdvisor(),list.getMaxParticipants(),list.getCreatedDate());
-                           
+
                             clubList.add(list);
                             errorCall.setText("");
                             addAnother(CreateClub);

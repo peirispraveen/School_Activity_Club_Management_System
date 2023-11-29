@@ -13,6 +13,7 @@ public class Storage {
     public static List<ClubAdvisor> availableClubAdvisor=new ArrayList<>();
     public static List<ClubMember> availableMembers=new ArrayList<>();
 
+
     public static List<Club> getAvailableClubs(){
         return availableClubs;
     }
@@ -35,10 +36,10 @@ public class Storage {
         Connection con = DriverManager.getConnection(url, user, password);
         Statement stmt = con.createStatement();
 
-        String query = "SELECT * FROM student_club";
+        String query = "SELECT * FROM student";
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
-            availableMembers.add(new ClubMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getDate(5), rs.getString(6)));
+            availableMembers.add(new ClubMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6)));
         }
 
 
@@ -46,18 +47,32 @@ public class Storage {
         rs = stmt.executeQuery(query);
 
         while (rs.next()) {
-
-            String[] name = rs.getString(4).split("\\s+");
-            availableClubs.add(new Club(rs.getString(1), rs.getString(2), rs.getString(3), new ClubAdvisor(name[0], name[1]), rs.getInt(5), rs.getDate(6), Club.parseClubMembers(rs.getString(7))));
+            availableClubs.add(new Club(rs.getString(1), rs.getString(2), rs.getString(3), new ClubAdvisor(rs.getString(4)), rs.getInt(5), rs.getDate(6)));
         }
 
-        query = "SELECT * FROM advisor_club";
+        query = "SELECT * FROM Advisor";
         rs = stmt.executeQuery(query);
         while (rs.next()) {
             availableClubAdvisor.add(new ClubAdvisor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
         }
+        fillMembers();
     }
 
+    public static void fillMembers() throws SQLException {
+        String query = "SELECT sc.club_id,sc.student_id,s.first_name,s.last_name FROM `student_club` AS sc \n" +
+                "JOIN student AS s\n" +
+                "ON sc.student_id=s.student_id";
+        Connection con=DriverManager.getConnection(url,user,password);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            for (Club club : availableClubs) {
+                if (club.getClubId().equals(rs.getString(1))) {
+                    club.addMember(new ClubMember(rs.getString(2), rs.getString(3), rs.getString(4)));
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -11,24 +11,28 @@ public class ClubMember implements Comparable<ClubMember>{
     private String memberId;
     private String fName;
     private String lName;
+    private String email;
+    private String password;
     private Date dob;
     private Date joinedDate;
     private ArrayList<Club> joinedClubs=new ArrayList<>();
     private String contactNumber;
-
-    public ClubMember(String id, String fName, String lName,Date dob,Date joinedDate, String contactNumber){
+    public ClubMember(String id, String fName, String lName,String email,Date dob,String password){
         this.memberId = id;
         this.fName = fName;
         this.lName=lName;
+        this.email=email;
         this.dob=dob;
-        this.joinedDate=joinedDate;
-        this.contactNumber = contactNumber;
-    }
+        this.password=password;
 
+    }
     public ClubMember(String memberId, String fName, String lName) {
         this.memberId = memberId;
         this.fName=fName;
         this.lName = lName;
+    }
+    public ClubMember(String id){
+        this.memberId=id;
     }
 
     public String getMemberId() {

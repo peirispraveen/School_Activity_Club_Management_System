@@ -24,6 +24,9 @@ public class ClubAdvisor {
         this.email=email;
         this.contactNumber = contactNumber;
     }
+    public ClubAdvisor(String advisorId){
+        this.advisorId=advisorId;
+    }
 
     public String getAdvisorId() {
         return advisorId;
@@ -78,6 +81,6 @@ public class ClubAdvisor {
 
     @Override
     public String toString(){
-        return getFName()+" "+getLName();
+        return getAdvisorId();
     }
 }

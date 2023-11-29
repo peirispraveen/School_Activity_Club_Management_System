@@ -52,17 +52,17 @@ public class DeleteClub extends Storage {
     public void deleteClub(ActionEvent actionEvent) throws SQLException {
         String clubName=getClubName.getText();
         boolean found=false;
-        for(Club club: getAvailableClubs()){
-            if(club.getClubName().equalsIgnoreCase(clubName) || club.getClubId().equals(clubName)){
-                found=true;
-                DBConnection.deleteClubDatabaseClub(club.getClubId());
+        for(Club club: getAvailableClubs()) {
+            if (club.getClubName().equalsIgnoreCase(clubName) || club.getClubId().equals(clubName)) {
+                found = true;
+                DBConnection.deleteDatabaseClub(club.getClubId());
 
                 availableClubs.remove(club);
                 availableClubsTbl.clear();
                 getList();
                 clubsTable.setItems(availableClubsTbl);
                 getClubName.clear();
-                errorCall.setText("");
+                errorCall.setText(club.getClubName() + " has been deleted");
                 break;
             }
         }

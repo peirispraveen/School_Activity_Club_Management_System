@@ -76,6 +76,7 @@ public class ViewClub extends Storage implements Initializable {
 
         clubId.setText(selectedClub.getClubId());
         clubName.setText(selectedClub.getClubName());
+        clubDescription.setWrapText(true);
         clubDescription.setText(selectedClub.getClubDescription());
         clubAdvisor.setText(selectedClub.getClubAdvisor().toString());
         maxNumber.setText(String.valueOf(selectedClub.getMaxParticipants()));
