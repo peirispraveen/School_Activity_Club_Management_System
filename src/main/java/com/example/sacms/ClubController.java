@@ -96,10 +96,10 @@ public class ClubController {
 
     @FXML
     private void backButton() throws IOException {
-        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-login-page.fxml"));
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-options.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(userRegLoader.load(), 950, 600);
-        stage.setTitle("Advisor Login");
+        stage.setTitle("Advisor Overview");
         stage.setScene(scene);
         stage.show();
 

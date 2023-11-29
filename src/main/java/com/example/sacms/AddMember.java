@@ -62,6 +62,8 @@ public class AddMember {
     private TextField advisorLnameBox;
     @FXML
     private TextField advisorEmailBox;
+
+    // Student details parameters
     private String studentId;
     private String studentFirstName;
     private String studentLastName;
@@ -76,7 +78,7 @@ public class AddMember {
     private String PassTemp1;
     private String PassTemp2;
 
-    protected static List<Student> studentList = new ArrayList<>();
+    protected static List<Student> studentList = new ArrayList<>();  // Static lists doesn't refresh from method to method
     protected static List<Advisor> advisorList = new ArrayList<>();
     @FXML
     private DatePicker dateOfBirthBox;
@@ -118,11 +120,11 @@ public class AddMember {
     @FXML
     private PasswordField passField;
 
-    public AddMember() {
+    public AddMember() {  // Empty constructor for good practice
     }
 
     @FXML
-    protected static void backButton(Button backButton) throws IOException {
+    protected static void backButton(Button backButton) throws IOException {  // Back button
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
         Stage mainStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -133,6 +135,7 @@ public class AddMember {
         prevStage.close();
     }
 
+    // Student Register process
     @FXML
     private void onStudentRegButtonClicked() throws IOException{
         clearStudentLabels();
@@ -140,13 +143,24 @@ public class AddMember {
         Objects.equals(studentLnameBox.getText(), "") || Objects.equals(studentEmailBox.getText(), "") ||
         Objects.equals(studentPassBox1.getText(), "") || Objects.equals(studentPassBox2.getText(), "")){
             studentRegLabel.setText("Please fill the above credentials");
-        }
+        }  // Check for empty inputs
         else {
             System.out.println("test");
 
             try {
                 if (!Objects.equals(studentIdBox.getText(), "")){
-                    studentId = studentIdBox.getText();
+                    if (Regex.stIdPatternMatches(studentIdBox.getText())) { // Validates the Student ID
+                        studentId = studentIdBox.getText();
+                        if (DBConnect.isStudentExists(studentId)){  // Check if the student id already exists
+                            stIdLabel.setText("*exists");
+                            studentRegLabel.setText("Student ID already exists");
+                            return;
+                        }
+                    }else {
+                        stIdLabel.setText("*invalid");
+                        return;
+                    }
+
                 }else{
                     stIdLabel.setText("*required");
                     return;
@@ -159,7 +173,7 @@ public class AddMember {
 
             try {
                 if (!Objects.equals(studentFnameBox.getText(), "")){
-                    if(Regex.namePatternMatches(studentFnameBox.getText())){
+                    if(Regex.namePatternMatches(studentFnameBox.getText())){  // Validates first name (for special characters)
                         studentFirstName = studentFnameBox.getText();
                     }else{
                         studentRegLabel.setText("Name cannot contain special characters/numbers");
@@ -179,7 +193,7 @@ public class AddMember {
 
             try {
                 if (!Objects.equals(studentLnameBox.getText(), "")){
-                    if (Regex.namePatternMatches(studentLnameBox.getText())){
+                    if (Regex.namePatternMatches(studentLnameBox.getText())){  // Validates last name (for special characters)
                         studentLastName = studentLnameBox.getText();
                     }else{
                         studentRegLabel.setText("Name cannot contain special characters/numbers");
@@ -200,7 +214,7 @@ public class AddMember {
             try {
                 if (!Objects.equals(studentEmailBox.getText(), "")){
                     try {
-                        if(Regex.emailPatternMatches(studentEmailBox.getText())){
+                        if(Regex.emailPatternMatches(studentEmailBox.getText())){  // Validates email
                             System.out.println("Valid email");
                             studentEmail = studentEmailBox.getText();
                         }else{
@@ -254,10 +268,10 @@ public class AddMember {
                 passLabel2.setText("*make sure your passwords match");
                 return;
             } else {
-                if (Regex.passwordPatternMatches(PassTemp1)) {
+                if (Regex.passwordPatternMatches(PassTemp1)) {  // Validates password (for a stronger password)
                     studentPassword = PassTemp1;
                 }else {
-                    passLabel2.setText("*one UpperCase letter \n" +
+                    passLabel2.setText("*one UpperCase letter \n" + // Password requirements
                             "*one lowerCase letter \n" +
                             "*one number \n" +
                             "*minimum 8 characters");
@@ -274,10 +288,10 @@ public class AddMember {
                 if(!Objects.equals(doB.getDayOfMonth(),0) || !Objects.equals(doB.getMonthValue(), 0)
                         || !Objects.equals(doB.getYear(), 0)){
 
-                    if (doB.isAfter(currentDate)){
+                    if (doB.isAfter(currentDate)){  // Date cannot be in the future
                         doBLabel.setText("*invalid date");
                         return;
-                    }else  if(doB.isAfter(minAge)){
+                    }else  if(doB.isAfter(minAge)){  // Minimun age is a requirement
                         doBLabel.setText("*minumum age is 14");
                         return;
                     } else {
@@ -320,6 +334,7 @@ public class AddMember {
         }
     }
 
+    // Advisor Registration Process
     @FXML
     private void onAdvisorRegButtonClicked() throws IOException{
         clearAdvisorLabels();
@@ -332,7 +347,16 @@ public class AddMember {
 
             try {
                 if (!Objects.equals(advisorIdBox.getText(), "")) {
-                    advisorId = advisorIdBox.getText();
+                    if (Regex.adIdPatternMatches(advisorIdBox.getText())){  // Advisor ID validation
+                        advisorId = advisorIdBox.getText();
+                        if (DBConnect.isAdvisorExists(advisorId)){  // Advisor exists validation
+                            adIdLabel.setText("*exists");
+                            advisorRegLabel.setText("Advisor ID already exists");
+                        }
+                    }else {
+                        adIdLabel.setText("*invalid");
+                        return;
+                    }
                 } else {
                     advisorRegLabel.setText("Enter your Advisor ID");
                     adIdLabel.setText("*required");
@@ -346,7 +370,7 @@ public class AddMember {
 
             try {
                 if (!Objects.equals(advisorFnameBox.getText(), "")) {
-                    if (Regex.namePatternMatches(advisorFnameBox.getText())) {
+                    if (Regex.namePatternMatches(advisorFnameBox.getText())) {  // first name validation
                         advisorFirstName = advisorFnameBox.getText();
                     } else {
                         advisorRegLabel.setText("Name cannot contain special characters/numbers");
@@ -365,7 +389,7 @@ public class AddMember {
 
             try {
                 if (!Objects.equals(advisorLnameBox.getText(), "")) {
-                    if (Regex.namePatternMatches(advisorLnameBox.getText())) {
+                    if (Regex.namePatternMatches(advisorLnameBox.getText())) {  // last name validation
                         advisorLastName = advisorLnameBox.getText();
                     } else {
                         advisorRegLabel.setText("Name cannot contain special characters/numbers");
@@ -385,7 +409,7 @@ public class AddMember {
             try {
                 if (!Objects.equals(advisorEmailBox.getText(), "")) {
                     try {
-                        if (Regex.emailPatternMatches(advisorEmailBox.getText())) {
+                        if (Regex.emailPatternMatches(advisorEmailBox.getText())) {  // email validation
                             System.out.println("Valid email");
                             advisorEmail = advisorEmailBox.getText();
                         } else {
@@ -439,7 +463,7 @@ public class AddMember {
                 adpassLabel2.setText("*make sure your passwords match");
                 return;
             } else {
-                if (Regex.passwordPatternMatches(PassTemp1)) {
+                if (Regex.passwordPatternMatches(PassTemp1)) {  // password validation
                     advisorPassword = PassTemp1;
                 }else {
                     adpassLabel2.setText("*one UpperCase letter \n" +
@@ -451,15 +475,6 @@ public class AddMember {
                 }
             }
 
-//            try {
-//                if (Regex.passwordPatternMatches(advisorPassword)){
-//                    adpassLabel2.setText("Strong Password");
-//                    adpassLabel2.setTextFill(Color.GREEN);
-//                }
-//            }catch (Exception g){
-//                g.printStackTrace();
-//            }
-
             LocalDate currentDate = LocalDate.now();
             LocalDate minAge = currentDate.minusYears(21);
 
@@ -468,10 +483,10 @@ public class AddMember {
                 if(!Objects.equals(doB.getDayOfMonth(),0) || !Objects.equals(doB.getMonthValue(), 0)
                         || !Objects.equals(doB.getYear(), 0)){
 
-                    if (doB.isAfter(currentDate)){
+                    if (doB.isAfter(currentDate)){  // Future dates are not accepted
                         addoBLabel.setText("*invalid date");
                         return;
-                    }else  if(doB.isAfter(minAge)){
+                    }else  if(doB.isAfter(minAge)){  // Minimum age requirement
                         addoBLabel.setText("*minumum age is 21");
                         return;
                     } else {
@@ -514,6 +529,7 @@ public class AddMember {
         }
     }
 
+    // Below are the text fields and label clearing methods
     private void clearStudentFields(){
         studentIdBox.clear();
         studentFnameBox.clear();
@@ -555,6 +571,7 @@ public class AddMember {
         adpassLabel2.setText("");
     }
 
+    // Back button
     @FXML
     private void backButton() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));

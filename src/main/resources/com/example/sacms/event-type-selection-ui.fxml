@@ -4,19 +4,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="73.0" prefWidth="400.0" styleClass="main-pane" stylesheets="@../../../Styles/event-scheduling.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
+<AnchorPane prefHeight="73.0" prefWidth="400.0" styleClass="main-pane" stylesheets="@../../../Styles/event-scheduling.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sacms.EventController">
    <children>
-      <Button focusTraversable="false" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickEventButton" prefHeight="36.0" prefWidth="113.0" styleClass="submit-button" text="Event" textFill="WHITE">
+      <Button focusTraversable="false" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickEventButton" prefHeight="36.0" prefWidth="113.0" styleClass="submit-button" text="Event" textFill="#712377">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button focusTraversable="false" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickActivityButton" prefHeight="29.0" prefWidth="113.0" styleClass="submit-button" text="Activity" textFill="WHITE">
+      <Button focusTraversable="false" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickActivityButton" prefHeight="29.0" prefWidth="113.0" styleClass="submit-button" text="Activity" textFill="#712377">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button focusTraversable="false" layoutX="273.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickEventMeetingButton" prefHeight="27.0" prefWidth="113.0" styleClass="submit-button" text="Meeting" textFill="WHITE">
+      <Button focusTraversable="false" layoutX="273.0" layoutY="17.0" mnemonicParsing="false" onAction="#onClickEventMeetingButton" prefHeight="27.0" prefWidth="113.0" styleClass="submit-button" text="Meeting" textFill="#712377">
          <font>
             <Font size="20.0" />
          </font>

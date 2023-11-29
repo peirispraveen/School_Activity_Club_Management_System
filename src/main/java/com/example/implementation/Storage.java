@@ -33,16 +33,18 @@ public class Storage {
 
     public static void allAvailables() throws SQLException {
 
+        // make connection
         Connection con = DriverManager.getConnection(url, user, password);
         Statement stmt = con.createStatement();
 
+        // Get all the students from the database
         String query = "SELECT * FROM student";
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             availableMembers.add(new ClubMember(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6)));
         }
 
-
+        // Get all the club details from the database
         query = "SELECT * FROM Club";
         rs = stmt.executeQuery(query);
 
@@ -50,6 +52,7 @@ public class Storage {
             availableClubs.add(new Club(rs.getString(1), rs.getString(2), rs.getString(3), new ClubAdvisor(rs.getString(4)), rs.getInt(5), rs.getDate(6)));
         }
 
+        // Get all the club advisors from the database
         query = "SELECT * FROM Advisor";
         rs = stmt.executeQuery(query);
         while (rs.next()) {
@@ -58,6 +61,7 @@ public class Storage {
         fillMembers();
     }
 
+    // TO add all the participants from the foreign key table to add it to clubs
     public static void fillMembers() throws SQLException {
         String query = "SELECT sc.club_id,sc.student_id,s.first_name,s.last_name FROM `student_club` AS sc \n" +
                 "JOIN student AS s\n" +

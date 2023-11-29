@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+// Validate each inputs from the user
 public class ClubValidator implements ClubValidation {
     String id;
     String name;

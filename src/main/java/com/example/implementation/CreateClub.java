@@ -28,18 +28,18 @@ public class CreateClub extends ClubApplication {
     Statement stmt;
 
     public void initialize() throws SQLException {
-
-
+//        Prepare the environment
         clubAdvisorList = Storage.getAvailableClubAdvisor();
         for(ClubAdvisor advisor : clubAdvisorList){
             clubAdvisor.getItems().add(advisor.getAdvisorId()+" "+advisor.getFName()+" "+advisor.getLName());
         }
     }
 
+    // onclick of create button it will check for validation
     public void createClubBtn(ActionEvent CreateClub) throws IOException, SQLException {
-        clubList=Storage.getAvailableClubs();
+        clubList=Storage.getAvailableClubs(); // getting all the clubs from a variable which stored in the database
 
-        if (clubId.getText().equals("") ||clubId.getText().contains(";") ) {
+        if (clubId.getText().equals("") ||clubId.getText().contains(";") ) { // using colon so that it doesn't crash when manipulate with database
             errorCall.setText("Fill Club ID without ';'");
         }
         else if (clubName.getText().equals("") || clubName.getText().contains(";")) {
@@ -54,6 +54,7 @@ public class CreateClub extends ClubApplication {
         else if (createdDate.getValue() == null || createdDate.getValue().isAfter(LocalDate.now())) {
             errorCall.setText("Enter a valid date");
         } else {
+            // Check whether club exist
             boolean clubExist=clubList.stream()
                     .anyMatch(club -> club.getClubId().equals(clubId.getText()) || club.getClubName().equals(clubName.getText()));
 
@@ -67,6 +68,7 @@ public class CreateClub extends ClubApplication {
                             list = new Club(clubId.getText(), clubName.getText(),clubDescription.getText(),new ClubAdvisor(advisorId),
                                     Integer.parseInt(maxParticipants.getText()), Date.valueOf(createdDate.getValue()));
                             String sql = "";
+                            // Call the database function to insert the details
                             DBConnection.insertToDatabase(list.getClubId(), list.getClubName(),list.getClubDescription(),list.getClubAdvisor(),list.getMaxParticipants(),list.getCreatedDate());
 
                             clubList.add(list);
@@ -84,6 +86,7 @@ public class CreateClub extends ClubApplication {
 
 
 
+        // Ask whether to add another club
     public void addAnother(ActionEvent event) throws IOException {
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -126,6 +129,7 @@ public class CreateClub extends ClubApplication {
     }
 
 
+    // Limit the character count of the textfield
     public void idReleased() {
         try {
             clubId.setText(clubId.getText().substring(0,5));

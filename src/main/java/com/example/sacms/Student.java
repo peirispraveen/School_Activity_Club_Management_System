@@ -1,6 +1,9 @@
 package com.example.sacms;
 
-public class Student implements Member{
+public class Student implements Member{  // student is a member
+    // student implements certain characteristics of a member
+
+    // student details parameters
     private String studentId;
     private String studentFirstName;
     private String studentLastName;
@@ -8,7 +11,7 @@ public class Student implements Member{
     private DateOfBirth dateOfBirth;
     private String studentPassword;
 
-    public Student() {
+    public Student() {  // empty constructor for good practice
     }
 
     public Student(String studentId, String studentFirstName, String studentLastName, String studentEmail, DateOfBirth dateOfBirth, String studentPassword) {
@@ -74,31 +77,4 @@ public class Student implements Member{
         this.dateOfBirth = dateOfBirth;
     }
 
-//    public static Student parseStudent(String line) {
-//        String[] parts = line.split(",");
-//        if (parts.length != 6) {
-//            throw new IllegalArgumentException("Invalid data format in the file.");
-//        }
-//
-//        String studentId = parts[0].trim();
-//        String studentFirstName = parts[1].trim();
-//        String studentLastName = parts[2].trim();
-//        String studentEmail = parts[3].trim();
-//
-//        // Extracting date of birth components
-//        String[] dobParts = parts[4].trim().split("/");
-//        if (dobParts.length != 3) {
-//            throw new IllegalArgumentException("Invalid date of birth format.");
-//        }
-//
-//        int day = Integer.parseInt(dobParts[0]);
-//        int month = Integer.parseInt(dobParts[1]);
-//        int year = Integer.parseInt(dobParts[2]);
-//
-//        DateOfBirth dateOfBirth = new DateOfBirth(day, month, year);
-//
-//        String studentPassword = parts[5].trim();
-//
-//        return new Student(studentId, studentFirstName, studentLastName, studentEmail, dateOfBirth, studentPassword);
-//    }
 }

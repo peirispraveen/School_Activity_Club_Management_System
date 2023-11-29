@@ -85,6 +85,7 @@ public class ClubMember implements Comparable<ClubMember>{
 
     public void viewClubDetails(){}
 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -99,6 +100,7 @@ public class ClubMember implements Comparable<ClubMember>{
         return getFName()+" "+getLName();
     }
 
+//    To sort in the Observable list
     @Override
     public int compareTo(ClubMember other) {
         return this.memberId.compareTo(other.memberId);

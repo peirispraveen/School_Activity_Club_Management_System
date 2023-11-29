@@ -1,6 +1,9 @@
 package com.example.sacms;
 
-public class Advisor implements Member {
+public class Advisor implements Member {  // Member class is an interface
+    // advisor implements certain characteristics of a member
+
+    // Advisor details parameters
     private String advisorId;
     private String advisorFirstName;
     private String advisorLastName;
@@ -8,9 +11,10 @@ public class Advisor implements Member {
     private DateOfBirth dateOfBirth;
     private String advisorPassword;
 
-    public Advisor() {
+    public Advisor() {  // Default constructor
     }
 
+    // Proper constructor
     public Advisor(String advisorId, String advisorFirstName, String advisorLastName, String advisorEmail, DateOfBirth dateOfBirth, String advisorPassword) {
         this.advisorId = advisorId;
         this.advisorFirstName = advisorFirstName;
@@ -20,6 +24,7 @@ public class Advisor implements Member {
         this.advisorPassword = advisorPassword;
     }
 
+    // getters are overridden
     @Override
     public String getId() {
         return advisorId;

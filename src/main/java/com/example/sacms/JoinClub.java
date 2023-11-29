@@ -19,7 +19,7 @@ import java.util.List;
 import static com.example.sacms.DBConnect.parseDateOfBirth;
 
 public class JoinClub {
-    private static final String url = "jdbc:mysql://localhost:3306/sacms";
+    private static final String url = "jdbc:mysql://localhost:3306/sacms";  // DB connection credentials
     private static final String username = "root";
     private static final String password = "";
     @FXML
@@ -41,7 +41,7 @@ public class JoinClub {
     }
 
     @FXML
-    private void initialize() throws SQLException {
+    private void initialize() throws SQLException {  //  the existing clubs are shown in the table
         clubIdColumn.setCellValueFactory(new PropertyValueFactory<>("clubId"));
         clubNameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
 
@@ -49,7 +49,7 @@ public class JoinClub {
         loadClubsIntoTableView();
     }
 
-    private void setupJoinButton() {
+    private void setupJoinButton() {  //  a join button is shown to join a certain club
         clubJoinColumn.setCellFactory(param -> new TableCell<Club, Club>() {
             private final Button joinButton = new Button("Join");
 
@@ -72,7 +72,7 @@ public class JoinClub {
         });
     }
 
-    public static List<Club> availableClubs() {
+    public static List<Club> availableClubs() {  // retrieves available clubs
         List<Club> clubList = new ArrayList<>();
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM club";
@@ -103,7 +103,7 @@ public class JoinClub {
         joinClubTable.getItems().addAll(clubData);
     }
 
-    public static void retrieveCurrentStudent(String studentId) {
+    public static void retrieveCurrentStudent(String studentId) {  //  the details of the logged in user
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM student WHERE student_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -124,7 +124,7 @@ public class JoinClub {
         }
     }
 
-    private void joinClub(Club club, String studentId){
+    private void joinClub(Club club, String studentId){  // the student is added to the club
         if (studentId != null && !studentId.isEmpty()) {
 
             if (!alreadyInClub(currStId, club.getClubId()))
@@ -152,7 +152,7 @@ public class JoinClub {
         }
     }
 
-    private static boolean alreadyInClub(String currStId, String clubId) {
+    private static boolean alreadyInClub(String currStId, String clubId) {  // checks if the user is already in the club
         try (Connection connection = getConnection()) {
             String query = "SELECT COUNT(*) FROM student_club WHERE student_id = ? AND club_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -173,10 +173,10 @@ public class JoinClub {
 
     @FXML
     private void backButton() throws IOException {
-        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
+        FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(userRegLoader.load(), 950, 600);
-        stage.setTitle("Registration");
+        stage.setTitle("Student Overview");
         stage.setScene(scene);
         stage.show();
 

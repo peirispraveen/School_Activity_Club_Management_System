@@ -121,10 +121,12 @@ public class Club implements Comparable<Club> {
     }
 
 
+//    To add member from each row
     public void addMember(ClubMember member) {
         clubMembers.add(member);
     }
 
+//    To sort in the Observable list
     @Override
     public int compareTo(Club other) {
         return this.clubId.compareTo(other.clubId);

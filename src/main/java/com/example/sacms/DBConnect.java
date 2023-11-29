@@ -19,9 +19,11 @@ import java.util.Objects;
 
 public class DBConnect {
 
-    private static final String url = "jdbc:mysql://localhost:3306/sacms";
-    private static final String username = "root";
-    private static final String password = "";
+    private static final String url = "jdbc:mysql://localhost:3306/sacms";  // url for DB connection
+    private static final String username = "root";  // username for DB connection
+    private static final String password = "";  // password for DB connection
+
+    // Student and Advisor logins are handled in this class
     @FXML
     private AnchorPane studentLogAnchor;
     @FXML
@@ -51,12 +53,13 @@ public class DBConnect {
     @FXML
     private ImageView advisorLogImage;
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {  // driver manager to get the connection
         return DriverManager.getConnection(url, username, password);
     }
 
+    // Inserting new student to the database
     public static void insertStudent(String studentId, String firstName, String lastName, String email, DateOfBirth dateOfBirth, String password) {
-        if (!isStudentExists(studentId)) {
+        if (!isStudentExists(studentId)) {  // checks if the student already exists
             try (Connection connection = getConnection()) {
                 String query = "INSERT INTO student (student_id, first_name, last_name, email, dateOfBirth, password) VALUES (?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -77,8 +80,9 @@ public class DBConnect {
         }
     }
 
+    // New advisor adding to DB
     public static void insertAdvisor(String advisorId, String firstName, String lastName, String email, DateOfBirth dateOfBirth, String password) {
-        if (!isAdvisorExists(advisorId)) {
+        if (!isAdvisorExists(advisorId)) {  // If the advisor already exists
             try (Connection connection = getConnection()) {
                 String query = "INSERT INTO advisor (advisor_id, first_name, last_name, email, dateOfBirth, password) VALUES (?, ?, ?, ?, ?, ?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -99,7 +103,7 @@ public class DBConnect {
         }
     }
 
-    public static void getStudentById(String studentId) {
+    public static void getStudentById(String studentId) {  // retrieve student details
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM student WHERE student_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -120,7 +124,7 @@ public class DBConnect {
         }
     }
 
-    public static void getAdvisorById(String advisorId) {
+    public static void getAdvisorById(String advisorId) {  // retrieve advisor details
         try (Connection connection = getConnection()) {
             String query = "SELECT * FROM advisor WHERE advisor_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -167,7 +171,7 @@ public class DBConnect {
         }
     }
 
-    private static boolean isStudentExists(String studentId) {
+    public static boolean isStudentExists(String studentId) {  // Checks if student exists in the database
         try (Connection connection = getConnection()) {
             String query = "SELECT COUNT(*) FROM student WHERE student_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -185,7 +189,7 @@ public class DBConnect {
         return false;
     }
 
-    private static boolean isStudentMatch(String studentId, String password) {
+    private static boolean isStudentMatch(String studentId, String password) {  // checks if the student id matches with the password
         try (Connection connection = getConnection()) {
             String query = "SELECT 1 FROM student WHERE student_id = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -202,7 +206,7 @@ public class DBConnect {
         return false;
     }
 
-    private static boolean isAdvisorMatch(String advisorId, String password) {
+    private static boolean isAdvisorMatch(String advisorId, String password) {  // checks if the advisor id matches with password
         try (Connection connection = getConnection()) {
             String query = "SELECT 1 FROM advisor WHERE advisor_id = ? AND password = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -219,7 +223,7 @@ public class DBConnect {
         return false;
     }
 
-    private static boolean isAdvisorExists(String advisorId) {
+    public static boolean isAdvisorExists(String advisorId) {  // // Checks if advisor exists in the database
         try (Connection connection = getConnection()) {
             String query = "SELECT COUNT(*) FROM advisor WHERE advisor_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -237,7 +241,7 @@ public class DBConnect {
         return false;
     }
 
-    public static List<Student> fetchStudentData() throws SQLException {
+    public static List<Student> fetchStudentData() throws SQLException {  // fetch the student data from the database
         List<Student> studentList = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
@@ -262,7 +266,7 @@ public class DBConnect {
         return studentList;
     }
 
-    public static List<Advisor> fetchAdvisorData() throws SQLException {
+    public static List<Advisor> fetchAdvisorData() throws SQLException {  // fetch the advisor data from the database
         List<Advisor> advisorList = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
@@ -287,7 +291,7 @@ public class DBConnect {
         return advisorList;
     }
 
-    static DateOfBirth parseDateOfBirth(String dateString) {
+    static DateOfBirth parseDateOfBirth(String dateString) {  // date of birth is processed when retrieving from the database
         String[] dateParts = dateString.split("-");
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
@@ -297,13 +301,14 @@ public class DBConnect {
     }
 
 
+    // the student login process
     @FXML
     private void onStudentLogButtonClicked() throws IOException {
         if (!Objects.equals(studentLogin.getText(), "") && !Objects.equals(studentLoginPass.getText(),"")) {
             if (isStudentMatch(studentLogin.getText(), studentLoginPass.getText())) {
 
                 String studentLogId = studentLogin.getText();
-                JoinClub.retrieveCurrentStudent(studentLogId);
+                JoinClub.retrieveCurrentStudent(studentLogId);  // the student details of the currently logged student is retrieved
 
                 FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("student-options.fxml"));
                 Scene scene = new Scene(userRegLoader.load(), 950, 600);
@@ -327,7 +332,7 @@ public class DBConnect {
     }
 
     @FXML
-    private void studentSignUpButton() throws IOException{
+    private void studentSignUpButton() throws IOException{ // goes to the registration page
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("student-reg.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -339,7 +344,7 @@ public class DBConnect {
     }
 
     @FXML
-    private void studentLogBackButton() throws IOException{
+    private void studentLogBackButton() throws IOException{  // goes back to the menu
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -351,7 +356,7 @@ public class DBConnect {
     }
 
     @FXML
-    private void advisorLogBackButton() throws IOException{
+    private void advisorLogBackButton() throws IOException{  // goes back to the menu
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("UserReg.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -364,7 +369,7 @@ public class DBConnect {
     }
 
     @FXML
-    private void advisorSignUpButton() throws IOException{
+    private void advisorSignUpButton() throws IOException{  // goes to the registration page
         FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-reg.fxml"));
         Stage newStage = new Stage();
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -376,14 +381,13 @@ public class DBConnect {
     }
 
     @FXML
-    private void onAdvisorLogButtonClicked() throws IOException, SQLException{
+    private void onAdvisorLogButtonClicked() throws IOException, SQLException{  // goes to advisor page
         if (!Objects.equals(advisorLogin.getText(), "") && !Objects.equals(advisorLoginPass.getText(),"")) {
             if (isAdvisorMatch(advisorLogin.getText(), advisorLoginPass.getText())) {
+                FXMLLoader userRegLoader = new FXMLLoader(UserRegApplication.class.getResource("advisor-options.fxml"));
+                Scene scene = new Scene(userRegLoader.load(), 950, 600);
                 Stage stage = new Stage();
-                Storage.allAvailables();
-                FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), 950, 600);
-                stage.setTitle("Club");
+                stage.setTitle("Advisor Overview");
                 stage.setScene(scene);
                 stage.show();
 

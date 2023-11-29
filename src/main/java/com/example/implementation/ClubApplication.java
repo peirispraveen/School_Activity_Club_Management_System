@@ -12,6 +12,7 @@ public class ClubApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
+//        Getting all the data from the database at the start
         Storage.allAvailables();
         FXMLLoader fxmlLoader = new FXMLLoader(ClubApplication.class.getResource("Club.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 500);

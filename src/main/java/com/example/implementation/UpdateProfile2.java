@@ -34,8 +34,7 @@ public class UpdateProfile2 extends Storage{
 
 
     public void initialize() throws SQLException {
-
-
+        // Initialize the environment
         clubAdvisorList = getAvailableClubAdvisor();
         for(ClubAdvisor advisor : clubAdvisorList){
             clubAdvisor.getItems().add(advisor.getFName()+" "+advisor.getLName());
@@ -51,7 +50,6 @@ public class UpdateProfile2 extends Storage{
 
     public void updateClub(ActionEvent actionEvent) throws IOException,SQLException {
 
-        availableClubs.removeIf(club -> club.getClubId().equals(updList.getClubId()));
         if (clubId.getText().equals("") ||clubId.getText().contains(";") ) {
             errorCall.setText("Fill Club ID without ';'");
         }
@@ -67,6 +65,7 @@ public class UpdateProfile2 extends Storage{
         else if (createdDate.getValue() == null || createdDate.getValue().isAfter(LocalDate.now())) {
             errorCall.setText("Enter a valid date");
         } else {
+            availableClubs.removeIf(club -> club.getClubId().equals(updList.getClubId()));  // on update btn click it removes the club so that it has access to previous club name or id
             boolean clubExist=availableClubs.stream()
                     .anyMatch(club -> club.getClubId().equals(clubId.getText()) || club.getClubName().equals(clubName.getText()));
 
@@ -78,8 +77,7 @@ public class UpdateProfile2 extends Storage{
                     if(Integer.parseInt(maxParticipants.getText())>0){
                     errorCall.setText("");
 
-
-                        String advisorId=clubAdvisor.getValue().split("\\s")[0];
+                        String advisorId=clubAdvisor.getValue().split("\\s")[0]; // extracting only id value
                         DBConnection.updateDatabaseClub(clubId.getText(),clubName.getText(),clubDescription.getText(),
                                 advisorId, Integer.parseInt(maxParticipants.getText()),Date.valueOf(createdDate.getValue()),updList.getClubId());
 
@@ -88,7 +86,7 @@ public class UpdateProfile2 extends Storage{
                         for(Club club:availableClubs){
                             club.setClubMembers(new ArrayList<>());
                         }
-                    fillMembers();
+                    fillMembers(); // update the members from the club
                     Stage currentStage=(Stage)((Node)actionEvent.getSource()).getScene().getWindow();
                     currentStage.close();
                     Stage homeStage=new Stage();

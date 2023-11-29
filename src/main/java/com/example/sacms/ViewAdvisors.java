@@ -39,17 +39,12 @@ public class ViewAdvisors {
 
 
     @FXML
-    private void initialize() {
+    private void initialize() { // the enrolled advisor are shown
         advisorIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         adfnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         adlnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         ademailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         addobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
-
-//        advisorIdColumn.setCellValueFactory(new PropertyValueFactory<>("advisorId"));
-//        adfnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorFirstName"));
-//        adlnameColumn.setCellValueFactory(new PropertyValueFactory<>("advisorLastName"));
-//        ademailColumn.setCellValueFactory(new PropertyValueFactory<>("advisorEmail"));
 
         loadDataIntoTableView();
     }
@@ -79,7 +74,7 @@ public class ViewAdvisors {
     }
 
     @FXML
-    private void downloadAdvisorExcel() throws IOException {
+    private void downloadAdvisorExcel() throws IOException {  // downloading the excel sheet prompts from here
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Download Path");
@@ -90,7 +85,7 @@ public class ViewAdvisors {
         if (selectedDirectory != null) {
             String path = selectedDirectory.getAbsolutePath();
             try {
-                if (ReportGen.excelGenerateAdvisors(path)){
+                if (ReportGen.excelGenerateAdvisors(path)){  // selected path is passed into the generate method
                     FXMLLoader fxmlLoader = new FXMLLoader(UserRegApplication.class.getResource("excel-download.fxml"));
                     Stage newStage = new Stage();
                     Scene newScene = new Scene(fxmlLoader.load(), 350, 180);
