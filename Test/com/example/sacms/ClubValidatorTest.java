@@ -1,5 +1,6 @@
-package com.example.implementation;
+package com.example.sacms;
 
+import com.example.implementation.ClubValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
